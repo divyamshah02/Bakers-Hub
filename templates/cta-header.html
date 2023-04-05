@@ -1,0 +1,37 @@
+<header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="{% url 'home' %}" class="logo">
+              <img src="/static/assets-cta/images/logo.png" alt="Baker Hub"
+                style="width: 200px;"/>
+            </a>
+
+            <!-- ***** Logo End ***** -->
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li><a href="{% url 'home' %}" class="active">Home</a></li>
+              <li><a href="{% url 'premium' %}">Premium</a></li>
+              <li><a href="{% url 'home' %}#features">features</a></li>
+              <!-- <li class="has-sub">
+                <a href="javascript:void(0)">Pages</a>
+                <ul class="sub-menu">
+                  <li><a href="about-us.html">About Us</a></li>
+                  <li><a href="our-services.html">Our Services</a></li>
+                  <li><a href="contact-us.html">Contact Us</a></li>
+                </ul>
+              </li> -->
+              <li><a href="{% url 'sign_in' %}">Sign in</a></li>
+              <li><a href="{% url 'home' %}#register-section">register</a></li>
+            </ul>
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>

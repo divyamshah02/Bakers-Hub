@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-dash-path="/static/assets-dash/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>Sign-in</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/assets-dash/img/favicon/favicon.ico" />
+    <!-- Bootstrap core CSS -->
+    <link href="/static/assets-cta/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/static/assets-cta/css/fontawesome.css">
+    <link rel="stylesheet" href="/static/assets-cta/css/templatemo-eduwell-style.css">
+    <link rel="stylesheet" href="/static/assets-cta/css/owl.css">
+    <link rel="stylesheet" href="/static/assets-cta/css/lightbox.css">
+
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/static/assets-dash/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/static/assets-dash/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+    <!-- Page -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/css/pages/page-auth.css" />
+    <!-- Helpers -->
+    <script src="/static/assets-dash/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="/static/assets-dash/js/config.js"></script>
+
+    <style>
+      .blur{
+        filter: blur(5px);        
+      }
+      #loading-bh {
+        position: absolute;
+        z-index: 999;  
+        top: 50%;
+        left: 50%;     
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    {% include "cta-header.html" %}
+    
+    <!-- Content -->
+
+    <div class="container-xxl" id="bh-body">
+        <div class="authentication-wrapper authentication-basic container-p-y">
+          <div class="authentication-inner py-4">
+            <!-- Forgot Password -->
+            <div class="card">
+              <div class="card-body">                            
+                <h4 class="mb-2">Forgot Password? 🔒</h4>
+                <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
+                
+                {% if error == 1 %}
+                  <div class="py-2 px-2 rounded m-2" 
+                  style="background-color: rgba(255, 113, 113, 0.341); color: red;">
+                    <b>Fatal error: Email Was Not Sent!</b>
+                  </div>
+
+                {% elif error == 2 %}
+                  <div class="py-2 px-2 rounded m-2" 
+                  style="background-color: rgba(255, 113, 113, 0.341); color: red;">
+                    <b>E-Mail Id is not registered!</b>
+                  </div>
+
+                {% elif error == 3 %}
+                  <div class="py-2 px-2 rounded m-2" 
+                  style="background-color: rgba(255, 113, 113, 0.341); color: red;">
+                    <b>Wrong OTP, Try Again</b>
+                  </div> 
+                  
+                {% elif error == 4 %}
+                  <div class="py-2 px-2 rounded m-2" 
+                  style="background-color: rgba(255, 113, 113, 0.341); color: red;">
+                    <b>Wrong OTP!</b>
+                  </div> 
+                {% endif %}
+
+                {% if success == 1 %}
+                <div class="py-2 px-2 rounded m-2" 
+                style="background-color: rgba(113, 255, 151, 0.341); color: green;">
+                  <b>Correct OTP!</b>
+                </div>
+
+              {% elif success == 2 %}
+                <div class="py-2 px-2 rounded m-2" 
+                style="background-color: rgba(113, 255, 151, 0.341); color: green;">
+                  <b>Password Changed!</b>
+                </div>
+                
+              {% endif %}
+              
+                
+                {% if otp_sent == 0 %}                
+                <form id="formAuthentication" class="mb-3" method="POST">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      autofocus
+                    />
+                  </div>
+                  <button id = "submit-btn" class="btn btn-primary d-grid w-100">Send Reset OTP</button>
+                </form>
+
+                {% elif otp_sent == 1 %}
+                <form id="formAuthentication" class="mb-3" method="POST">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email_otp"
+                      value="{{email}}"
+                      placeholder="Enter your email"
+                      readonly
+                    />
+                    <input type="hidden" value="{{trial_round}}" name="trial_round" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="otp" class="form-label">OTP</label>
+                    <input                      
+                      type="text"
+                      class="form-control"
+                      id="otp"
+                      name="otp"
+                      maxlength="6"
+                      placeholder="Enter otp sent to your email"                     
+                      autofocus
+                    />
+                  </div>
+                  <button id="submit-btn" class="btn btn-primary d-grid w-100">Verify</button>
+                </form>
+
+                {% elif otp_sent == 2 %}
+                <form id="formAuthentication" class="mb-3" method="POST">
+                  {% csrf_token %}
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email_password"
+                      value="{{email}}"
+                      placeholder="Enter your email"
+                      readonly
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="otp" class="form-label">New Password</label>
+                    <input                      
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      name="new_password"                     
+                      placeholder="Set new password"                     
+                      autofocus
+                    />
+                  </div>
+                  <button id="submit-btn" class="btn btn-primary d-grid w-100">Save</button>
+                </form>
+                {% endif %}
+
+                <div class="text-center">
+                  <a href="{% url 'sign_in' %}" class="d-flex align-items-center justify-content-center">
+                    <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
+                    Back to login
+                  </a>
+                </div>                                                                                   
+              </div>
+            </div>
+            <!-- /Forgot Password -->
+          </div>
+        </div>
+    </div>
+
+    <div class="spinner-border text-primary loading-bh" id="loading-bh">
+      <span class="visually-hidden">Loading...</span>
+    </div>   
+
+    <!-- / Content -->
+
+    <div class="buy-now">
+      <a
+        href="{% url 'home' %}#cta-premium"
+        target="_blank"
+        class="btn btn-danger btn-buy-now"
+        >Upgrade to Pro</a
+      >
+    </div>
+
+    <!-- Core JS -->
+    <script>
+      const submitBtn = document.getElementById('submit-btn');
+      const loadingDiv = document.getElementById('loading-bh');
+      const bhBody = document.getElementById('bh-body');
+    
+      submitBtn.addEventListener('click', () => {
+        loadingDiv.style.display = 'block';
+        bhBody.classList.add('blur');
+      });
+    </script>
+    
+
+    <script src="/static/assets-cta/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/assets-cta/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets-cta/js/isotope.min.js"></script>
+    <script src="/static/assets-cta/js/owl-carousel.js"></script>
+    <script src="/static/assets-cta/js/lightbox.js"></script>
+    <script src="/static/assets-cta/js/tabs.js"></script>
+    <script src="/static/assets-cta/js/video.js"></script>
+    <script src="/static/assets-cta/js/slick-slider.js"></script>
+    <script src="/static/assets-cta/js/custom.js"></script>    
+    <!-- build:js assets-dash/vendor/js/core.js -->
+    <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+    <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+    <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+    <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="/static/assets-dash/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="/static/assets-dash/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>

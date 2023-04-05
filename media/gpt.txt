@@ -1,0 +1,1 @@
+i am creaating a website where people like home bakers can manage their ccounts, they can add their expenses and sales and we will generate report for it monthly and all the data can be seen in one page including their sale, purchases, expenses

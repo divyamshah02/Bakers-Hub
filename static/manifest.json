@@ -1,0 +1,14 @@
+{
+    "name": "Bakers Hub",
+    "short_name": "Bakers Hub",
+    "start_url": ".",
+    "display": "standalone",
+    "icons": [
+      {
+        "src": "/static/assets-cta/images/favicon.png",
+        "sizes": "500x500",
+        "type": "image/png"
+      }
+    ]    
+  }
+  

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<!-- =========================================================
+* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
+==============================================================
+
+* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
+* Created by: ThemeSelection
+* License: You must have a valid license purchased in order to legally use the theme for your project.
+* Copyright ThemeSelection (https://themeselection.com)
+
+=========================================================
+ -->
+<!-- beautify ignore:start -->
+<html
+  lang="en"
+  class="light-style customizer-hide"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-dash-path="/static/assets-dash/"
+  data-template="vertical-menu-template-free"
+>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+  <title>Bakers Hub</title>
+  <link rel="icon" href="/static/assets-cta/images/favicon.png">
+  <!-- Bootstrap core CSS -->
+  <link href="/static/assets-cta/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="/static/assets-cta/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/templatemo-eduwell-style.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/owl.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/lightbox.css">
+  <!--
+
+TemplateMo 573 EduWell
+
+https://templatemo.com/tm-573-eduwell
+
+-->
+</head>
+  <body>
+
+    {% include "cta-header.html" %}
+
+    <section class="register" id="register-section" style="margin-top: 100px; padding-top: 0px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 d-none d-lg-block">
+            <div id="map">
+  
+              <!-- You just need to go to Google Maps for your own map point, and copy the embed code from Share -> Embed a map section -->
+              <img src="/static/assets-cta/images/people-working-together-online.png" style="border:0; border-radius: 15px; position: relative;
+                  z-index: 2;" />
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <form id="register" method="post" style="border: 2px solid #888888a9; box-shadow: 6px 6px 20px #666666;">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="section-heading">
+                    <h6>Login</h6>
+                    <h4>Let's go <em>Inside</em></h4>
+                    <p></p>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  {% if error == 1 %}                 
+                  <div class="mb-4 py-2 px-2 text-danger rounded m-2"
+                    style="background-color: rgba(255, 113, 113, 0.508);"><b>
+                      E-mail Id is not registered!
+                      </a></b>
+                  </div>
+                  {% elif error == 2 %}
+                  <div class="mb-4 py-2 px-2 text-danger rounded m-2"
+                    style="background-color: rgba(255, 113, 113, 0.508);"><b>
+                      Wrong Password!
+                      </a></b>
+                  </div>                  
+                  {% elif error == 3 %}
+                  <div class="mb-4 px-2 text-danger rounded m-2"
+                    style="background-color: rgba(255, 113, 113, 0.508);"><b>
+                      Fatal Error Please Try Again!
+                      </a></b>
+                  </div>
+                  {% endif %}
+                </div>
+                <div class="col-lg-12">
+                  {% if error == 2 %}  
+                  <fieldset>
+                    <input type="email" name="email" id="email" value="{{email}}"
+                    placeholder="Enter your registered Email" required>
+                  </fieldset>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <input type="Password" name="password" id="password" placeholder="Password" required autofocus>
+                    </fieldset>
+                  </div> 
+                  {% else %}             
+                  <fieldset>
+                    <input type="email" name="email" id="email"
+                    placeholder="Enter your registered Email" required autofocus>
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <input type="Password" name="password" id="password" placeholder="Password" required>
+                  </fieldset>
+                </div>                                              
+                {% endif %}
+                <div class="col-lg-8">
+                  <p class="mb-0">                                    
+                    <a href="{% url 'forget_pass' %}">
+                      <b><span style="color: #dc8cdb;">Forgot password?</span></b>
+                    </a>
+                  </p>
+                  <p class="mb-3">
+                    <span>Don't have an account?</span>                    
+                    <a href="{% url 'home' %}">
+                      <b><span style="color: #dc8cdb;">Register instead</span></b>
+                    </a>
+                  </p>
+                </div>
+                <div class="col-lg-4">
+                  <fieldset class="mt-1">
+                    <button type="submit" id="form-submit" class="main-gradient-button">Log in</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-12">
+            <ul class="social-icons">
+              <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+          <div class="col-lg-12">
+            <footer class="content-footer footer bg-footer-theme
+                text-center bg-transparent">
+              <br>
+              <div class="mb-3">
+                ©
+                <script>document.write(new Date().getFullYear());</script>
+                <span><b><a href="{% url 'home' %}" style="color: #2f32eb;">Bakers Hub</a></b></span><br>
+                Made with ❤️ by
+                <a href="" target="_blank" class="footer-link
+                    fw-bolder" style="color: #2f32eb;">Divyam Shah</a>
+  
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Content -->
+
+    <!-- <div class="container-xxl">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+          
+          <div class="card" style="background: linear-gradient(to bottom, rgba(219, 138, 222, 0.473) 0%, rgba(246, 191, 159, 0.489)); box-shadow: 4px 4px 10px #888;">
+            <div class="card-body">              
+              <h4 class="mb-2">Welcome to <span style="color: #696cff;">BakersHub!</span> 👋</h4>
+              <p class="mb-4">Please sign-in to your account and start the adventure</p>
+
+              <form id="formAuthentication" class="mb-3" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+
+                  {% if error == 1 %}
+                  <div class="py-2 px-2 text-danger rounded m-2" style="background-color: rgba(255, 113, 113, 0.508);"><b>
+                    E-mail Id is not registered!</b>
+                  </div>
+
+                  {% elif error == 2 %}
+                  <div class="py-2 px-2 text-danger rounded m-2" style="background-color: rgba(255, 113, 113, 0.508);"><b>
+                    Wrong Password!</b>
+                  </div>
+
+                  {% endif %}                  
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email or username"
+                    autofocus
+                    required
+                  />
+                </div>
+                <div class="mb-3 form-password-toggle">
+                  <div class="d-flex justify-content-between">
+                    <label class="form-label" for="password">Password</label>
+                    <a href="{% url 'forget_pass' %}">
+                      <small>Forgot Password?</small>
+                    </a>
+                  </div>
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      name="password"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password"
+                      required
+                    />
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me"/>
+                    <label class="form-check-label" for="remember-me"> Remember Me </label>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                </div>
+              </form>
+
+              <p class="text-center">
+                <span>New on our platform?</span>
+                <a href="{% url 'home' %}">
+                  <span>Create an account</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+    </div> -->
+
+    <!-- / Content -->
+
+    <!-- Core JS -->
+    <script src="/static/assets-cta/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/assets-cta/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets-cta/js/isotope.min.js"></script>
+    <script src="/static/assets-cta/js/owl-carousel.js"></script>
+    <script src="/static/assets-cta/js/lightbox.js"></script>
+    <script src="/static/assets-cta/js/tabs.js"></script>
+    <script src="/static/assets-cta/js/video.js"></script>
+    <script src="/static/assets-cta/js/slick-slider.js"></script>
+    <script src="/static/assets-cta/js/custom.js"></script>
+
+  </body>
+</html>
