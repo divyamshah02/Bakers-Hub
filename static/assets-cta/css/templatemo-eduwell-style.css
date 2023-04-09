@@ -288,11 +288,20 @@ header
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  float: left;
+  float: left; 
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+}
+
+.header-area .main-nav .logo_sign_in{
+  line-height: 100px;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .background-header .main-nav .logo {

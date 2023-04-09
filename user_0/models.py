@@ -1,7 +1,19 @@
 from django.db import models
 
 # Create your models here.
-class sales(models.Model):
+class UserProfile(models.Model):
+    user_id = models.CharField(max_length=10)
+    email = models.EmailField()
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    pfp = models.ImageField(upload_to='s_pfps')
+    otp = models.CharField(max_length=6)
+        
+class Category(models.Model):
+    user_id = models.CharField(max_length=10)
+    category = models.CharField(max_length=255)
+    
+class Sales(models.Model):
     user_id = models.CharField(max_length=10)
     customer_name = models.CharField(max_length=255)
     order_name = models.CharField(max_length=255)
@@ -14,7 +26,7 @@ class sales(models.Model):
     extra_note = models.TextField()
     order_date = models.CharField(max_length=255)
     
-class expense(models.Model):
+class Expense(models.Model):
     user_id = models.CharField(max_length=10)
     expense_name = models.CharField(max_length=255)
     expense_amount = models.CharField(max_length=255)

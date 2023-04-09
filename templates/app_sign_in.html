@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default"
+  data-assets-path="/static/assets-dash/" data-template="vertical-menu-template-free">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+  <title>Bakers Hub</title>
+
+  <meta name="description" content="" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/static/assets-cta/images/favicon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Icons. Uncomment required icon fonts -->
+  <link rel="stylesheet" href="/static/assets-dash/vendor/fonts/boxicons.css" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="/static/assets-dash/vendor/css/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="/static/assets-dash/vendor/css/theme-default.css"
+    class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="/static/assets-dash/css/demo.css" />
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+  <!-- Page CSS -->
+  <!-- Page -->
+  <link rel="stylesheet" href="/static/assets-dash/vendor/css/pages/page-auth.css" />
+  <!-- Helpers -->
+  <script src="/static/assets-dash/vendor/js/helpers.js"></script>
+
+  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+  <script src="/static/assets-dash/js/config.js"></script>
+  <link rel="stylesheet" href="/static/assets-cta/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/templatemo-eduwell-style.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/owl.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/lightbox.css">
+  <style>
+    .blur {
+      filter: blur(5px);
+    }
+
+    #loading-bh {
+      position: absolute;
+      z-index: 999;
+      top: 50%;
+      color: rgb(176, 50, 98);
+      left: 50%;
+      display: none;
+    }
+  </style>
+</head>
+
+<body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%);">
+  <!-- Content -->
+  <div class="spinner-border loading-bh" id="loading-bh">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <div class="container-xxl" id="main">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+      <div class="authentication-inner">
+        <div class="row">
+          <div class="col-12 p-5 text-center">
+            <img src="/static/assets-cta/images/logo.png" alt="Baker Hub"
+              style="width: 250px; position: relative; z-index: 10;" />
+          </div>
+        </div>
+        <!-- Register -->
+
+        <div class="card" style="background-color: transparent; border: 2px solid black;">
+          <div class="card-body">
+            <!-- Logo -->
+            <!-- /Logo -->
+            <h4 class="mb-2 text-end-black" style="color: black;">Welcome to Bakers Hub! 👋</h4>
+            <p class="mb-4" style="color: black;">Please sign-in to your account and start the adventure</p>
+
+            <form class="mb-3" method="POST" id="my-form">
+              {% csrf_token %}
+              {% if error == 1 %}
+              <div class="mb-4 py-2 px-2 text-danger rounded m-2" style="background-color: rgba(255, 113, 113, 0.508);">
+                <b>
+                  E-mail Id is not registered!
+                  </a></b>
+              </div>
+              {% elif error == 2 %}
+              <div class="mb-4 py-2 px-2 text-danger rounded m-2" style="background-color: rgba(255, 113, 113, 0.508);">
+                <b>
+                  Wrong Password!
+                  </a></b>
+              </div>
+              {% elif error == 3 %}
+              <div class="mb-4 px-2 text-danger rounded m-2" style="background-color: rgba(255, 113, 113, 0.508);"><b>
+                  Fatal Error Please Try Again!
+                  </a></b>
+              </div>
+              {% endif %}
+              {% if error == 2 %}
+              <div class="mb-3">
+                <label for="email" class="form-label" style="color: black;"><b>Email</b></label>
+                <input required type="email" class="form-control" id="email" name="email" value="{{email}}"
+                  placeholder="Enter your email" />
+              </div>
+              <div class="mb-3 form-password-toggle">
+                <div class="d-flex justify-content-between">
+                  <label class="form-label" for="password" style="color: black;"><b>Password</b></label>
+                  <a href="{% url 'forget_pass' %}">
+                    <small style="color: rgb(176, 50, 98);"><b>Forgot Password?</b></small>
+                  </a>
+                </div>
+                <div class="input-group input-group-merge">
+                  <input required type="password" id="password" class="form-control" name="password"
+                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    aria-describedby="password" autofocus />
+                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                </div>
+              </div>
+              {% else %}
+              <div class="mb-3">
+                <label for="email" class="form-label" style="color: black;"><b>Email</b></label>
+                <input required type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
+                  autofocus />
+              </div>
+              <div class="mb-3 form-password-toggle">
+                <div class="d-flex justify-content-between">
+                  <label class="form-label" for="password" style="color: black;"><b>Password</b></label>
+                  <a href="{% url 'forget_pass' %}">
+                    <small style="color: rgb(176, 50, 98);"><u><b>Forgot Password?</b></u></small>
+                  </a>
+                </div>
+                <div class="input-group input-group-merge">
+                  <input required type="password" id="password" class="form-control" name="password"
+                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    aria-describedby="password" />
+                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                </div>
+              </div>
+              {% endif %}
+              <div class="mb-3">
+                <button class="btn d-grid w-100" type="submit" style="background-color: rgb(176, 50, 98); color: #fff;"
+                  id="sign_in">
+                  Sign in</button>
+              </div>
+            </form>
+
+            <p class="text-center">
+              <span style="color: black;">New on our platform?</span>
+              <a href="{% url 'register' %}">
+                <span style="color: rgb(176, 50, 98);"><b><u>Create an account</u></b></span>
+              </a>
+            </p>
+          </div>
+        </div>
+        <!-- /Register -->
+      </div>
+    </div>
+  </div>
+
+  <!-- / Content -->
+
+  <!-- Core JS -->
+  <script>
+    const submitBtn = document.getElementById('sign_in');
+    const loadingDiv = document.getElementById('loading-bh');
+    const bhBody = document.getElementById('main');
+    const form = document.getElementById('my-form');
+
+
+    submitBtn.addEventListener('click', () => {
+      if (form.checkValidity()) {
+        loadingDiv.style.display = 'block';
+        bhBody.classList.add('blur');
+      } else {
+        form.reportValidity();
+      }
+    });
+  </script>
+  <!-- build:js assets/vendor/js/core.js -->
+  <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+  <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+  <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+  <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+  <script src="/static/assets-dash/vendor/js/menu.js"></script>
+  <!-- endbuild -->
+
+  <!-- Vendors JS -->
+
+  <!-- Main JS -->
+  <script src="/static/assets-dash/js/main.js"></script>
+
+  <!-- Page JS -->
+
+  <!-- Place this tag in your head or just before your close body tag. -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>

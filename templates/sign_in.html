@@ -48,11 +48,8 @@ https://templatemo.com/tm-573-eduwell
 
 -->
 </head>
-  <body>
-
-    {% include "cta-header.html" %}
-
-    <section class="register" id="register-section" style="margin-top: 100px; padding-top: 0px;">
+  <body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%); padding-bottom: 90%;">    
+    <section class="register" id="register-section" style="margin-top: 0; padding-top: 0px; padding-bottom: 100px;">
       <div class="container">
         <div class="row">
           <div class="col-lg-7 d-none d-lg-block">
@@ -138,115 +135,11 @@ https://templatemo.com/tm-573-eduwell
                 </div>
               </div>
             </form>
-          </div>
-          <div class="col-lg-12">
-            <ul class="social-icons">
-              <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-          <div class="col-lg-12">
-            <footer class="content-footer footer bg-footer-theme
-                text-center bg-transparent">
-              <br>
-              <div class="mb-3">
-                ©
-                <script>document.write(new Date().getFullYear());</script>
-                <span><b><a href="{% url 'home' %}" style="color: #2f32eb;">Bakers Hub</a></b></span><br>
-                Made with ❤️ by
-                <a href="" target="_blank" class="footer-link
-                    fw-bolder" style="color: #2f32eb;">Divyam Shah</a>
-  
-              </div>
-            </footer>
-          </div>
+          </div>          
         </div>
       </div>
     </section>
-    
-    <!-- Content -->
-
-    <!-- <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-          
-          <div class="card" style="background: linear-gradient(to bottom, rgba(219, 138, 222, 0.473) 0%, rgba(246, 191, 159, 0.489)); box-shadow: 4px 4px 10px #888;">
-            <div class="card-body">              
-              <h4 class="mb-2">Welcome to <span style="color: #696cff;">BakersHub!</span> 👋</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
-
-              <form id="formAuthentication" class="mb-3" method="POST">
-                {% csrf_token %}
-                <div class="mb-3">
-
-                  {% if error == 1 %}
-                  <div class="py-2 px-2 text-danger rounded m-2" style="background-color: rgba(255, 113, 113, 0.508);"><b>
-                    E-mail Id is not registered!</b>
-                  </div>
-
-                  {% elif error == 2 %}
-                  <div class="py-2 px-2 text-danger rounded m-2" style="background-color: rgba(255, 113, 113, 0.508);"><b>
-                    Wrong Password!</b>
-                  </div>
-
-                  {% endif %}                  
-                  <label for="email" class="form-label">Email</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email or username"
-                    autofocus
-                    required
-                  />
-                </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                    <a href="{% url 'forget_pass' %}">
-                      <small>Forgot Password?</small>
-                    </a>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                      required
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me"/>
-                    <label class="form-check-label" for="remember-me"> Remember Me </label>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
-                </div>
-              </form>
-
-              <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="{% url 'home' %}">
-                  <span>Create an account</span>
-                </a>
-              </p>
-            </div>
-          </div>
-        
-        </div>
-      </div>
-    </div> -->
-
-    <!-- / Content -->
+       
 
     <!-- Core JS -->
     <script src="/static/assets-cta/vendor/jquery/jquery.min.js"></script>

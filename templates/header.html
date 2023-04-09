@@ -19,35 +19,7 @@
         <meta name="description" content="" />
 
         <!-- Favicon -->
-        <link rel="icon" href="/static/assets-cta/images/favicon.png">
-
-        <style>
-            .mobile-nav {
-                background: #F1F1F1;
-                position: fixed;
-                bottom: 0;
-                height: 55px;
-                width: 100%;
-                display: flex;
-                justify-content: space-around;
-                z-index: 9999;
-                }
-            .bloc-icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                }
-            .bloc-icon img {
-                width: 30px;
-                }
-            @media screen and (min-width: 1200px) {
-                .mobile-nav {
-                display: none;
-                }
-                }
-        </style>
-        
-
+        <link rel="icon" href="/static/assets-cta/images/favicon.png">        
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
@@ -78,6 +50,37 @@
         <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
         <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
         <script src="/static/assets-dash/js/config.js"></script>
+        <style>
+            .mobile-nav {
+                background: #F1F1F1;
+                position: fixed;
+                bottom: 0;
+                height: 55px;
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                z-index: 9999;
+                }
+            .bloc-icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                }
+            .bloc-icon img {
+                width: 30px;
+                }
+            @media screen and (min-width: 1200px) {
+                .mobile-nav {
+                display: none;
+                }
+                }
+            /* .active{
+                background-color: rgba(176, 50, 98, 0.541);
+                color: #fff;
+            } */
+        </style>
+        
 
     </head>
 
@@ -86,17 +89,16 @@
         <div class="layout-wrapper layout-content-navbar">
             <div class="layout-container">
                 <!-- Menu -->
-                <aside id="layout-menu" class="layout-menu menu-vertical menu
-                    bg-menu-theme">
+                <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                     <div class="app-brand demo">
-                        <a href="{% url 'home' %}" class="app-brand-link">
+                        <a href="{% url 'dashboard' %}" class="app-brand-link">
                             <img src="/static/assets-cta/images/logo.png" alt="Baker Hub"
-                style="width: 200px;"/>
+                                style="width: 200px;"/>
                         </a>
 
                         <a href="javascript:void(0);" class="layout-menu-toggle
                             menu-link text-large ms-auto d-block d-xl-none">
-                            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                            <i class="bx bx-chevron-left bx-sm align-middle rounded-circle" style="background-color: rgb(176, 50, 98);"></i>
                         </a>
                     </div>
 

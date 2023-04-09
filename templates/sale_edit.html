@@ -1,394 +1,335 @@
 {% include "header.html" %}
+<style>
+    .blur {
+        filter: blur(5px);
+    }
 
-                    <!-- / Navbar -->
+    #loading-bh {
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        color: rgb(176, 50, 98);
+        left: 50%;
+        display: none;
+    }
+</style>
 
-                    <!-- Content wrapper -->
-                    <div class="content-wrapper">
-                        <!-- Content -->
+<body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%)">
 
-                        <div class="container-xxl flex-grow-1 container-p-y">
-                            <!-- Basic Layout -->
-                            <div class="row">
-                                <div class="col-xl">
-                                    <div class="card mb-4">
-                                        <div class="card-header d-flex
+    <div class="spinner-border loading-bh" id="loading-bh">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <!-- Content wrapper -->
+    <div class="content-wrapper" id="main">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Basic Layout -->
+            <div class="row">
+                <div class="col-xl">
+                    <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
+                        <div class="card-header d-flex
                                             justify-content-between
-                                            align-items-center"
-                                            style="background-color: rgba(105,
-                                            108, 255, 0.16);">
-                                            <h2 class="mb-0"
-                                                style="color: #2f32eb;"><b>Order</b></h2>
-                                            <small class="text-muted float-end">Sales - Edit</small>
-                                        </div>
-                                        <div class="card-body rounded-bottom"
-                                            style="background-color: rgba(105,
-                                            108, 255, 0.16);">                                    
-                                                {% if sale != None %}
-                                                    {% if sale == 1 %}
-                                                    <div class="py-2 px-2 rounded m-2" style="background-color: rgba(255, 113, 113, 0.508); color: red;"><b>
-                                                        Fatal Error - Your order was not added!</b>
-                                                    </div>
-                                                    {% else %}
-                                                    <div class="py-2 px-2 rounded m-2" style="background-color: rgba(113, 255, 151, 0.341); color: green;"><b>
-                                                        Order of <u>{{sale.customer_name}} for {{sale.quantity}} {{sale.unit}} {{sale.order_name}} @{{sale.price}}₹ on {{sale.date_of_delivery}} - {{sale.time_of_delivery}}</u> Updated</b>
-                                                    </div>
-                                                    <a href="{% url 'dashboard' %}">
-                                                        <button class="btn
-                                                    btn-primary mx-4 my-2">Go Back To Dashboard</button></a>                                                     
-                                                    {% endif %}                                                                                                
-                                                {% endif %} 
-                                                <form method="POST">
-                                                    {% csrf_token %}  
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                        for="customer_name"
-                                                        style="color: #696cff;">Customer Name<span
-                                                            class="text-danger"
-                                                            style="font-size:
+                                            align-items-center">
+                            <h2 class="mb-0" style="color: #000;"><b>Order - Edit</b></h2>
+                            <small class="float-end" style="color: #252222">Sales</small>
+                        </div>
+                        <div class="card-body rounded-bottom">
+                            {% if sale != None %}
+                            {% if sale == 1 %}
+                            <div class="py-2 px-2 rounded m-2"
+                                style="background-color: rgba(255, 113, 113, 0.508); color: red; border: 2px solid black;">
+                                <b>
+                                    Fatal Error - Your order was not added!</b>
+                            </div>
+                            {% else %}
+                            <div class="py-2 px-2 rounded m-2"
+                                style="background-color: rgba(113, 255, 151, 0.341); color: green; border: 2px solid black;">
+                                <b>
+                                    Order of <u>{{sale.customer_name}} for {{sale.quantity}} {{sale.unit}}
+                                        {{sale.order_name}} @{{sale.price}}₹ on {{sale.date_of_delivery}} -
+                                        {{sale.time_of_delivery}}</u> Updated</b>
+                            </div>
+                            <a href="{% url 'dashboard' %}">
+                                <button class="btn mx-2 my-2"
+                                    style="background-color: rgb(176, 50, 98); color: #fff;">Go Back To Dashboard</button></a>
+                            {% endif %}
+                            {% endif %}
+                            <form method="POST" id="my-form">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label class="form-label" for="customer_name" style="color: #000;">Customer
+                                        Name<span class="text-danger" style="font-size:
                                                             large;">*</span></label>
-                                                    <input type="text"
-                                                        class="form-control"
-                                                        id="customer_name"
-                                                        name="customer_name"
-                                                        placeholder="Divyam Shah"
-                                                        value="{{customer_name}}"
-                                                        aria-label="Customer
-                                                        name" required/>
-                                                </div>
+                                    <input type="text" class="form-control" id="customer_name" name="customer_name"
+                                        placeholder="Divyam Shah" value="{{customer_name}}" aria-label="Customer
+                                                        name" required />
+                                </div>
 
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                        for="order_name"
-                                                        style="color: #696cff;">Order
-                                                        Name<span
-                                                            class="text-danger"
-                                                            style="font-size:
+                                <div class="mb-3">
+                                    <label class="form-label" for="order_name" style="color: #000;">Order
+                                        Name<span class="text-danger" style="font-size:
                                                             large;">*</span></label>
-                                                    <input type="text"
-                                                        class="form-control"
-                                                        id="order_name"
-                                                        name="order_name"
-                                                        value="{{order_name}}"
-                                                        placeholder="Vanilla Cheese Cake"
-                                                        aria-label="Order name"
-                                                        required/>
-                                                </div>
+                                    <input type="text" class="form-control" id="order_name" name="order_name"
+                                        value="{{order_name}}" placeholder="Vanilla Cheese Cake" aria-label="Order name"
+                                        required />
+                                </div>
 
-                                                <div class="mb-3 row">
-                                                    <label class="form-label"
-                                                        for="quantity"
-                                                        style="color: #696cff;">Quantity<span
-                                                            class="text-danger"
-                                                            style="font-size:
+                                <div class="mb-3 row">
+                                    <label class="form-label" for="quantity" style="color: #000;">Quantity<span
+                                            class="text-danger" style="font-size:
                                                             large;">*</span></label>
-                                                    <div class="col-8">
-                                                        <input
-                                                            id="quantity"
-                                                            name="quantity"
-                                                            type="number"
-                                                            min="0"
-                                                            placeholder="1"
-                                                            value="{{quantity}}"
-                                                            class="form-control"
-                                                            aria-label="Quantity"
-                                                            required/>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <select
-                                                            class="form-select"
-                                                            id="qty_weigth"
-                                                            name="unit">
-                                                            {% if weight == "piece" %}
-                                                            <option selected value="piece">Piece</option>                                                            
-                                                            {% else %}
-                                                            <option value="piece">Piece</option>
-                                                            {% endif %}
+                                    <div class="col-8">
+                                        <input id="quantity" name="quantity" type="number" min="0" placeholder="1"
+                                            value="{{quantity}}" class="form-control" aria-label="Quantity" required />
+                                    </div>
+                                    <div class="col-4">
+                                        <select class="form-select" id="qty_weigth" name="unit">
+                                            {% if weight == "piece" %}
+                                            <option selected value="piece">Piece</option>
+                                            {% else %}
+                                            <option value="piece">Piece</option>
+                                            {% endif %}
 
-                                                            {% if weight == "kg" %}
-                                                            <option selected value="kg">Kg</option>
-                                                            {% else %}
-                                                            <option value="kg">Kg</option>
-                                                            {% endif %}
+                                            {% if weight == "kg" %}
+                                            <option selected value="kg">Kg</option>
+                                            {% else %}
+                                            <option value="kg">Kg</option>
+                                            {% endif %}
 
-                                                            {% if weight == "ltr" %}
-                                                            <option selected value="ltr">Ltr</option>
-                                                            {% else %}
-                                                            <option value="ltr">Ltr</option>
-                                                            {% endif %}
-                                                        </select>
-                                                    </div>
+                                            {% if weight == "ltr" %}
+                                            <option selected value="ltr">Ltr</option>
+                                            {% else %}
+                                            <option value="ltr">Ltr</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
 
-                                                </div>
+                                </div>
 
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                        for="price"
-                                                        style="color: #696cff;">Price
-                                                        <span
-                                                            class="text-danger"
-                                                            style="font-size:
+                                <div class="mb-3">
+                                    <label class="form-label" for="price" style="color: #000;">Price
+                                        <span class="text-danger" style="font-size:
                                                             large;">*</span></label>
-                                                    <div class="input-group
+                                    <div class="input-group
                                                         input-group-merge">
-                                                        <span
-                                                            class="input-group-text">₹</span>
-                                                        <input
-                                                            id="price"
-                                                            name="price"
-                                                            type="number"
-                                                            min="0"
-                                                            class="form-control"
-                                                            placeholder="1000"
-                                                            value="{{price}}"
-                                                            aria-label="Price"
-                                                            required/>
-                                                    </div>
-                                                </div>
+                                        <span class="input-group-text">₹</span>
+                                        <input id="price" name="price" type="number" min="0" class="form-control"
+                                            placeholder="1000" value="{{price}}" aria-label="Price" required />
+                                    </div>
+                                </div>
 
-                                                <div class="mb-3 row">
-                                                    <label class="form-label"
-                                                            for="category"
-                                                            style="color: #696cff;">Category
-                                                            <span
-                                                                class="text-danger"
-                                                                style="font-size:
+                                <div class="mb-3 row">
+                                    <label class="form-label" for="category" style="color: #000;">Category
+                                        <span class="text-danger" style="font-size:
                                                                 large;">*</span>
-                                                        </label>
-                                                    <div class="col-8">                                                            
-                                                        <select
-                                                        class="form-select"
-                                                        id="category"
-                                                        name="category">    
+                                    </label>
+                                    <div class="col-8">
+                                        <select class="form-select" id="category" name="category">
 
-                                                        {% if category_len == 0 %}
-                                                        <option value="Null">No Category</option>      
-                                                        
-                                                        {% else %}
-                                                        <option selected value="{{category}}">{{category}}</option>                                                       
-                                                        {% for category in category_data %}                                                            
-                                                        <option value="{{category.category}}">{{category.category}}</option>                                                       
-                                                        {% endfor %}
-                                                        <option value="Null">No Category</option>      
-                                                        {% endif %}                                                                                                                                                                        
-                                                        </select>
+                                            {% if category_len == 0 %}
+                                            <option value="Null">No Category</option>
+
+                                            {% else %}
+                                            <option selected value="{{category}}">{{category}}</option>
+                                            {% for category in category_data %}
+                                            <option value="{{category.category}}">{{category.category}}</option>
+                                            {% endfor %}
+                                            <option value="Null">No Category</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn"
+                                            style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;"
+                                            data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                            Add
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="modalCenter" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalCenterTitle">Add Category</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
-
-
-                                                    <div class="col-4">                                                                                                                    
-                                                          <!-- Button trigger modal -->
-                                                          <button
-                                                            type="button"
-                                                            class="btn btn-primary"
-                                                            style="width: 100%;"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#modalCenter"
-                                                          >
-                                                            Add
-                                                          </button>
-                                  
-                                                          <!-- Modal -->
-                                                          <div class="modal fade" id="modalCenter" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                              <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                  <h5 class="modal-title" id="modalCenterTitle">Add Category</h5>
-                                                                  <button
-                                                                    type="button"
-                                                                    class="btn-close"
-                                                                    data-bs-dismiss="modal"
-                                                                    aria-label="Close"
-                                                                  ></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                  <div class="row">
-                                                                    <div class="col mb-3">
-                                                                      <label for="nameWithTitle" class="form-label">Name</label>
-                                                                      <input
-                                                                        type="text"
-                                                                        id="newcategory"
-                                                                        class="form-control"
-                                                                        placeholder="Enter Category Name"
-                                                                        autofocus
-                                                                      />
-                                                                    </div>
-                                                                  </div>                                                                      
-                                                                </div>
-                                                                <div class="modal-footer">                                                                      
-                                                                  <button type="button" id="addcategory" class="btn btn-primary">Add</button>
-                                                                </div>
-                                                              </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col mb-3">
+                                                                <label for="nameWithTitle"
+                                                                    class="form-label">Name</label>
+                                                                <input type="text" id="newcategory" class="form-control"
+                                                                    placeholder="Enter Category Name" />
                                                             </div>
-                                                          </div>                                                            
+                                                        </div>
                                                     </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="addcategory" class="btn"
+                                                            style="background-color: rgb(176, 50, 98); color: #fff;">Add</button>
+                                                    </div>
+                                                </div>
                                             </div>
-
-                                                <div class="mb-3">
-                                                    <label
-                                                        for="date_of_delivery"
-                                                        class="col-md-2
-                                                        col-form-label"
-                                                        style="color: #696cff;">Date
-                                                        of delivery <span
-                                                            class="text-danger"
-                                                            style="font-size:
-                                                            large;">*</span></label>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <input
-                                                                class="form-control"
-                                                                name="date_of_delivery"
-                                                                type="date"
-                                                                id="date_of_delivery"
-                                                                value="{{date_of_delivery}}"
-                                                                required/>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <input
-                                                                class="form-control"
-                                                                type="time"                                                                
-                                                                id="time"
-                                                                name="time_of_delivery"
-                                                                value="{{time_of_delivery}}"
-                                                                />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                        for="extra_note"
-                                                        style="color: #696cff;">Extra
-                                                        notes
-                                                    </label>
-                                                    <textarea
-                                                        id="extra_note"
-                                                        name="extra_note"
-                                                        class="form-control"
-                                                        rows="4"
-                                                        placeholder="Make it pure VEG"
-                                                        >{{extra_notes}}</textarea>
-                                                </div>
-                                                <div class="mb-5">
-                                                    <label
-                                                        for="order_date"
-                                                        class="col-md-2
-                                                        col-form-label"
-                                                        style="color: #696cff;">Date
-                                                        of order <span
-                                                            class="text-danger"
-                                                            style="font-size:
-                                                            large;">*</span></label>
-                                                    <input class="form-control"
-                                                        name="order_date"
-                                                        type="date"
-                                                        id="order_date"
-                                                        value="{{order_date}}"
-                                                        required/>
-                                                </div>                                                
-                                                <input type="hidden" name="sale_id" value="{{id}}">
-
-                                                <button type="submit" class="btn
-                                                    btn-primary">Save</button>&nbsp;                                        
-                                                    <a href="{% url 'dashboard' %}">                                                        
-                                                    <button type="button" class="btn btn-outline-secondary">Cancel</button></a>   
-                                            </form>                                         
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="mb-3">
+                                    <label for="date_of_delivery" class="col-md-2
+                                                        col-form-label" style="color: #000;">Date
+                                        of delivery <span class="text-danger" style="font-size:
+                                                            large;">*</span></label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input class="form-control" name="date_of_delivery" type="date"
+                                                id="date_of_delivery" value="{{date_of_delivery}}" required />
+                                        </div>
+                                        <div class="col-6">
+                                            <input class="form-control" type="time" id="time" name="time_of_delivery"
+                                                value="{{time_of_delivery}}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="extra_note" style="color: #000;">Extra
+                                        notes
+                                    </label>
+                                    <textarea id="extra_note" name="extra_note" class="form-control" rows="4"
+                                        placeholder="Make it pure VEG">{{extra_notes}}</textarea>
+                                </div>
+                                <div class="mb-5">
+                                    <label for="order_date" class="col-md-2
+                                                        col-form-label" style="color: #000;">Date
+                                        of order <span class="text-danger" style="font-size:
+                                                            large;">*</span></label>
+                                    <input class="form-control" name="order_date" type="date" id="order_date"
+                                        value="{{order_date}}" required />
+                                </div>
+                                <input type="hidden" name="sale_id" value="{{id}}">
+
+                                <button type="submit" id="sale_save" class="btn"
+                                    style="background-color: rgb(176, 50, 98); color: #fff;">Save</button>&nbsp;
+                                <a href="{% url 'dashboard' %}">
+                                    <button type="button" class="btn btn-outline-dark">Cancel</button></a>
+                            </form>
                         </div>
-                        <!-- / Content -->
-
-                        <!-- Footer -->
-                        <footer class="content-footer footer bg-footer-theme
-                            text-center">
-                            <div class="mb-3">
-
-                                © <script>document.write(new Date().getFullYear());</script> Copyright<br>All rights reserverd to
-                                <span style="color: #2f32eb;"><b>BakersHub</b></span>    
-
-                            </div>
-                        </footer>
-                        <!-- / Footer -->
-
-                        <div class="content-backdrop fade"></div>
                     </div>
-                    <!-- Content wrapper -->
                 </div>
-                <!-- / Layout page -->
             </div>
-
-            <!-- Overlay -->
-            <div class="layout-overlay layout-menu-toggle"></div>
         </div>
-        <!-- / Layout wrapper -->
+        <!-- / Content -->
 
-        <div class="buy-now">
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme
+                            text-center">
+            <div class="mb-3">
+
+                ©
+                <script>document.write(new Date().getFullYear());</script> Copyright<br>All rights reserverd to
+                <span style="color: #2f32eb;"><b>BakersHub</b></span>
+
+            </div>
+        </footer>
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+    </div>
+    <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- <div class="buy-now">
             <a
                 href="{% url 'home' %}#cta-premium"
                 target="_blank"
                 class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
-        </div>
+        </div> -->
 
-        <!-- Core JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script>
-            $(document).ready(function() {
-            
+    <!-- Core JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script>
+        $(document).ready(function () {
             // Add option button click handler
-            $("#addcategory").click(function() {
+            $("#addcategory").click(function () {
                 var newOptionValue = $("#newcategory").val();
-                if (newOptionValue) {
-                // Add new option to select element
-                var newOption = $("<option>").val(newOptionValue).text(newOptionValue);
-                $("#category").append(newOption);
-                // Select new option
-                $("#category").val(newOptionValue);
-                // Hide modal
-                $("#modalCenter").modal("hide");
+                if (newOptionValue != "") {
+                    // Add new option to select element
+                    var newOption = $("<option>").val(newOptionValue).text(newOptionValue);
+                    $("#category").append(newOption);
+                    // Select new option
+                    $("#category").val(newOptionValue);
+                    // Hide modal
+                    $("#modalCenter").modal("hide");
+
+                    var category = document.getElementById('category').value
+                    $.ajax({
+                        url: '{% url "api_add_category" %}',
+                        type: 'POST',
+                        headers: {
+                            'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()
+                        },
+                        data: {
+                            'category': category,
+                            'user_id': '{{user}}',
+                        },
+                        success: function (response) {
+                            // Handle successful response from server
+                            console.log(response);
+                        },
+                        error: function (xhr, errmsg, err) {
+                            // Handle error response from server
+                            console.log(xhr.status + ": " + xhr.responseText);
+                        }
+                    });
                 }
-
-                var category = document.getElementById('category').value
-                $.ajax({
-                    url: '{% url "api_add_category" %}',
-                    type: 'POST',
-                    headers: {
-                        'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()
-                    },
-                    data: {
-                    'category': category,
-                    'user_id': '{{user}}',
-                    },
-                    success: function(response) {
-                    // Handle successful response from server
-                    console.log(response);
-                    },
-                    error: function(xhr, errmsg, err) {
-                    // Handle error response from server
-                    console.log(xhr.status + ": " + xhr.responseText);
-                    }
-                });
             });
-            
-            });
-        </script>
-        <!-- build:js assets-dash/vendor/js/core.js -->
-        <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
-        <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
-        <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
-        <script
-            src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-        <script src="/static/assets-dash/vendor/js/menu.js"></script>
-        <!-- endbuild -->
 
-        <!-- Vendors JS -->
+        });
+    </script>
+    <script>
+        const submitBtn = document.getElementById('sale_save');
+        const loadingDiv = document.getElementById('loading-bh');
+        const bhBody = document.getElementById('main');
+        const form = document.getElementById('my-form');
 
-        <!-- Main JS -->
-        <script src="/static/assets-dash/js/main.js"></script>
 
-        <!-- Page JS -->
+        submitBtn.addEventListener('click', () => {
+            if (form.checkValidity()) {
+                loadingDiv.style.display = 'block';
+                bhBody.classList.add('blur');
+            } else {
+                form.reportValidity();
+            }
+        });
+    </script>
+    <!-- build:js assets-dash/vendor/js/core.js -->
+    <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+    <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+    <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+    <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/static/assets-dash/vendor/js/menu.js"></script>
+    <!-- endbuild -->
 
-        <!-- Place this tag in your head or just before your close body tag. -->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-    </body>
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="/static/assets-dash/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
 </html>
