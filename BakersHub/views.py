@@ -6,8 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+from django.db.models import Count
 from user_0.models import UserProfile,Category,Expense,Sales
+from django.core.files.uploadedfile import InMemoryUploadedFile
 import random,datetime,yagmail,os
+from PIL import Image
+from io import BytesIO
 
 def home(request):    
     error = 0
@@ -121,7 +125,6 @@ def forget_pass(request):
         email = ''
         FROM_EMAIL = "divyamshah2020@gmail.com"
         PASSWORD = os.environ.get('password')
-        print(os.environ.get('password'))
         if request.method == 'POST':
             if request.POST.get('email'):
                 email = request.POST.get('email')
@@ -207,7 +210,7 @@ def dashboard(request):
         current_date = datetime.date.today()
         month_num = current_date.strftime("%m")
         month = current_date.strftime("%B")
-        year = current_date.strftime("%Y")
+        year = current_date.strftime("%Y")  
             
         # --- Sale Data --- #
         user_sale_data = Sales.objects.filter(user_id = user)
@@ -235,14 +238,19 @@ def dashboard(request):
         for user_expense in user_expense_data:
             expense_date = user_expense.expense_date.split('-')
             if expense_date[1] == month_num:
+                if user_expense.bill != "":
+                    bill = user_expense.bill.url
+                else:
+                    bill = None
                 temp_expense_data = {
                     'item':str(user_expense.expense_name).title(),
                     'qty':f"{user_expense.expense_quantity} {user_expense.qty_unit}",
                     'date':user_expense.expense_date,
                     'price':user_expense.expense_amount,
                     'id':user_expense.id,
-                    'notes':user_expense.extra_note,
-                }
+                    'notes':user_expense.extra_note, 
+                    'bill':bill,                   
+                }                
                 user_expense_total_amt += int(user_expense.expense_amount)
                 user_expense_info.append(temp_expense_data)
             
@@ -268,10 +276,11 @@ def dashboard(request):
             profit_perct = 0
             loss_perct = 0    
             
-        if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+        profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp
+        if profile_pfp == "":
             profile_pfp = 0 
         else:    
-            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url       
+            profile_pfp = profile_pfp.url    
         
         if len(user_expense_info) == 0:
             no_exp = 1
@@ -358,6 +367,10 @@ def dashboard_last_month(request):
             for user_expense in user_expense_data:
                 expense_date = user_expense.expense_date.split('-')
                 if expense_date[1] == month_num:
+                    if user_expense.bill != "":
+                        bill = user_expense.bill.url
+                    else:
+                        bill = None
                     temp_expense_data = {
                         'item':str(user_expense.expense_name).title(),
                         'qty':f"{user_expense.expense_quantity} {user_expense.qty_unit}",
@@ -365,6 +378,7 @@ def dashboard_last_month(request):
                         'price':user_expense.expense_amount,
                         'id':user_expense.id,              
                         'notes':user_expense.extra_note,
+                        'bill':bill,
   
                     }
                     user_expense_total_amt += int(user_expense.expense_amount)
@@ -394,10 +408,11 @@ def dashboard_last_month(request):
                 profit_perct = 0
                 loss_perct = 0     
                 
-            if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp
+            if profile_pfp == "":
                 profile_pfp = 0 
             else:    
-                profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url    
+                profile_pfp = profile_pfp.url
             
             data = {
                 'tab':1,
@@ -468,13 +483,18 @@ def dashboard_this_year(request):
         for user_expense in user_expense_data:
             expense_date = user_expense.expense_date.split('-')
             if expense_date[0] == year:
+                if user_expense.bill != "":
+                    bill = user_expense.bill.url
+                else:
+                    bill = None
                 temp_expense_data = {
                     'item':str(user_expense.expense_name).title(),
                     'qty':f"{user_expense.expense_quantity} {user_expense.qty_unit}",
                     'date':user_expense.expense_date,
                     'price':user_expense.expense_amount,
                     'id':user_expense.id,          
-                    'notes':user_expense.extra_note,      
+                    'notes':user_expense.extra_note,  
+                    'bill':bill,    
                 }
                 user_expense_total_amt += int(user_expense.expense_amount)
                 user_expense_info.append(temp_expense_data)
@@ -503,10 +523,11 @@ def dashboard_this_year(request):
             profit_perct = 0
             loss_perct = 0    
             
-        if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+        profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp
+        if profile_pfp == "":
             profile_pfp = 0 
         else:    
-            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url     
+            profile_pfp = profile_pfp.url     
         
         data = {
             'tab':1,
@@ -569,13 +590,18 @@ def dashboard_lifetime(request):
         user_expense_total_amt = 0
         for user_expense in user_expense_data:
             expense_date = user_expense.expense_date.split('-')
+            if user_expense.bill != "":
+                bill = user_expense.bill.url
+            else:
+                bill = None
             temp_expense_data = {
                     'item':str(user_expense.expense_name).title(),
                     'qty':f"{user_expense.expense_quantity} {user_expense.qty_unit}",
                     'date':user_expense.expense_date,
                     'price':user_expense.expense_amount,
                     'id':user_expense.id,    
-                    'notes':user_expense.extra_note,            
+                    'notes':user_expense.extra_note, 
+                    'bill':bill,           
                 }
             user_expense_total_amt += int(user_expense.expense_amount)
             user_expense_info.append(temp_expense_data)
@@ -604,10 +630,11 @@ def dashboard_lifetime(request):
             profit_perct = 0
             loss_perct = 0  
         
-        if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+        profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp
+        if profile_pfp == "":
             profile_pfp = 0 
         else:    
-            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url       
+            profile_pfp = profile_pfp.url 
         
         data = {
             'tab':1,
@@ -667,10 +694,11 @@ def sale_edit(request):
         else:
             sale_id = request.session.get('sale_id')
             sale_data = Sales.objects.filter(id = sale_id)[0]
-            if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp
+            if profile_pfp == "":
                 profile_pfp = 0 
             else:    
-                profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url 
+                profile_pfp = profile_pfp.url
             category_data = Category.objects.filter(user_id = user)
             data = {
                 'customer_name':sale_data.customer_name,
@@ -728,10 +756,11 @@ def sale_adder(request):
             except:
                 sale_add = 1
                 
-        if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+        profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp
+        if profile_pfp == "":
             profile_pfp = 0 
         else:    
-            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url 
+            profile_pfp = profile_pfp.url 
             
         category_data = Category.objects.filter(user_id = user)
         data = {
@@ -778,10 +807,11 @@ def expense_edit(request):
         else:
             expense_id = request.session.get('expense_id')
             expense_data = Expense.objects.filter(id = expense_id)[0]
-            if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp
+            if profile_pfp == "":
                 profile_pfp = 0 
             else:    
-                profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url 
+                profile_pfp = profile_pfp.url
             data = {
                 'expense_name':expense_data.expense_name,
                 'expense_amount':expense_data.expense_amount,
@@ -806,14 +836,40 @@ def expense_adder(request):
         expense_add = None
         user = request.user
         if request.method == 'POST': 
-            try:       
-                add_expense = Expense(user_id = user,
-                                        expense_name = request.POST.get('expense_name'),
-                                        expense_amount = request.POST.get('expense_amount'),
-                                        expense_quantity =request.POST.get('expense_quantity'),
-                                        qty_unit = request.POST.get('qty_unit'),
-                                        extra_note = request.POST.get('extra_note'),
-                                        expense_date = request.POST.get('expense_date'),
+            try:   
+                bill=request.FILES.get('bill')   
+                if(bill):
+                    img = Image.open(bill).convert('RGB')
+                    # img = img.convert('RGB')
+                    img = img.reduce(factor=2)
+                    buffer = BytesIO()
+                    img.save(buffer, format='JPEG')
+                    buffer.seek(0)
+                    file = InMemoryUploadedFile(
+                        buffer,
+                        'ImageField',
+                        f"{bill.name.split('.')[0]}_compressed.jpg",
+                        'image/jpeg',
+                        buffer.getbuffer().nbytes,
+                        None
+                    )
+                    add_expense = Expense(user_id = user,
+                                            expense_name = request.POST.get('expense_name'),
+                                            expense_amount = request.POST.get('expense_amount'),
+                                            expense_quantity =request.POST.get('expense_quantity'),
+                                            qty_unit = request.POST.get('qty_unit'),
+                                            extra_note = request.POST.get('extra_note'),
+                                            expense_date = request.POST.get('expense_date'),
+                                            bill=file,
+                                    )
+                else:
+                    add_expense = Expense(user_id = user,
+                                            expense_name = request.POST.get('expense_name'),
+                                            expense_amount = request.POST.get('expense_amount'),
+                                            expense_quantity =request.POST.get('expense_quantity'),
+                                            qty_unit = request.POST.get('qty_unit'),
+                                            extra_note = request.POST.get('extra_note'),
+                                            expense_date = request.POST.get('expense_date'),
                                     )
                 add_expense.save()
                 expense_add = {
@@ -825,15 +881,31 @@ def expense_adder(request):
                 }
             except:
                 expense_add = 1
-        if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+        profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp
+        if profile_pfp == "":
             profile_pfp = 0 
         else:    
-            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url
+            profile_pfp = profile_pfp.url            
+        user_exp = Expense.objects.filter(user_id = user)
+        if len(user_exp)>0:            
+            frequent_expenses = user_exp.values('expense_name').annotate(count=Count('expense_name'))
+            frequent_expenses = frequent_expenses.order_by('-count')
+            frequent_expenses = frequent_expenses[:2]                      
+            frequent_expenses_data = []
+            for frequent_exp in frequent_expenses:
+                expense_name=frequent_exp['expense_name']              
+                expense_data = user_exp.filter(expense_name=expense_name).values('expense_name','expense_amount','expense_quantity','qty_unit','extra_note')                            
+                frequent_expenses_data.append(expense_data[len(expense_data)-1])
+                
+        else:
+            frequent_expenses_data = None         
+            
         data = {
             'tab':3,
             'expense':expense_add,
             'p_letter':str(user.first_name)[0].lower(),  
-            'profile_pfp':profile_pfp,       
+            'profile_pfp':profile_pfp,  
+            'frequent_expenses_data':frequent_expenses_data,   
                 
         }
         return render(request,"expense_adder.html",data)
@@ -844,23 +916,41 @@ def expense_adder(request):
 def profile(request):
     try:
         user = request.user
+        user_profile=UserProfile.objects.get(user_id = user)
         if request.method == 'POST':
             if request.POST.get('pfp_changed') == 'True':            
-                user_profile_pfp=UserProfile.objects.get(user_id = user)
-                user_profile_pfp.pfp = request.FILES.get('pfp')
-                user_profile_pfp.save()
+                try:
+                    image = request.FILES.get('pfp')
+                    img = Image.open(image).convert('RGB')
+                    # img = img.convert('RGB')
+                    img = img.reduce(factor=2)
+                    buffer = BytesIO()
+                    img.save(buffer, format='JPEG')
+                    buffer.seek(0)
+                    file = InMemoryUploadedFile(
+                        buffer,
+                        'ImageField',
+                        f"{image.name.split('.')[0]}_compressed.jpg",
+                        'image/jpeg',
+                        buffer.getbuffer().nbytes,
+                        None
+                    )
+                    user_profile.pfp.save(file.name, file, save=True)     
+                except:
+                    pass          
             request.user.first_name = request.POST.get('first_name')
             request.user.last_name = request.POST.get('last_name')
-            user.save()
-            
-            user_profile = UserProfile.objects.get(user_id = user)
+            user.save()            
+            # user_profile=UserProfile.objects.get(user_id = user)
             user_profile.first_name = request.POST.get('first_name')
             user_profile.last_name = request.POST.get('last_name')
+            user_profile.save()
             
-        if UserProfile.objects.filter(user_id=user)[0].pfp == "":
+        profile_pfp = user_profile.pfp
+        if profile_pfp == "":
             profile_pfp = 0 
         else:    
-            profile_pfp = UserProfile.objects.filter(user_id=user)[0].pfp.url
+            profile_pfp = profile_pfp.url
         data = {
             'first_name':request.user.first_name,
             'last_name':request.user.last_name,

@@ -21,9 +21,9 @@ from django.conf.urls.static import static
 from django.conf.urls import handler404
 
 urlpatterns = [
+    # path('<path>/',views.maintenance,name='maintenance'),
     path('admin/', admin.site.urls),
     path('',views.home,name='home'),
-    # path('<path>/',views.maintenance,name='maintenance'),
     path('premium/',views.premium,name='premium'),
     path('register/',views.register,name='register'),
     path('sign_in/',views.sign_in,name='sign_in'),

@@ -6,7 +6,7 @@ class UserProfile(models.Model):
     email = models.EmailField()
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    pfp = models.ImageField(upload_to='s_pfps')
+    pfp = models.ImageField(upload_to='users0_pfp')
     otp = models.CharField(max_length=6)
         
 class Category(models.Model):
@@ -32,5 +32,6 @@ class Expense(models.Model):
     expense_amount = models.CharField(max_length=255)
     expense_quantity = models.CharField(max_length=255)
     qty_unit = models.CharField(max_length=255)
+    bill = models.ImageField(upload_to='users0_bill',default=None,null=True)
     extra_note = models.TextField()
     expense_date = models.CharField(max_length=255)

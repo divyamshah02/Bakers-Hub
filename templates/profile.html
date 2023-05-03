@@ -1,6 +1,6 @@
 {% include "header.html" %}
-<div class="card mb-4">
-    <h5 class="card-header">Profile Details</h5>
+<div class="card mb-4 m-4" style="background-color: transparent; border: 2px solid black;">
+    <h5 class="card-header" style="color: #000;">Profile Details</h5>
     <!-- Account -->
     <div class="card-body">
       <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
@@ -13,7 +13,7 @@
           class="d-block rounded"
           height="100"
           width="100"
-          id="uploadedAvatar" />
+          id="UploadedAvatar" />
         {% else %}
         <img
             src="{{profile_pfp}}"
@@ -21,12 +21,12 @@
           class="d-block rounded"
           height="100"
           width="100"
-          id="uploadedAvatar" />
+          id="UploadedAvatar" />
         {% endif %}
         
         <input type="hidden" name="pfp_changed" value="False" id="pfp_changed">
         <div class="button-wrapper">  
-          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+          <label for="upload" class="btn me-2 mb-4" tabindex="0" style="background-color: rgb(176, 50, 98); color: #fff;">
             <span class="d-none d-sm-block">Upload new photo</span>
             <i class="bx bx-upload d-block d-sm-none"></i>
             <input
@@ -38,22 +38,21 @@
               accept="image/png, image/jpeg"
             />
           </label>
-          <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+          <button type="button" class="btn btn-outline-dark account-image-reset mb-4">
             <i class="bx bx-reset d-block d-sm-none"></i>
             <span class="d-none d-sm-block">Reset</span>
           </button>
 
-          <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800Kb</p>
+          <p class="mb-0" style="color: #000;">Allowed JPG, GIF or PNG. Max size of 800Kb</p>
         </div>
       
       </div>
     </div>
-    <hr class="my-0" />
-    <div class="card-body">
-      
+    <hr class="my-0" style="background-color: transparent;">
+    <div class="card-body">      
         <div class="row">
           <div class="mb-3 col-md-6">
-            <label for="firstName" class="form-label">First Name</label>
+            <label style="color: #000;" for="firstName" class="form-label"><b>First Name</b></label>
             <input
               class="form-control"
               type="text"
@@ -64,11 +63,11 @@
             />
           </div>
           <div class="mb-3 col-md-6">
-            <label for="lastName" class="form-label">Last Name</label>
+            <label style="color: #000;" for="lastName" class="form-label"><b>Last Name</b></label>
             <input class="form-control" type="text" name="last_name" id="lastName" value="{{last_name}}" />
           </div>
           <div class="mb-3 col-md-6">
-            <label for="email" class="form-label">E-mail</label>
+            <label style="color: #000;" for="email" class="form-label"><b>E-mail</b></label>
             <input
               class="form-control"
               type="text"
@@ -80,23 +79,15 @@
           </div>
         </div>
         <div class="mt-2">
-          <button type="submit" class="btn btn-primary me-2">Save changes</button>
-          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+          <button type="submit" class="btn me-2" style="background-color: rgb(176, 50, 98); color: #fff;">Save changes</button>
+          <button type="reset" class="btn btn-outline-dark">Cancel</button>
         </div>
       </form>
     </div>
     <!-- /Account -->
 </div>
 <!-- Footer -->
-<footer class="content-footer footer bg-footer-theme
-text-center">
-<div class="mb-3">
 
-    © <script>document.write(new Date().getFullYear());</script> Copyright<br>All rights reserverd to
-    <span style="color: #2f32eb;"><b>BakersHub</b></span>    
-
-</div>
-</footer>
 <!-- / Footer -->
   <!-- Core JS -->
     <!-- build:js assets-dash/vendor/js/core.js -->

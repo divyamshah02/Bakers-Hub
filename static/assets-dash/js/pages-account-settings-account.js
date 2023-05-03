@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
     // Update/reset user image of account page
     document.getElementById('pfp_changed').value = "True";
-    let accountUserImage = document.getElementById('uploadedAvatar');
+    let accountUserImage = document.getElementById('UploadedAvatar');
     const fileInput = document.querySelector('.account-file-input'),
       resetFileInput = document.querySelector('.account-image-reset');
 
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
       const resetImage = accountUserImage.src;
       fileInput.onchange = () => {
         if (fileInput.files[0]) {
-          accountUserImage.src = window.URL.createObjectURL(fileInput.files[0]);
+          accountUserImage.src = window.URL.createObjectURL(fileInput.files[0]);          
         }
       };
       resetFileInput.onclick = () => {

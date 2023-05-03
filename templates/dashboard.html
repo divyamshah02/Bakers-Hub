@@ -1,482 +1,543 @@
 {% include "header.html" %}
 
-<body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%)">
-    <!-- / Navbar -->
 
-    <!-- Content wrapper -->
+<!-- / Navbar -->
 
-    <div class="content-wrapper">
-        <!-- Content -->
+<!-- Content wrapper -->
+<div id="moveModalHere"></div>
 
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-                <div class="col-6">
-                    <h2 style="color: #000;">{{month}} - {{year}}</h2>
-                </div>
-                <div class="col-6 text-end">
-                    <div class="dropdown">
-                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                            <i class="bx bx-dots-vertical-rounded" style="color: #000;"></i>
-                        </button>
-                        <style>
-                            .item-hover:hover {
-                                background-color: #696cff;
-                                color: #fff;
-                            }
+<div class="content-wrapper">
+    <!-- Content -->
 
-                            .list-group-item.active {
-                                background-color: rgb(176, 50, 98) !important;
-                                border-color: rgb(176, 50, 98) !important;
-                            }
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="row">
+            <div class="col-6">
+                <h2 style="color: #000;">{{month}} - {{year}}</h2>
+            </div>
+            <div class="col-6 text-end">
+                <div class="dropdown">
+                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded" style="color: #000;"></i>
+                    </button>
+                    <style>
+                        .item-hover:hover {
+                            background-color: #696cff;
+                            color: #fff;
+                        }
 
-                            .list-group-item {
-                                border-color: rgb(176, 50, 98);
-                                color: #000;
-                            }
-                        </style>
-                        <div class="dropdown-menu dropdown-menu-start" aria-labelledby="transactionID">
-                            <a class="dropdown-item item-hover" href="{% url 'dashboard_last_month' %}">Last Month</a>
-                            <a class="dropdown-item item-hover" href="{% url 'dashboard_this_year' %}">This Year</a>
-                            <a class="dropdown-item item-hover" href="{% url 'dashboard_lifetime' %}">lifetime</a>
-                        </div>
+                        .list-group-item.active {
+                            background-color: rgb(176, 50, 98) !important;
+                            border-color: rgb(176, 50, 98) !important;
+                        }
+
+                        .list-group-item {
+                            border-color: rgb(176, 50, 98);
+                            color: #000;
+                        }
+                    </style>
+                    <div class="dropdown-menu dropdown-menu-start" aria-labelledby="transactionID">
+                        <a class="dropdown-item item-hover" href="{% url 'dashboard_last_month' %}">Last Month</a>
+                        <a class="dropdown-item item-hover" href="{% url 'dashboard_this_year' %}">This Year</a>
+                        <a class="dropdown-item item-hover" href="{% url 'dashboard_lifetime' %}">lifetime</a>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6 col-sm-6 col-md-6 col-lg-3">
-                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
-                        <div class="card-body">
-                            <div class="card-title d-flex
+        </div>
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+                <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                    <div class="card-body">
+                        <div class="card-title d-flex
                                                 align-items-start
                                                 justify-content-between">
 
-                                {% if loss_perct == None %}
-                                <div class="avatar flex-shrink-0">
-                                    <i class="bx bx-pie-chart-alt bx-md text-success bg-label-success p-1 rounded"></i>
-                                </div>
-                            </div>
-                            <span class="fw-semibold d-block
-                                            mb-1">Profit</span>
-                            <h3 class="card-title mb-2">₹{{profit}}</h3>
-                            <small class="text-success
-                                            fw-semibold"><i class="bx
-                                                bx-up-arrow-alt"></i>
-                                +{{profit_perct}}%
-                            </small>
-
-                            {% elif loss_perct == 0 %}
+                            {% if loss_perct == None %}
                             <div class="avatar flex-shrink-0">
                                 <i class="bx bx-pie-chart-alt bx-md text-success bg-label-success p-1 rounded"></i>
                             </div>
                         </div>
-                        <span class="fw-semibold d-block mb-1">Profit</span>
+                        <span class="fw-semibold d-block
+                                            mb-1">Profit</span>
                         <h3 class="card-title mb-2">₹{{profit}}</h3>
-                        <small class="text-danger fw-semibold">&nbsp</small>
+                        <small class="text-success
+                                            fw-semibold"><i class="bx
+                                                bx-up-arrow-alt"></i>
+                            +{{profit_perct}}%
+                        </small>
 
-                        {% else %}
+                        {% elif loss_perct == 0 %}
                         <div class="avatar flex-shrink-0">
-                            <i class="bx bx-pie-chart-alt bx-md text-danger bg-label-danger p-1 rounded"></i>
+                            <i class="bx bx-pie-chart-alt bx-md text-success bg-label-success p-1 rounded"></i>
                         </div>
                     </div>
-                    <span class="fw-semibold d-block
-                                                mb-1">Loss</span>
+                    <span class="fw-semibold d-block mb-1">Profit</span>
                     <h3 class="card-title mb-2">₹{{profit}}</h3>
-                    <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i>
-                        -{{loss_perct}}%</small>
+                    <small class="text-danger fw-semibold">&nbsp</small>
 
-                    {% endif %}
+                    {% else %}
+                    <div class="avatar flex-shrink-0">
+                        <i class="bx bx-pie-chart-alt bx-md text-danger bg-label-danger p-1 rounded"></i>
+                    </div>
                 </div>
+                <span class="fw-semibold d-block
+                                                mb-1">Loss</span>
+                <h3 class="card-title mb-2">₹{{profit}}</h3>
+                <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i>
+                    -{{loss_perct}}%</small>
+
+                {% endif %}
             </div>
         </div>
+    </div>
 
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3">
-            <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
-                <div class="card-body">
-                    <div class="card-title d-flex align-items-start justify-content-between">
-                        <div class="avatar flex-shrink-0">
-                            <i class="bx bx-package bx-md text-warning bg-label-warning p-1 rounded"></i>
-                        </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+        <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                        <i class="bx bx-package bx-md text-warning bg-label-warning p-1 rounded"></i>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Orders</span>
-                    <h3 class="card-title mb-2">{{orders}}</h3>
-                    <small class="text-success fw-semibold">
-                        <!-- <i class="bx bx-up-arrow-alt"></i> -->
-                        &nbsp;
-                    </small>
                 </div>
+                <span class="fw-semibold d-block mb-1">Orders</span>
+                <h3 class="card-title mb-2">{{orders}}</h3>
+                <small class="text-success fw-semibold">
+                    <!-- <i class="bx bx-up-arrow-alt"></i> -->
+                    &nbsp;
+                </small>
             </div>
         </div>
+    </div>
 
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3">
-            <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
-                <div class="card-body">
-                    <div class="card-title d-flex align-items-start justify-content-between">
-                        <div class="avatar flex-shrink-0">
-                            <i class="bx bx-wallet bx-md text-info bg-label-info p-1 rounded"></i>
-                        </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+        <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                        <i class="bx bx-wallet bx-md text-info bg-label-info p-1 rounded"></i>
                     </div>
-                    <span class="d-block mb-1">Sales</span>
-                    <h3 class="card-title text-nowrap
+                </div>
+                <span class="d-block mb-1">Sales</span>
+                <h3 class="card-title text-nowrap
                                                 mb-2">₹{{sales}}</h3>
-                    <small class="text-danger fw-semibold">
-                        <!-- <i class="bx bx-down-arrow-alt"></i> -->
-                        &nbsp;</small>
-                </div>
+                <small class="text-danger fw-semibold">
+                    <!-- <i class="bx bx-down-arrow-alt"></i> -->
+                    &nbsp;</small>
             </div>
         </div>
+    </div>
 
-        <div class="col-6 col-sm-6 col-md-6 col-lg-3">
-            <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
-                <div class="card-body">
-                    <div class="card-title d-flex align-items-start justify-content-between">
-                        <div class="avatar flex-shrink-0">
-                            <i class="bx bx-money bx-md text-danger bg-label-danger p-1 rounded"></i>
-                        </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-3">
+        <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                    <div class="avatar flex-shrink-0">
+                        <i class="bx bx-money bx-md text-danger bg-label-danger p-1 rounded"></i>
                     </div>
-                    <span class="d-block mb-1">Payments</span>
-                    <h3 class="card-title text-nowrap
+                </div>
+                <span class="d-block mb-1">Payments</span>
+                <h3 class="card-title text-nowrap
                                                 mb-2">₹{{payments}}</h3>
-                    <small class="text-danger fw-semibold">
-                        <!-- <i class="bx bx-down-arrow-alt"></i> -->
-                        &nbsp;</small>
-                </div>
+                <small class="text-danger fw-semibold">
+                    <!-- <i class="bx bx-down-arrow-alt"></i> -->
+                    &nbsp;</small>
             </div>
         </div>
-
-
     </div>
 
-    <div class="row mt-4">
-        {% if no_sale == 1 %}
-        <div class="col-12 col-lg-6 col-md-6">
-            <a href="{% url 'sale_adder' %}" class="btn my-2"
-                style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;">Add your first order</a>
+
+</div>
+
+<div class="row mt-4">
+    {% if no_sale == 1 %}
+    <div class="col-12 col-lg-6 col-md-6">
+        <a href="{% url 'sale_adder' %}" class="btn my-2"
+            style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;">Add your first order</a>
+    </div>
+    {% endif %}
+    {% if no_exp == 1 %}
+    <div class="col-12 col-lg-6 col-md-6">
+        <a href="{% url 'expense_adder' %}" class="btn my-2"
+            style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;">Add your first expense</a>
+    </div>
+    {% endif %}
+
+    <div class="demo-inline-spacing mt-3">
+        <div class="list-group list-group-horizontal-md text-md-center">
+            <a class="list-group-item list-group-item-action active" id="order-list-item" data-bs-toggle="list"
+                href="#horizontal-order">All Orders</a>
+            <a class="list-group-item list-group-item-action" id="expense-list-item" data-bs-toggle="list"
+                href="#horizontal-expense">All Expenses</a>
         </div>
-        {% endif %}
-        {% if no_exp == 1 %}
-        <div class="col-12 col-lg-6 col-md-6">
-            <a href="{% url 'expense_adder' %}" class="btn my-2"
-                style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;">Add your first expense</a>
-        </div>
-        {% endif %}
-
-        <div class="demo-inline-spacing mt-3">
-            <div class="list-group list-group-horizontal-md text-md-center">
-                <a class="list-group-item list-group-item-action active" id="order-list-item" data-bs-toggle="list"
-                    href="#horizontal-order">All Orders</a>
-                <a class="list-group-item list-group-item-action" id="expense-list-item" data-bs-toggle="list"
-                    href="#horizontal-expense">All Expenses</a>
-                <!-- <a
-                                        class="list-group-item list-group-item-action"
-                                        id="transaction-list-item"
-                                        data-bs-toggle="list"
-                                        href="#horizontal-transaction"
-                                        >Transactions</a> -->
-            </div>
-            <div class="tab-content px-0 mt-0">
-                <div class="tab-pane fade show active" id="horizontal-order">
-                    <div class="mb-4">
-                        <div class="card p-2" style="box-shadow: 5px 5px 10px black;">
-                            <h4 class="p-2">Orders - {{month}}</h4>
-                            <div class="table-responsive text-nowrap">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Customer</th>
-                                            <th>Order</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-border-bottom-0">
-                                        {% for sale in sale_info reversed %}
-                                        <tr>
-                                            <td data-bs-toggle="modal"
-                                                data-bs-target="#modalCentersale{{ forloop.counter }}"
-                                                style="cursor: pointer;">
-                                                <i class="fab fa-angular fa-lg text-danger"></i>
-                                                <strong><u>{{sale.customer}}</u></strong>
-                                            </td>
-                                            <td>{{sale.item}}</td>
-                                        </tr>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="modalCentersale{{ forloop.counter }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle"
-                                                            style="color: #000;"><b>{{sale.item}}</b>
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle">Customer Name: </label>
-                                                                <label class="text-end"
-                                                                    style="color: #000;font-size: larger;"><b>{{sale.customer}}</b></label>
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle" class="">Price: </label>
-                                                                <label
-                                                                    style="color: #000;font-size: larger;"><b>₹{{sale.price}}</b></label>
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle" class="">Date: </label>
-                                                                <label
-                                                                    style="color: #000;font-size: larger;"><b>{{sale.date}}</b></label>
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle" class="">Date of Delivery:
-                                                                </label>
-                                                                <label
-                                                                    style="color: #000;font-size: larger;"><b>{{sale.date_of_delivery}}</b></label>
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle" class="">Extra Notes:
-                                                                </label>
-                                                                <label
-                                                                    style="color: #000;font-size: larger;"><b>{{sale.notes}}</b></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form method='POST' id="sale_id_edit{{ forloop.counter }}">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" value="{{sale.id}}" name="sale_edit">
-                                                        </form>
-                                                        <form method='POST' id="sale_id_delete{{ forloop.counter }}">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" value="{{sale.id}}" name="sale_delete">
-                                                        </form>
-                                                        <button type="button"  class="btn"
-                                                            onclick="document.getElementById('sale_id_edit{{ forloop.counter }}').submit()"
-                                                            style="background-color: rgb(176, 50, 98); color: #fff;">Edit</button>
-
-                                                        <button type="button" 
-                                                            class="btn btn-outline-dark"
-                                                            class="btn btn-outline-dark" data-bs-target="#modalTogglesaledelete{{ forloop.counter }}"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-dismiss="modal">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal fade" id="modalTogglesaledelete{{ forloop.counter }}" aria-hidden="true"
-                                            aria-labelledby="modalToggleLabel2" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalToggleLabel2"
-                                                            style="color: #000;"><b>Please confirm your action</b></h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body text-wrap">Deleting the order of
-                                                        <b>{{sale.customer}}</b>.<br>
-                                                        This action cannot be undone and all associated data would be
-                                                        permanently removed.
-                                                        <br>Are you certain you wish to proceed?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button"  class="btn"
-                                                            onclick="document.getElementById('sale_id_delete{{ forloop.counter }}').submit()"
-                                                            style="background-color: rgb(176, 50, 98); color: #fff;">
-                                                            Delete
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {% endfor %}
-                                        <tr>
-                                            <td></td>
-                                            <td><br><br><br><br><br><br><br><br></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+        <div class="tab-content px-0 mt-0">
+            <div class="tab-pane fade show active" id="horizontal-order">
+                <div class="mb-4">
+                    <div class="card p-2" style="box-shadow: 5px 5px 10px black;">
+                        <h4 class="p-2">Orders - {{month}}</h4>
+                        <div class="row">
+                            <div class="col-6 mx-3 my-1">
+                                <input type="text" id="searchInputSale" class="form-control" placeholder="Search..."
+                                style="border: 1px solid black; color: #000;">
                             </div>
-
                         </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="horizontal-expense">
-                    <div class="mb-4">
-                        <div class="card p-2">
-                            <h4 class="p-2">Expenses - {{month}}</h4>
-                            <div class="table-responsive text-nowrap">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Expense</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-border-bottom-0">
-                                        {% for expense in expense_info reversed %}
-                                        <tr>
-                                            <td data-bs-toggle="modal"
-                                                data-bs-target="#modalCenterexp{{ forloop.counter }}"
-                                                style="cursor: pointer;">
-                                                <i class="fab fa-angular fa-lg text-danger"></i>
-                                                <strong>{{expense.item}}</strong>
-                                            </td>
-                                            <td>{{expense.qty}}</td>
-                                            <td>₹{{expense.price}}</td>
-                                        </tr>
-                                        <div class="modal fade" id="modalCenterexp{{ forloop.counter }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalCenterTitle"
-                                                            style="color: #000;"><b>{{expense.item}}</b>
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle">Quantity: </label>
-                                                                <label class="text-end"
-                                                                    style="color: #000;font-size: larger;"><b>{{expense.qty}}</b></label>
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle" class="">Price: </label>
-                                                                <label
-                                                                    style="color: #000;font-size: larger;"><b>₹{{expense.price}}</b></label>
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle" class="">Date: </label>
-                                                                <label
-                                                                    style="color: #000;font-size: larger;"><b>{{expense.date}}</b></label>
-                                                            </div>
-                                                            <div class="col-12 mb-2">
-                                                                <label for="nameWithTitle" class="">Extra Notes:
-                                                                </label>
-                                                                <label
-                                                                    style="color: #000;font-size: larger;"><b>{{expense.notes}}</b></label>
-                                                            </div>
+                        <div class="table-responsive text-nowrap">
+                            <table class="table" id="saleTable">
+                                <thead>
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Order</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    {% for sale in sale_info reversed %}
+                                    <tr data-bs-toggle="modal"
+                                    data-bs-target="#modalCentersale{{ forloop.counter }}"
+                                    style="cursor: pointer;">
+                                        <td>
+                                            <i class="fab fa-angular fa-lg text-danger"></i>
+                                            <strong><u>{{sale.customer}}</u></strong>
+                                        </td>
+                                        <td>{{sale.item}}</td>
+                                    </tr>
+                                    <!-- Modal -->
+                                    <div class="modal fade modalBodyToMove" id="modalCentersale{{ forloop.counter }}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalCenterTitle" style="color: #000;">
+                                                        <b>{{sale.item}}</b>
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle">Customer Name: </label>
+                                                            <label class="text-end"
+                                                                style="color: #000;font-size: larger;"><b>{{sale.customer}}</b></label>
+                                                        </div>
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle" class="">Price: </label>
+                                                            <label
+                                                                style="color: #000;font-size: larger;"><b>₹{{sale.price}}</b></label>
+                                                        </div>
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle" class="">Date: </label>
+                                                            <label
+                                                                style="color: #000;font-size: larger;"><b>{{sale.date}}</b></label>
+                                                        </div>
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle" class="">Date of Delivery:
+                                                            </label>
+                                                            <label
+                                                                style="color: #000;font-size: larger;"><b>{{sale.date_of_delivery}}</b></label>
+                                                        </div>
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle" class="">Extra Notes:
+                                                            </label>
+                                                            <label
+                                                                style="color: #000;font-size: larger;"><b>{{sale.notes}}</b></label>
                                                         </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <form method='POST' id="exp_id_edit{{ forloop.counter }}">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" value="{{expense.id}}" name="exp_edit">
-                                                        </form>
-                                                        <form method='POST' id="exp_id_delete{{ forloop.counter }}">
-                                                            {% csrf_token %}
-                                                            <input type="hidden" value="{{expense.id}}"
-                                                                name="exp_delete">
-                                                        </form>
-                                                        <button type="button"  class="btn"
-                                                            onclick="document.getElementById('exp_id_edit{{ forloop.counter }}').submit()"
-                                                            style="background-color: rgb(176, 50, 98); color: #fff;">Edit</button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form method='POST' id="sale_id_edit{{ forloop.counter }}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{sale.id}}" name="sale_edit">
+                                                    </form>
+                                                    <form method='POST' id="sale_id_delete{{ forloop.counter }}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{sale.id}}" name="sale_delete">
+                                                    </form>
+                                                    <button type="button" class="btn"
+                                                        onclick="document.getElementById('sale_id_edit{{ forloop.counter }}').submit()"
+                                                        style="background-color: rgb(176, 50, 98); color: #fff;">Edit</button>
 
-                                                        <button type="button" 
-                                                            class="btn btn-outline-dark" data-bs-target="#modalToggleexpdelete{{ forloop.counter }}"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-dismiss="modal">Delete</button>
-                                                    </div>
+                                                    <button type="button" class="btn btn-outline-dark"
+                                                        class="btn btn-outline-dark"
+                                                        data-bs-target="#modalTogglesaledelete{{ forloop.counter }}"
+                                                        data-bs-toggle="modal" data-bs-dismiss="modal">Delete</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal fade" id="modalToggleexpdelete{{ forloop.counter }}" aria-hidden="true"
-                                            aria-labelledby="modalToggleLabel2" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalToggleLabel2"
-                                                            style="color: #000;"><b>Please confirm your action</b></h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body text-wrap">Deleting the expense of
-                                                        <b>{{expense.item}}</b>.<br>
-                                                        This action cannot be undone and all associated data would be
-                                                        permanently removed.
-                                                        <br>Are you certain you wish to proceed?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn"
-                                                            onclick="document.getElementById('exp_id_delete{{ forloop.counter }}').submit()"
-                                                            style="background-color: rgb(176, 50, 98); color: #fff;">
-                                                            Delete
-                                                        </button>
-                                                    </div>
+                                    </div>
+                                    <div class="modal fade modalBodyToMove"
+                                        id="modalTogglesaledelete{{ forloop.counter }}" aria-hidden="true"
+                                        aria-labelledby="modalToggleLabel2" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalToggleLabel2" style="color: #000;">
+                                                        <b>Please confirm your action</b></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-wrap">Deleting the order of
+                                                    <b>{{sale.customer}}</b>.<br>
+                                                    This action cannot be undone and all associated data would be
+                                                    permanently removed.
+                                                    <br>Are you certain you wish to proceed?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn"
+                                                        onclick="document.getElementById('sale_id_delete{{ forloop.counter }}').submit()"
+                                                        style="background-color: rgb(176, 50, 98); color: #fff;">
+                                                        Delete
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-                                        {% endfor %}
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td><br><br><br><br><br><br><br><br></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </div>
 
+                                    {% endfor %}
+                                    <tr>
+                                        <td></td>
+                                        <td><br><br><br><br><br><br><br><br></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="tab-pane fade" id="horizontal-expense">
+                <div class="mb-4">
+                    <div class="card p-2" style="box-shadow: 5px 5px 10px black;">
+                        <h4 class="p-2">Expenses - {{month}}</h4>
+                        <div class="row">
+                            <div class="col-6 mx-3 my-1">                                
+                                <input type="text" id="searchInputExp" class="form-control" placeholder="Search..."
+                                style="border: 1px solid black; color: #000;">
+                            </div>
+                        </div>                        
+                        <div class="table-responsive text-nowrap">
+                            <table class="table" id="expTable">
+                                <thead>
+                                    <tr>
+                                        <th>Expense</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+                                    {% for expense in expense_info reversed %}
+                                    <tr data-bs-toggle="modal" data-bs-target="#modalCenterexp{{ forloop.counter }}"
+                                    style="cursor: pointer;">
+                                        <td>
+                                            <i class="fab fa-angular fa-lg text-danger"></i>
+                                            <strong><u>{{expense.item}}</u></strong>
+                                        </td>
+                                        <td>{{expense.qty}}</td>
+                                        <td>₹{{expense.price}}</td>
+                                    </tr>
+                                    <div class="modal fade modalBodyToMove" id="modalCenterexp{{ forloop.counter }}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalCenterTitle" style="color: #000;">
+                                                        <b>{{expense.item}}</b>
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle">Quantity: </label>
+                                                            <label class="text-end"
+                                                                style="color: #000;font-size: larger;"><b>{{expense.qty}}</b></label>
+                                                        </div>
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle" class="">Price: </label>
+                                                            <label
+                                                                style="color: #000;font-size: larger;"><b>₹{{expense.price}}</b></label>
+                                                        </div>
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle" class="">Date: </label>
+                                                            <label
+                                                                style="color: #000;font-size: larger;"><b>{{expense.date}}</b></label>
+                                                        </div>
+                                                        <div class="col-12 mb-2">
+                                                            <label for="nameWithTitle" class="">Extra Notes:
+                                                            </label>
+                                                            <label
+                                                                style="color: #000;font-size: larger;"><b>{{expense.notes}}</b></label>
+                                                        </div>
+                                                        {% if expense.bill == None %}
+                                                        
+                                                        {% else %}                                                        
+                                                        <div class="col-12 mb-2">
+                                                            <button class="btn" style="border: 1px solid rgb(176, 50, 98); color: rgb(176, 50, 98);"
+                                                            data-bs-target="#modalToggleexpbill{{ forloop.counter }}"
+                                                            data-bs-toggle="modal" data-bs-dismiss="modal">
+                                                                <b>View Bill</b></button>                                                                
+                                                        </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form method='POST' id="exp_id_edit{{ forloop.counter }}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{expense.id}}" name="exp_edit">
+                                                    </form>
+                                                    <form method='POST' id="exp_id_delete{{ forloop.counter }}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" value="{{expense.id}}" name="exp_delete">
+                                                    </form>
+                                                    <button type="button" class="btn"
+                                                        onclick="document.getElementById('exp_id_edit{{ forloop.counter }}').submit()"
+                                                        style="background-color: rgb(176, 50, 98); color: #fff;">Edit</button>
+
+                                                    <button type="button" class="btn btn-outline-dark"
+                                                        data-bs-target="#modalToggleexpdelete{{ forloop.counter }}"
+                                                        data-bs-toggle="modal" data-bs-dismiss="modal">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade modalBodyToMove"
+                                        id="modalToggleexpdelete{{ forloop.counter }}" aria-hidden="true"
+                                        aria-labelledby="modalToggleLabel2" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalToggleLabel2" style="color: #000;">
+                                                        <b>Please confirm your action</b></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-wrap">Deleting the expense of
+                                                    <b>{{expense.item}}</b>.<br>
+                                                    This action cannot be undone and all associated data would be
+                                                    permanently removed.
+                                                    <br>Are you certain you wish to proceed?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn"
+                                                        onclick="document.getElementById('exp_id_delete{{ forloop.counter }}').submit()"
+                                                        style="background-color: rgb(176, 50, 98); color: #fff;">
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade modalBodyToMove"
+                                        id="modalToggleexpbill{{ forloop.counter }}" aria-hidden="true"
+                                        aria-labelledby="modalToggleLabel2" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalToggleLabel2" style="color: #000;">
+                                                        <b>Bill of {{expense.item}}</b></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-wrap">
+                                                    <img src="{{expense.bill}}" width="100%">                                                                                           
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{{expense.bill}}" class="btn" download                                                        
+                                                        style="background-color: rgb(176, 50, 98); color: #fff;">
+                                                        Download
+                                                </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td><br><br><br><br><br><br><br><br></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    <!-- / Content -->
+</div>
+</div>
+<!-- / Content -->
 
-    <!-- Footer -->
-    <!-- <footer class="content-footer footer bg-footer-theme text-center">
+<!-- Footer -->
+<!-- <footer class="content-footer footer bg-footer-theme text-center">
     <div class="pb-3">
         © <script>document.write(new Date().getFullYear());</script> Copyright<br>All rights reserverd to
         <span style="color: #2f32eb;"><b>BakersHub</b></span>
 
     </div>
 </footer> -->
-    <!-- / Footer -->
+<!-- / Footer -->
 
-    <div class="content-backdrop fade"></div>
-    </div>
-    <!-- Content wrapper -->
-    </div>
-    <!-- / Layout page -->
-    </div>
+<div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+</div>
+<!-- / Layout page -->
+</div>
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+</div>
 
-    <!-- / Layout wrapper -->
-    <!-- 
+<!-- / Layout wrapper -->
+<!-- 
 <div class="buy-now">
     <a href="{% url 'home' %}#cta-premium" target="_blank" class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
 </div> -->
 
 
-    <!-- Core JS -->
-    <!-- build:js assets-dash/vendor/js/core.js -->
-    <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
-    <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
-    <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
-    <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/static/assets-dash/vendor/js/menu.js"></script>
-    <!-- endbuild -->
+<!-- Core JS -->
+<script>
+    var elements = document.querySelectorAll('.modalBodyToMove');
+    var classCount = elements.length;
+    if (classCount > 0) {
+        for (var i = 0; i < elements.length; i++) {
+            document.getElementById('moveModalHere').appendChild(elements[i])
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $("#searchInputSale").on("keyup", function() {
+        var value = $(this).val().toLowerCase();        
+        $("#saleTable tbody tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
 
-    <!-- Vendors JS -->
-    <script src="/static/assets-dash/vendor/libs/apex-charts/apexcharts.js"></script>
-    <!-- Main JS -->
-    <script src="/static/assets-dash/js/main.js"></script>
+      $("#searchInputExp").on("keyup", function() {
+        var value = $(this).val().toLowerCase();        
+        $("#expTable tbody tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
+<!-- build:js assets-dash/vendor/js/core.js -->
+<script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+<script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+<script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/static/assets-dash/vendor/js/menu.js"></script>
+<!-- endbuild -->
 
-    <!-- Page JS -->
-    <script src="/static/assets-dash/js/dashboards-analytics.js"></script>
+<!-- Vendors JS -->
+<script src="/static/assets-dash/vendor/libs/apex-charts/apexcharts.js"></script>
+<!-- Main JS -->
+<script src="/static/assets-dash/js/main.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Page JS -->
+<script src="/static/assets-dash/js/dashboards-analytics.js"></script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>

@@ -14,169 +14,227 @@
     }
 </style>
 
-<body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%)">
+<div class="spinner-border loading-bh" id="loading-bh">
+    <span class="visually-hidden">Loading...</span>
+</div>
 
-    <div class="spinner-border loading-bh" id="loading-bh">
-        <span class="visually-hidden">Loading...</span>
-    </div>
+<!-- Content wrapper -->
+<div class="content-wrapper" id="main">
+    <!-- Content -->
 
-    <!-- Content wrapper -->
-    <div class="content-wrapper" id="main">
-        <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
-            <!-- Basic Layout -->
-            <div class="row">
-                <div class="col-xl">
-                    <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
-                        <div class="card-header d-flex
+    <div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+        <!-- Basic Layout -->
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
+                    <div class="card-header d-flex
                                             justify-content-between
                                             align-items-center">
-                            <h2 class="mb-0" style="color: #000"><b>Expense</b></h2>
-                            <small class="float-end" style="color: #252222">Purchase</small>
-                        </div>
-                        <div class="card-body rounded-bottom">
-                            <form method="POST" id="my-form">
-                                {% csrf_token %}
-                                {% if expense != None %}
-                                {% if expense == 1 %}
-                                <div class="py-2 px-2 rounded m-2"
-                                    style="background-color: rgba(255, 113, 113, 0.508); color: red; border: 2px solid black;">
-                                    <b>
-                                        Fatal Error - Your expense was not added!</b>
-                                </div>
-                                {% else %}
-                                <div class="py-2 px-2 rounded m-2"
-                                    style="background-color: rgba(113, 255, 151, 0.341); color: green; border: 2px solid black;">
-                                    <b>
-                                        Expense of <u>{{expense.name}} @{{expense.price}} for {{expense.qty}}
-                                            {{expense.unit}} on {{expense.date}}</u> Added</b>
-                                </div>
-                                {% endif %}
-                                {% endif %}
-                                <div class="mb-3">
-                                    <label class="form-label" for="expense_name" style="color: #000;">Expense Name<span
-                                            class="text-danger" style="font-size:
+                        <h2 class="mb-0" style="color: #000"><b>Expense</b></h2>
+                        <small class="float-end" style="color: #252222">Purchase</small>
+                    </div>
+                    <div class="card-body rounded-bottom">
+                        <form method="POST" id="my-form" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% if frequent_expenses_data == None %}
+                            {% else %}
+                            <div class="mb-3" style="color: #000">
+                                <b>Frequently added expenses: </b><br>
+                                {% for data in frequent_expenses_data %}
+                                <span id="fexp{{ forloop.counter }}"
+                                    style="color: rgb(176, 50, 98);cursor: pointer;"><b><u>{{data.expense_name}}..</u>
+                                    </b></span>
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+
+                                        var expDiv = document.getElementById("fexp{{ forloop.counter }}");
+                                        var expname = document.getElementById("expense_name");
+                                        var expamount = document.getElementById("expense_amount");
+                                        var expquantity = document.getElementById("expense_quantity");
+                                        var expqty_unit = document.getElementById("qty_unit");
+                                        var expextra_note = document.getElementById("extra_note");
+                                        expDiv.onclick = function () {
+                                            expname.value = "{{data.expense_name}}";
+                                            expamount.value = "{{data.expense_amount}}";
+                                            expquantity.value = "{{data.expense_quantity}}";
+                                            expqty_unit.value = "{{data.qty_unit}}";
+                                            expextra_note.value = "{{data.extra_note}}";
+                                        }
+                                    });
+                                </script>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            {% if expense != None %}
+                            {% if expense == 1 %}
+                            <div class="py-2 px-2 rounded m-2"
+                                style="background-color: rgba(255, 113, 113, 0.508); color: red; border: 2px solid black;">
+                                <b>
+                                    Fatal Error - Your expense was not added!</b>
+                            </div>
+                            {% else %}
+                            <div class="py-2 px-2 rounded m-2"
+                                style="background-color: rgba(113, 255, 151, 0.341); color: green; border: 2px solid black;">
+                                <b>
+                                    Expense of <u>{{expense.name}} @{{expense.price}} for {{expense.qty}}
+                                        {{expense.unit}} on {{expense.date}}</u> Added</b>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                            <div class="mb-3">
+                                <label class="form-label" for="expense_name" style="color: #000;">Expense Name<span
+                                        class="text-danger" style="font-size:
                                                             large;">*</span></label>
-                                    <input type="text" class="form-control" id="expense_name" name="expense_name"
-                                        placeholder="Butter" aria-label="Expense
-                                                        name" required />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="expense_amount" style="color: #000;">Expense
-                                        Amount<span class="text-danger" style="font-size:
+                                <input type="text" class="form-control" id="expense_name" name="expense_name"
+                                    placeholder="Butter" aria-label="Expense name" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="expense_amount" style="color: #000;">Expense
+                                    Amount<span class="text-danger" style="font-size:
                                                             large;">*</span></label>
-                                    <div class="input-group
+                                <div class="input-group
                                                         input-group-merge">
-                                        <span class="input-group-text">₹</span>
-                                        <input id="expense_amount" name="expense_amount" type="number" min="0"
-                                            class="form-control" placeholder="100" aria-label="Amount" required />
-                                    </div>
+                                    <span class="input-group-text">₹</span>
+                                    <input id="expense_amount" name="expense_amount" type="number" min="0"
+                                        class="form-control" placeholder="100" aria-label="Amount" required />
                                 </div>
-                                <div class="mb-3 row">
-                                    <label class="form-label" for="expense_quantity" style="color: #000;">Quantity<span
-                                            class="text-danger" style="font-size: large;">*</span></label>
-                                    <div class="col-8">
-                                        <input id="expense_quantity" name="expense_quantity" type="number" min="0"
-                                            placeholder="1" class="form-control" aria-label="Quantity" required />
-                                    </div>
-                                    <div class="col-4">
-                                        <select class="form-select" id="qty_weigth" name="qty_unit">
-                                            <option value="piece">Piece</option>
-                                            <option value="kg">Kg</option>
-                                            <option value="ltr">Ltr</option>
-                                        </select>
-                                    </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="form-label" for="expense_quantity" style="color: #000;">Quantity<span
+                                        class="text-danger" style="font-size: large;">*</span></label>
+                                <div class="col-8">
+                                    <input id="expense_quantity" name="expense_quantity" type="number" min="0"
+                                        placeholder="1" class="form-control" aria-label="Quantity" required />
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-select" id="qty_unit" name="qty_unit">
+                                        <option value="Kg">Kg</option>
+                                        <option value="Grams">Grams</option>
+                                        <option value="Piece">Piece</option>
+                                        <option value="Ltr">Ltr</option>
+                                        <option value="Ml">Ml</option>
+                                    </select>
+                                </div>
 
-                                </div>
+                            </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label" for="extra_note" style="color: #000;">Extra
-                                        note
-                                    </label>
-                                    <textarea id="extra_note" name="extra_note" class="form-control" rows="4"
-                                        placeholder="This item is for cakes"></textarea>
+                            <div class="mb-3">
+                                <label class="form-label" for="extra_note" style="color: #000;">Upload Bill</label>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="hidden" name="pfp_changed" value="False" id="pfp_changed">
+                                        <div class="button-wrapper">
+                                            <label for="upload" class="btn" tabindex="0"
+                                                style="background-color: rgb(176, 50, 98); color: #fff; width: 100%;">
+                                                <span class="d-none d-sm-block">Upload</span>
+                                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                                <input type="file" id="upload" class="account-file-input" hidden name="bill"
+                                                    accept="image/png, image/jpeg" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 d-flex justify-content-center align-items-center">
+                                        <img
+                                        src="{{profile_pfp}}"                             
+                                        class="d-block rounded"                                    
+                                        id="billUploadedAvatar" 
+                                        width="0" height="0"
+                                        style="visibility: hidden;"/>
+                                        
+                                    </div>
                                 </div>
-                                <div class="mb-5">
-                                    <label for="expense_date" class="col-md-2
+                                
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label" for="extra_note" style="color: #000;">Extra note
+                                </label>
+                                <textarea id="extra_note" name="extra_note" class="form-control" rows="4"
+                                    placeholder="This item is for cakes"></textarea>
+                            </div>
+                            <div class="mb-5">
+                                <label for="expense_date" class="col-md-2
                                                         col-form-label" style="color: #000;">Date<span
-                                            class="text-danger" style="font-size:
+                                        class="text-danger" style="font-size:
                                                             large;">*</span></label>
-                                    <input class="form-control" name="expense_date" type="date" id="expense_date"
-                                        required />
-                                </div>
-                                <button id="add_exp" type="submit" class="btn"
-                                    style="background-color: rgb(176, 50, 98); color: #fff;">Add Expense</button>
-                            </form>
-                        </div>
+                                <input class="form-control" name="expense_date" type="date" id="expense_date"
+                                    required />
+                            </div>
+                            <button id="add_exp" type="submit" class="btn"
+                                style="background-color: rgb(176, 50, 98); color: #fff;">Add Expense</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- / Content -->
-
-        <!-- Footer -->
-
-        <!-- / Footer -->
-
-        <div class="content-backdrop fade"></div>
     </div>
-    <!-- Content wrapper -->
-    </div>
-    <!-- / Layout page -->
-    </div>
+    <!-- / Content -->
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
+    <!-- Footer -->
 
-    <!-- <div class="buy-now">
+    <!-- / Footer -->
+
+    <div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+</div>
+<!-- / Layout page -->
+</div>
+
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<!-- / Layout wrapper -->
+
+<!-- <div class="buy-now">
             <a
                 href="{% url 'home' %}#cta-premium"
                 target="_blank"
                 class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
         </div> -->
 
-    <!-- Core JS -->
-    <script>
-        var today = new Date();
-        var formattedDate = today.toISOString().substr(0, 10);
-        document.getElementById("expense_date").value = formattedDate;
-    </script>
-    <script>
-        const submitBtn = document.getElementById('add_exp');
-        const loadingDiv = document.getElementById('loading-bh');
-        const bhBody = document.getElementById('main');
-        const form = document.getElementById('my-form');
+<!-- Core JS -->
+<script>
+    var today = new Date();
+    var formattedDate = today.toISOString().substr(0, 10);
+    document.getElementById("expense_date").value = formattedDate;
+</script>
+<script>
+    const submitBtn = document.getElementById('add_exp');
+    const loadingDiv = document.getElementById('loading-bh');
+    const bhBody = document.getElementById('main');
+    const form = document.getElementById('my-form');
 
 
-        submitBtn.addEventListener('click', () => {
-            if (form.checkValidity()) {
-                loadingDiv.style.display = 'block';
-                bhBody.classList.add('blur');
-            } else {
-                form.reportValidity();
-            }
-        });
-    </script>
-    <!-- build:js assets-dash/vendor/js/core.js -->
-    <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
-    <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
-    <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
-    <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="/static/assets-dash/vendor/js/menu.js"></script>
-    <!-- endbuild -->
+    submitBtn.addEventListener('click', () => {
+        if (form.checkValidity()) {
+            loadingDiv.style.display = 'block';
+            bhBody.classList.add('blur');
+        } else {
+            form.reportValidity();
+        }
+    });
+</script>
+<!-- build:js assets-dash/vendor/js/core.js -->
+<script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+<script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+<script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+<script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/static/assets-dash/vendor/js/menu.js"></script>
+<!-- endbuild -->
 
-    <!-- Vendors JS -->
+<!-- Vendors JS -->
 
-    <!-- Main JS -->
-    <script src="/static/assets-dash/js/main.js"></script>
+<!-- Main JS -->
+<script src="/static/assets-dash/js/main.js"></script>
 
-    <!-- Page JS -->
+<!-- Page JS -->
+<script src="/static/assets-dash/js/bill-adder.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
 </body>
 
 </html>
