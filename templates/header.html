@@ -127,6 +127,26 @@
                         </li>
                         {% endif %}
 
+                        {% if tab == 4 %}
+                        <!-- Charts -->
+                        <li class="menu-item active">
+                            <a href="{% url 'charts' %}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-line-chart"></i>
+                                <div data-i18n="Basic">Charts</div>
+                            </a>
+                        </li>
+                        
+                        {% else %}
+                        <!-- Charts -->
+                        <li class="menu-item">
+                            <a href="{% url 'charts' %}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-line-chart"></i>
+                                <div data-i18n="Basic">Charts</div>
+                            </a>
+                        </li>
+                        {% endif %}
+
+
                         <li class="menu-header small text-uppercase">
                             <span class="menu-header-text">Transactions</span>
                         </li>
@@ -168,10 +188,49 @@
                             </a>
                         </li>
                         {% endif %}
+                 
 
                         <!-- Process -->
                         <li class="menu-header small text-uppercase"><span
-                                class="menu-header-text"></span></li>
+                                class="menu-header-text">Actions</span></li>
+                        {% if tab == 5 %}
+                        <!-- Profle -->
+                        <li class="menu-item active">
+                            <a href="{% url 'profile' %}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <div data-i18n="Basic">Profile</div>
+                            </a>
+                        </li>
+                        
+                        {% else %}
+                        <!-- Profile -->
+                        <li class="menu-item">
+                            <a href="{% url 'profile' %}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <div data-i18n="Basic">Profile</div>
+                            </a>
+                        </li>
+                        {% endif %}       
+
+                        {% if tab == 6 %}
+                        <!-- Settings -->
+                        <li class="menu-item active">
+                            <a href="{% url 'settings' %}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-cog"></i>
+                                <div data-i18n="Basic">Settings</div>
+                            </a>
+                        </li>
+                        
+                        {% else %}
+                        <!-- Settings -->
+                        <li class="menu-item">
+                            <a href="{% url 'settings' %}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-cog"></i>
+                                <div data-i18n="Basic">Settings</div>
+                            </a>
+                        </li>
+                        {% endif %}       
+
                         <li class="menu-item">
                             <a
                                 href="{% url 'logout' %}"

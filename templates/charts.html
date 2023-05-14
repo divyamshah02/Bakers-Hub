@@ -1,0 +1,267 @@
+{% include "header.html" %}
+
+<div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+    <div class="row gap-lg-0 gap-3">
+      <!-- Sales Chart -->
+        <div class="col-lg-6">
+            <div class="card h-100" style="box-shadow: 5px 5px 10px black;">
+                <div class="card-header">
+                    <b>Sales</b> <small class="fw-semibold">(Last 7 days)</small>
+                    <div class="d-flex align-items-center">
+                        <h6 class="mb-0 text-success me-1">₹{{total_sale}}</h6>                        
+                    </div>
+                </div>
+                <div class="card-body" style="height: 100%; width: 100%;">
+                    <canvas id="incomechart" style="width: 100%; height: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Expense Chart -->
+        <div class="col-lg-6">
+            <div class="card h-100" style="box-shadow: 5px 5px 10px black;">
+                <div class="card-header">
+                    <b>Expenses</b> <small class="fw-semibold">(Last 7 days)</small>
+                    <div class="d-flex align-items-center">
+                        <h6 class="mb-0 text-success me-1">₹{{total_exp}}</h6>                        
+                    </div>
+                </div>
+                <div class="card-body" style="height: 100%; width: 100%;">
+                    <canvas id="expchart" style="width: 100%; height: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Category wise chart -->
+        <div class="col-lg-12 py-lg-4">
+            <div class="card h-100" style="box-shadow: 5px 5px 10px black;">
+              {% if category_data == none %}
+              {% else %}
+                <div class="card-header">
+
+                    <b>Category wise sales</b> <small class="fw-semibold">(This month)</small>
+                    <br>
+                      {% for category in category_data reversed %}                
+                        <b>{{category.category}}</b>: <small class="fw-semibold"><u>₹{{category.amt}}</u></small>&nbsp;                     
+                      {% endfor %}
+                    
+                </div>
+                <div class="card-body d-flex justify-content-center align-items-center" style="height: 350px;">
+                    <canvas  id="category"></canvas>
+                </div>
+              {% endif %}
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for sale in sale_data reversed %}
+    <input type="hidden" value="{{sale.amt}}" id="sale{{ forloop.counter }}" placeholder="{{sale.date}}">
+{% endfor %}
+
+{% for exp in exp_data reversed %}
+    <input type="hidden" value="{{exp.amt}}" id="exp{{ forloop.counter }}" placeholder="{{exp.date}}">
+{% endfor %}
+
+{% for category in category_data reversed %}
+    <input type="hidden" value="{{category.amt}}" id="category{{ forloop.counter }}" placeholder="{{category.category}}">
+{% endfor %}
+
+<script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+<script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+<script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/static/assets-dash/vendor/js/menu.js"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+<script src="/static/assets-dash/vendor/libs/apex-charts/apexcharts.js"></script>
+<!-- Main JS -->
+<script src="/static/assets-dash/js/main.js"></script>
+
+<!-- Page JS -->
+<script src="/static/assets-dash/js/dashboards-analytics.js"></script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var inputs = document.querySelectorAll('input[type="hidden"][id^="sale"]');
+
+    // Create an empty array to store the data
+    var salesData = [];
+    var salesDate = [];
+
+    // Iterate over the input elements and retrieve their value attributes
+    for (var i = 0; i < inputs.length; i++) {
+    var input = inputs[i];
+    var value = parseInt(input.value); // Assuming the value is an integer
+    var datee = input.placeholder;
+    salesData.push(value);
+    salesDate.push(datee);
+    }
+
+    var inputexp = document.querySelectorAll('input[type="hidden"][id^="exp"]');
+
+    // Create an empty array to store the data
+    var expData = [];
+    var expDate = [];
+
+    // Iterate over the input elements and retrieve their value attributes
+    for (var i = 0; i < inputexp.length; i++) {
+    var input = inputexp[i];
+    var value = parseInt(input.value); // Assuming the value is an integer
+    var dateexp = input.placeholder;
+    expData.push(value);
+    expDate.push(dateexp);
+    }
+
+
+  var ctx = document.getElementById('incomechart').getContext('2d');
+  var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: salesDate,
+      datasets: [{
+        label: 'Sales',
+        data: salesData,
+        backgroundColor: [
+          'rgb(176, 50, 98)',             
+        ],
+        tension: 0.4,
+        borderColor: [    
+          'rgb(176, 50, 98)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+        
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          },
+          gridLines:{
+            display: false
+          }
+
+        }],
+        xAxes: [{
+            gridLines:{
+            color: 'transparent'
+          }
+        }]
+      }
+    }
+  });
+
+  var ctx = document.getElementById('expchart').getContext('2d');
+  var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: expDate,
+      datasets: [{
+        label: 'Expenses',
+        data: expData,
+        backgroundColor: [
+          'rgb(176, 50, 98)',             
+        ],
+        tension: 0.4,
+        borderColor: [    
+          'rgb(176, 50, 98)',
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+        
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          },
+          gridLines:{
+            display: false
+          }
+
+        }],
+        xAxes: [{
+            gridLines:{
+            color: 'transparent'
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+<script>
+    var inputc = document.querySelectorAll('input[type="hidden"][id^="category"]');
+    var categoryy = [];
+    var categoryData = [];
+
+    // Iterate over the input elements and retrieve their value attributes
+    for (var i = 0; i < inputc.length; i++) {
+    var input = inputc[i];
+    var value = parseInt(input.value); // Assuming the value is an integer
+    var categ = input.placeholder;
+    categoryData.push(value);
+    categoryy.push(categ);
+    }
+    var ctx = document.getElementById('category').getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: categoryy,
+        datasets: [{
+          label: 'Sales',
+          data: categoryData,
+          backgroundColor: [
+            'rgba(255, 99, 132, 2)',    
+            'rgba(54, 162, 235, 2)',
+            'rgba(255, 206, 86, 2)',
+            'rgba(75, 192, 192, 2)',
+            'rgba(153, 102, 255, 2)',
+            'rgba(255, 159, 64, 2)',
+            'rgba(255, 59, 132, 2)'     
+          ],
+          tension: 0.4,
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+          
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            },
+            gridLines:{
+              display: false
+            }
+  
+          }],
+          xAxes: [{
+              gridLines:{
+              color: 'transparent'
+            }
+          }]
+        }
+      }
+    });
+</script>
+
+</body>
+
+</html>

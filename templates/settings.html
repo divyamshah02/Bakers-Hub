@@ -1,0 +1,152 @@
+{% include "header.html" %}
+
+<style>
+   .opt{
+    color: #000;
+   } 
+   .form-check-input:checked{
+    background-color: rgb(176, 50, 98);
+    border: rgb(203, 96, 137);
+    box-shadow: 0 0 0 1px rgb(203, 96, 137);
+   }
+   .form-check-input:focus{
+    border: rgb(203, 96, 137);
+    box-shadow: 0 0 0 1px rgb(203, 96, 137);
+   }
+
+   .form-check-input:hover{
+    border: rgb(203, 96, 137);
+    box-shadow: 0 0 0 3px rgb(203, 96, 137);
+   }
+</style>
+
+<div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+    <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2 class="mb-0" style="color: rgb(176, 50, 98)"><b>Customize Your App Experience</b></h2>
+            
+        </div>
+        <div class="card-body rounded-bottom">
+            <h5 class="" style="color: #000">Set Your Preferred Landing Page Upon Opening</h5>
+            <form method="POST">
+            {% csrf_token %}
+            {% if user_view == '1' %}
+            <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="first_view"
+                  id="dashboard"
+                  value="1"
+                  checked
+                />
+                <label class="form-check-label" for="dashboard"><span class="opt"><b>Dashboard</b></span></label>
+            </div>
+            {% else %}
+            <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="first_view"
+                  id="dashboard"
+                  value="1"
+                />
+                <label class="form-check-label" for="dashboard"><span class="opt"><b>Dashboard</b></span></label>
+            </div>
+            {% endif %}
+            {% if user_view == '2' %}
+            <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="first_view"
+                    id="sale_adder"
+                    value="2"
+                    checked
+                  />
+                  <label class="form-check-label" for="sale_adder"><span class="opt"><b>Sale adder</b></span></label>
+            </div>
+            {% else %}
+            <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="first_view"
+                  id="sale_adder"
+                  value="2"                  
+                />
+                <label class="form-check-label" for="sale_adder"><span class="opt"><b>Sale adder</b></span></label>
+            </div>
+            {% endif %}
+            {% if user_view == '3' %}
+            <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="first_view"
+                    id="exp_adder"
+                    value="3"
+                    checked
+                  />
+                  <label class="form-check-label" for="exp_adder"><span class="opt"><b>Expense adder</b></span></label>
+            </div>
+            {% else %}
+            <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="first_view"
+                  id="exp_adder"
+                  value="3"
+                />
+                <label class="form-check-label" for="exp_adder"><span class="opt"><b>Expense adder</b></span></label>
+            </div>
+            {% endif %}
+            <div class="py-4">
+              <h5 class="" style="color: #000">Change Theme</h5>
+              <u>Coming soon..</u>
+            </div>
+            <button id="submit" type="submit" class="btn mt-5" style="background-color: rgb(176, 50, 98); color: #fff;">Save</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+<script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+<script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/static/assets-dash/vendor/js/menu.js"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+<script src="/static/assets-dash/vendor/libs/apex-charts/apexcharts.js"></script>
+<!-- Main JS -->
+<script src="/static/assets-dash/js/main.js"></script>
+
+<!-- Page JS -->
+<script src="/static/assets-dash/js/dashboards-analytics.js"></script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</body>
+</html>

@@ -8,6 +8,7 @@ class UserProfile(models.Model):
     last_name = models.CharField(max_length=255)
     pfp = models.ImageField(upload_to='users0_pfp')
     otp = models.CharField(max_length=6)
+    first_view = models.CharField(max_length=1,default=1)
         
 class Category(models.Model):
     user_id = models.CharField(max_length=10)
