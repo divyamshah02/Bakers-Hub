@@ -8,7 +8,7 @@
         position: absolute;
         z-index: 999;
         top: 50%;
-        color: rgb(176, 50, 98);
+        color: var(--dark-color);
         left: 50%;
         display: none;
     }
@@ -74,10 +74,9 @@
                                 <!-- Quantity -->
                                 <div class="mb-3 row">
                                     <label class="form-label" for="quantity" style="color: #000">Quantity<span
-                                            class="text-danger" style="font-size:
-                                                            large;">*</span></label>
+                                            class="text-danger" style="font-size: large;">*</span></label>
                                     <div class="col-8">
-                                        <input id="quantity" name="quantity" type="number" min="0" placeholder="1"
+                                        <input id="quantity" name="quantity" type="number" pattern="[0-9]*[.,]?[0-9]+" step="0.01" min="0.01" placeholder="1"
                                             class="form-control" aria-label="Quantity" required />
                                     </div>
                                     <div class="col-4">
@@ -101,7 +100,7 @@
                                     </label>
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text">₹</span>
-                                        <input id="price" name="price" type="number" min="0" class="form-control"
+                                        <input id="price" name="price" type="number" pattern="[0-9]*[.,]?[0-9]+" min="0" class="form-control"
                                             placeholder="1000" aria-label="Price" required />
                                     </div>
                                 </div>
@@ -129,8 +128,7 @@
 
                                     <div class="col-4">
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn"
-                                            style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;"
+                                        <button type="button" class="btn btn_bh" style="width: 100%;"
                                             data-bs-toggle="modal" data-bs-target="#modalCenter">
                                             Add
                                         </button>
@@ -150,13 +148,12 @@
                                                                 <label for="nameWithTitle"
                                                                     class="form-label">Name</label>
                                                                 <input type="text" id="newcategory" class="form-control"
-                                                                    placeholder="Enter Category Name" autofocus />
+                                                                    placeholder="Cake, Cookie, Brownie..." autofocus />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" id="addcategory" class="btn"
-                                                            style="background-color: rgb(176, 50, 98); color: #fff;">Add</button>
+                                                        <button type="button" id="addcategory" class="btn btn_bh">Add</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,8 +199,7 @@
                                 </div>
 
                                 <!-- Submit -->
-                                <button id="add_order" type="submit" class="btn"
-                                    style="background-color: rgb(176, 50, 98); color: #fff;">Add Order</button>
+                                <button id="add_order" type="submit" class="btn btn_bh">Add Order</button>
                             </form>
                         </div>
                     </div>

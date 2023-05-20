@@ -1,5 +1,24 @@
 {% include "header.html" %}
-<div class="card mb-4 m-4" style="background-color: transparent; border: 2px solid black;">
+
+<style>
+  .blur {
+      filter: blur(5px);
+  }
+
+  #loading-bh {
+      position: absolute;
+      z-index: 999;
+      top: 50%;
+      color: var(--dark-color);
+      left: 50%;
+      display: none;
+  }
+</style>
+<div class="spinner-border loading-bh" id="loading-bh">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="card mb-5 m-4" style="background-color: transparent; border: 2px solid black;" id="main">
     <h5 class="card-header" style="color: #000;">Profile Details</h5>
     <!-- Account -->
     <div class="card-body">
@@ -26,7 +45,7 @@
         
         <input type="hidden" name="pfp_changed" value="False" id="pfp_changed">
         <div class="button-wrapper">  
-          <label for="upload" class="btn me-2 mb-4" tabindex="0" style="background-color: rgb(176, 50, 98); color: #fff;">
+          <label for="upload" class="btn me-2 mb-4 btn_bh" tabindex="0">
             <span class="d-none d-sm-block">Upload new photo</span>
             <i class="bx bx-upload d-block d-sm-none"></i>
             <input
@@ -79,13 +98,14 @@
           </div>
         </div>
         <div class="mt-2">
-          <button type="submit" class="btn me-2" style="background-color: rgb(176, 50, 98); color: #fff;">Save changes</button>
+          <button type="submit" id="save" class="btn me-2 btn_bh">Save changes</button>
           <button type="reset" class="btn btn-outline-dark">Cancel</button>
         </div>
       </form>
     </div>
     <!-- /Account -->
 </div>
+<br><br><br><br>
 <!-- Footer -->
 
 <!-- / Footer -->
@@ -109,5 +129,22 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script>
+      const submitBtn = document.getElementById('save');
+      const loadingDiv = document.getElementById('loading-bh');
+      const bhBody = document.getElementById('main');
+      const form = document.getElementById('formAccountSettings');
+
+
+      submitBtn.addEventListener('click', () => {
+          if (form.checkValidity()) {
+              loadingDiv.style.display = 'block';
+              bhBody.classList.add('blur');
+          } else {
+              form.reportValidity();
+          }
+      });
+  </script>
   </body>
 </html>

@@ -9,6 +9,11 @@ class UserProfile(models.Model):
     pfp = models.ImageField(upload_to='users0_pfp')
     otp = models.CharField(max_length=6)
     first_view = models.CharField(max_length=1,default=1)
+    premium = models.BooleanField(default=False)
+    join_date = models.CharField(max_length=255,default=0)
+    free_end_date = models.CharField(max_length=255,default=0)
+    first_login = models.BooleanField(default=False)
+    theme_selection = models.CharField(default=0,max_length=2)
         
 class Category(models.Model):
     user_id = models.CharField(max_length=10)

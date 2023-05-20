@@ -8,7 +8,7 @@
         position: absolute;
         z-index: 999;
         top: 50%;
-        color: rgb(176, 50, 98);
+        color: var(--dark-color);
         left: 50%;
         display: none;
     }
@@ -45,8 +45,7 @@
                                         {{expense.unit}} on {{expense.date}}</u> Updated</b>
                             </div>
                             <a href="{% url 'dashboard' %}">
-                                <button class="btn mx-2 my-2"
-                                    style="background-color: rgb(176, 50, 98); color: #fff;">Go Back To Dashboard</button></a>
+                                <button class="btn mx-2 my-2 btn_bh">Go Back To Dashboard</button></a>
                             {% endif %}
                             {% endif %}
                             <form method="POST" id="my-form">
@@ -67,7 +66,7 @@
                                                         input-group-merge">
                                         <span class="input-group-text">₹</span>
                                         <input id="expense_amount" name="expense_amount" value="{{expense_amount}}"
-                                            type="number" min="0" class="form-control" placeholder="100"
+                                            type="number" pattern="[0-9]*[.,]?[0-9]+" min="0" class="form-control" placeholder="100"
                                             aria-label="Amount" required />
                                     </div>
                                 </div>
@@ -76,7 +75,7 @@
                                             class="text-danger" style="font-size: large;">*</span></label>
                                     <div class="col-8">
                                         <input id="expense_quantity" name="expense_quantity" value="{{quantity}}"
-                                            type="number" min="0" placeholder="1" class="form-control"
+                                            type="number" pattern="[0-9]*[.,]?[0-9]+" step="0.01" min="0.01" placeholder="1" class="form-control"
                                             aria-label="Quantity" required />
                                     </div>
                                     <div class="col-4">
@@ -119,8 +118,7 @@
                                         id="expense_date" required />
                                 </div>
                                 <input type="hidden" name="exp_id" value="{{id}}">
-                                <button type="submit" id="exp_save" class="btn"
-                                    style="background-color: rgb(176, 50, 98); color: #fff;">Save</button>&nbsp;
+                                <button type="submit" id="exp_save" class="btn btn_bh">Save</button>&nbsp;
                                 <a href="{% url 'dashboard' %}">
                                     <button type="button" class="btn btn-outline-dark">Cancel</button></a>
                             </form>

@@ -9,7 +9,7 @@
 <div class="content-wrapper">
     <!-- Content -->
 
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="container-xxl flex-grow-1 container-p-y" style="position: relative; z-index: 1000;">
         <div class="row">
             <div class="col-6">
                 <h2 style="color: #000;">{{month}} - {{year}}</h2>
@@ -18,30 +18,7 @@
                 <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                         <i class="bx bx-dots-vertical-rounded" style="color: #000;"></i>
-                    </button>
-                    <style>
-                        .item-hover:hover {
-                            background-color: #696cff;
-                            color: #fff;
-                        }
-
-                        .list-group-item.active {
-                            background-color: rgb(176, 50, 98) !important;
-                            border-color: rgb(176, 50, 98) !important;
-                        }
-
-                        .list-group-item {
-                            border-color: rgb(176, 50, 98);
-                            color: #000;
-                        }
-                        .item-hover:hover{
-                            background-color: rgb(176, 50, 98);
-                        }
-                        .list-group-item-action:hover{
-                            background-color: rgba(190, 87, 127, 0.627);
-                            color: #fff;
-                        }
-                    </style>
+                    </button>                
                     <div class="dropdown-menu dropdown-menu-start" aria-labelledby="transactionID">
                         <a class="dropdown-item item-hover" href="{% url 'dashboard_last_month' %}">Last Month</a>
                         <a class="dropdown-item item-hover" href="{% url 'dashboard_this_year' %}">This Year</a>
@@ -157,14 +134,14 @@
 <div class="row mt-4">
     {% if no_sale == 1 %}
     <div class="col-12 col-lg-6 col-md-6">
-        <a href="{% url 'sale_adder' %}" class="btn my-2"
-            style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;">Add your first order</a>
+        <a href="{% url 'sale_adder' %}" class="btn my-2 btn_bh"
+            style="width: 100%;">Add your first order</a>
     </div>
     {% endif %}
     {% if no_exp == 1 %}
     <div class="col-12 col-lg-6 col-md-6">
-        <a href="{% url 'expense_adder' %}" class="btn my-2"
-            style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;">Add your first expense</a>
+        <a href="{% url 'expense_adder' %}" class="btn my-2 btn_bh"
+            style="width: 100%;">Add your first expense</a>
     </div>
     {% endif %}
 
@@ -257,9 +234,9 @@
                                                         {% csrf_token %}
                                                         <input type="hidden" value="{{sale.id}}" name="sale_delete">
                                                     </form>
-                                                    <button type="button" class="btn"
-                                                        onclick="document.getElementById('sale_id_edit{{ forloop.counter }}').submit()"
-                                                        style="background-color: rgb(176, 50, 98); color: #fff;">Edit</button>
+                                                    <button type="button" class="btn btn_bh"
+                                                        onclick="document.getElementById('sale_id_edit{{ forloop.counter }}').submit()">
+                                                        Edit</button>
 
                                                     <button type="button" class="btn btn-outline-dark"
                                                         class="btn btn-outline-dark"
@@ -287,9 +264,8 @@
                                                     <br>Are you certain you wish to proceed?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn"
-                                                        onclick="document.getElementById('sale_id_delete{{ forloop.counter }}').submit()"
-                                                        style="background-color: rgb(176, 50, 98); color: #fff;">
+                                                    <button type="button" class="btn btn_bh"
+                                                        onclick="document.getElementById('sale_id_delete{{ forloop.counter }}').submit()">
                                                         Delete
                                                     </button>
                                                 </div>
@@ -376,7 +352,7 @@
                                                         
                                                         {% else %}                                                        
                                                         <div class="col-12 mb-2">
-                                                            <button class="btn" style="border: 1px solid rgb(176, 50, 98); color: rgb(176, 50, 98);"
+                                                            <button class="btn tex_col_bh bor_col_bh"
                                                             data-bs-target="#modalToggleexpbill{{ forloop.counter }}"
                                                             data-bs-toggle="modal" data-bs-dismiss="modal">
                                                                 <b>View Bill</b></button>                                                                
@@ -393,9 +369,8 @@
                                                         {% csrf_token %}
                                                         <input type="hidden" value="{{expense.id}}" name="exp_delete">
                                                     </form>
-                                                    <button type="button" class="btn"
-                                                        onclick="document.getElementById('exp_id_edit{{ forloop.counter }}').submit()"
-                                                        style="background-color: rgb(176, 50, 98); color: #fff;">Edit</button>
+                                                    <button type="button" class="btn btn_bh"
+                                                        onclick="document.getElementById('exp_id_edit{{ forloop.counter }}').submit()">Edit</button>
 
                                                     <button type="button" class="btn btn-outline-dark"
                                                         data-bs-target="#modalToggleexpdelete{{ forloop.counter }}"
@@ -422,9 +397,8 @@
                                                     <br>Are you certain you wish to proceed?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn"
-                                                        onclick="document.getElementById('exp_id_delete{{ forloop.counter }}').submit()"
-                                                        style="background-color: rgb(176, 50, 98); color: #fff;">
+                                                    <button type="button" class="btn btn_bh"
+                                                        onclick="document.getElementById('exp_id_delete{{ forloop.counter }}').submit()">
                                                         Delete
                                                     </button>
                                                 </div>
@@ -446,10 +420,7 @@
                                                     <img src="{{expense.bill}}" width="100%">                                                                                           
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a href="{{expense.bill}}" class="btn" download                                                        
-                                                        style="background-color: rgb(176, 50, 98); color: #fff;">
-                                                        Download
-                                                </a>
+                                                    <a href="{{expense.bill}}" class="btn btn_bh" download>Download</a>
                                                 </div>
                                             </div>
                                         </div>

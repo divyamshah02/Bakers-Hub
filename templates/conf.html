@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* CSS for confetti */
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(1080deg);
+      }
+    }
+
+    .confetti-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: transparent;
+      background-image: linear-gradient(to right, #FF3C40, #FFBE0B, #FBFF02, #18FF92, #00A6FF, #B45309, #FF13D4);
+      background-size: 200% 100%;
+      animation: confetti-fall 5s linear infinite;
+    }
+
+    .confetti.single-color {
+      background-image: none;
+      background-color: #F44336;
+    }
+
+    .confetti.gold {
+      background-image: none;
+      background-color: gold;
+    }
+
+    .confetti.silver {
+      background-image: none;
+      background-color: silver;
+    }
+
+    .confetti.bronze {
+      background-image: none;
+      background-color: #CD7F32;
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti-container"></div>
+  
+  <script>
+    // JavaScript for confetti
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var confettiContainer = document.querySelector('.confetti-container');
+      var confettiInterval;
+
+      // Create confetti elements
+      function createConfetti() {
+        var confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+        confettiContainer.appendChild(confetti);
+        setTimeout(function() {
+          confetti.remove();
+        }, 5000); // Remove confetti after 5 seconds
+      }
+
+      // Generate confetti at regular intervals
+      function startConfetti() {
+        confettiInterval = setInterval(function() {
+          createConfetti();
+        }, 100); // Generate confetti every 0.1 seconds
+      }
+
+      // Stop generating confetti after 5 seconds
+      setTimeout(function() {
+        clearInterval(confettiInterval);
+      }, 5000);
+
+      // Start generating confetti
+      startConfetti();
+    });
+  </script>
+</body>
+</html>

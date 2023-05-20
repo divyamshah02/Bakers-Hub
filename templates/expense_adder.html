@@ -8,7 +8,7 @@
         position: absolute;
         z-index: 999;
         top: 50%;
-        color: rgb(176, 50, 98);
+        color: var(--dark-color);
         left: 50%;
         display: none;
     }
@@ -41,8 +41,8 @@
                             <div class="mb-3" style="color: #000">
                                 <b>Frequently added expenses: </b><br>
                                 {% for data in frequent_expenses_data %}
-                                <span id="fexp{{ forloop.counter }}"
-                                    style="color: rgb(176, 50, 98);cursor: pointer;"><b><u>{{data.expense_name}}..</u>
+                                <span id="fexp{{ forloop.counter }}" class="tex_col_bh"
+                                    style="cursor: pointer;"><b><u>{{data.expense_name}}..</u>
                                     </b></span>
                                 <script>
                                     document.addEventListener("DOMContentLoaded", function () {
@@ -89,13 +89,11 @@
                                     placeholder="Butter" aria-label="Expense name" required />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="expense_amount" style="color: #000;">Expense
-                                    Amount<span class="text-danger" style="font-size:
-                                                            large;">*</span></label>
+                                <label class="form-label" for="expense_amount" style="color: #000;">Expense Amount<span class="text-danger" style="font-size: large;">*</span></label>
                                 <div class="input-group
                                                         input-group-merge">
                                     <span class="input-group-text">₹</span>
-                                    <input id="expense_amount" name="expense_amount" type="number" min="0"
+                                    <input id="expense_amount" name="expense_amount" type="number" pattern="[0-9]*[.,]?[0-9]+" min="0"
                                         class="form-control" placeholder="100" aria-label="Amount" required />
                                 </div>
                             </div>
@@ -103,7 +101,7 @@
                                 <label class="form-label" for="expense_quantity" style="color: #000;">Quantity<span
                                         class="text-danger" style="font-size: large;">*</span></label>
                                 <div class="col-8">
-                                    <input id="expense_quantity" name="expense_quantity" type="number" min="0"
+                                    <input id="expense_quantity" name="expense_quantity" type="number" pattern="[0-9]*[.,]?[0-9]+" step="0.01" min="0.01"
                                         placeholder="1" class="form-control" aria-label="Quantity" required />
                                 </div>
                                 <div class="col-4">
@@ -124,8 +122,8 @@
                                     <div class="col-6">
                                         <input type="hidden" name="pfp_changed" value="False" id="pfp_changed">
                                         <div class="button-wrapper">
-                                            <label for="upload" class="btn" tabindex="0"
-                                                style="background-color: rgb(176, 50, 98); color: #fff; width: 100%;">
+                                            <label for="upload" class="btn btn_bh" tabindex="0"
+                                                style="width: 100%;">
                                                 <span class="d-none d-sm-block">Upload</span>
                                                 <i class="bx bx-upload d-block d-sm-none"></i>
                                                 <input type="file" id="upload" class="account-file-input" hidden name="bill"
@@ -161,8 +159,7 @@
                                 <input class="form-control" name="expense_date" type="date" id="expense_date"
                                     required />
                             </div>
-                            <button id="add_exp" type="submit" class="btn"
-                                style="background-color: rgb(176, 50, 98); color: #fff;">Add Expense</button>
+                            <button id="add_exp" type="submit" class="btn btn_bh">Add Expense</button>
                         </form>
                     </div>
                 </div>

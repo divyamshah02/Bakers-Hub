@@ -8,7 +8,7 @@
         position: absolute;
         z-index: 999;
         top: 50%;
-        color: rgb(176, 50, 98);
+        color: var(--dark-color);
         left: 50%;
         display: none;
     }
@@ -48,8 +48,7 @@
                                     {{sale.time_of_delivery}}</u> Updated</b>
                         </div>
                         <a href="{% url 'dashboard' %}">
-                            <button class="btn mx-2 my-2" style="background-color: rgb(176, 50, 98); color: #fff;">Go
-                                Back To Dashboard</button></a>
+                            <button class="btn mx-2 my-2 btn_bh">Go Back To Dashboard</button></a>
                         {% endif %}
                         {% endif %}
                         <form method="POST" id="my-form">
@@ -77,7 +76,7 @@
                                         class="text-danger" style="font-size:
                                                             large;">*</span></label>
                                 <div class="col-8">
-                                    <input id="quantity" name="quantity" type="number" min="0" placeholder="1"
+                                    <input id="quantity" name="quantity" type="number" pattern="[0-9]*[.,]?[0-9]+" placeholder="1" step="0.01" min="0.01"
                                         value="{{quantity}}" class="form-control" aria-label="Quantity" required />
                                 </div>
                                 <div class="col-4">
@@ -111,7 +110,7 @@
                                 <div class="input-group
                                                         input-group-merge">
                                     <span class="input-group-text">₹</span>
-                                    <input id="price" name="price" type="number" min="0" class="form-control"
+                                    <input id="price" name="price" type="number" pattern="[0-9]*[.,]?[0-9]+" min="0" class="form-control"
                                         placeholder="1000" value="{{price}}" aria-label="Price" required />
                                 </div>
                             </div>
@@ -140,8 +139,8 @@
 
                                 <div class="col-4">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn"
-                                        style="width: 100%; background-color: rgb(176, 50, 98); color: #fff;"
+                                    <button type="button" class="btn btn_bh"
+                                        style="width: 100%;"
                                         data-bs-toggle="modal" data-bs-target="#modalCenter">
                                         Add
                                     </button>
@@ -165,8 +164,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" id="addcategory" class="btn"
-                                                        style="background-color: rgb(176, 50, 98); color: #fff;">Add</button>
+                                                    <button type="button" id="addcategory" class="btn btn_bh">Add</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,8 +206,7 @@
                             </div>
                             <input type="hidden" name="sale_id" value="{{id}}">
 
-                            <button type="submit" id="sale_save" class="btn"
-                                style="background-color: rgb(176, 50, 98); color: #fff;">Save</button>&nbsp;
+                            <button type="submit" id="sale_save" class="btn btn_bh">Save</button>&nbsp;
                             <a href="{% url 'dashboard' %}">
                                 <button type="button" class="btn btn-outline-dark">Cancel</button></a>
                         </form>
@@ -221,7 +218,7 @@
     <!-- / Content -->
 
     <!-- Footer -->
-    <footer class="content-footer footer bg-footer-theme
+    <!-- <footer class="content-footer footer bg-footer-theme
                             text-center">
         <div class="mb-3">
 
@@ -230,7 +227,7 @@
             <span style="color: #2f32eb;"><b>BakersHub</b></span>
 
         </div>
-    </footer>
+    </footer> -->
     <!-- / Footer -->
 
     <div class="content-backdrop fade"></div>

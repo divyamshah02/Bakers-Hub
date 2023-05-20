@@ -4,31 +4,33 @@
    .opt{
     color: #000;
    } 
-   .form-check-input:checked{
-    background-color: rgb(176, 50, 98);
-    border: rgb(203, 96, 137);
-    box-shadow: 0 0 0 1px rgb(203, 96, 137);
-   }
-   .form-check-input:focus{
-    border: rgb(203, 96, 137);
-    box-shadow: 0 0 0 1px rgb(203, 96, 137);
-   }
+   .blur {
+        filter: blur(5px);
+    }
 
-   .form-check-input:hover{
-    border: rgb(203, 96, 137);
-    box-shadow: 0 0 0 3px rgb(203, 96, 137);
-   }
+    #loading-bh {
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        color: var(--dark-color);
+        left: 50%;
+        display: none;
+    }
 </style>
 
-<div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+<div class="spinner-border loading-bh" id="loading-bh">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;" id="main">
     <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h2 class="mb-0" style="color: rgb(176, 50, 98)"><b>Customize Your App Experience</b></h2>
-            
+      <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="mb-0" style="color: #000"><strong><b>Settings</b></strong></h2>   
         </div>
         <div class="card-body rounded-bottom">
-            <h5 class="" style="color: #000">Set Your Preferred Landing Page Upon Opening</h5>
-            <form method="POST">
+          <h3 class="tex_col_bh"><b>Customize Your App Experience</b></h3>      
+            <h6 style="color: #000">Set Your Preferred Landing Page Upon Opening</h6>
+          <form method="POST" id="my-form">
             {% csrf_token %}
             {% if user_view == '1' %}
             <div class="form-check">
@@ -103,26 +105,86 @@
             </div>
             {% endif %}
             <div class="py-4">
-              <h5 class="" style="color: #000">Change Theme</h5>
-              <u>Coming soon..</u>
+              <h6 style="color: #000">Set Your Preferred Theme</h6>
+              {% if theme == '0' %}
+              <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="theme"
+                    id="pink"
+                    value="0"
+                    checked
+                  />
+                  <label class="form-check-label" for="pink"><span class="opt"><b>Pink</b></span></label>
+              </div>
+              {% else %}
+              <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="theme"
+                    id="pink"
+                    value="0"
+                  />
+                  <label class="form-check-label" for="pink"><span class="opt"><b>Pink</b></span></label>
+              </div>
+              {% endif %}
+              {% if theme == '1' %}
+              <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="theme"
+                      id="blue"
+                      value="1"
+                      checked
+                    />
+                    <label class="form-check-label" for="blue"><span class="opt"><b>Blue</b></span></label>
+              </div>
+              {% else %}
+              <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="theme"
+                    id="blue"
+                    value="1"                  
+                  />
+                  <label class="form-check-label" for="blue"><span class="opt"><b>Blue</b></span></label>
+              </div>
+              {% endif %}
+              {% if theme == '2' %}
+              <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="theme"
+                      id="white"
+                      value="2"
+                      checked
+                    />
+                    <label class="form-check-label" for="white"><span class="opt"><b>Classic</b></span></label>
+              </div>
+              {% else %}
+              <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="theme"
+                    id="white"
+                    value="2"
+                  />
+                  <label class="form-check-label" for="white"><span class="opt"><b>Classic</b></span></label>
+              </div>
+              {% endif %}
             </div>
-            <button id="submit" type="submit" class="btn mt-5" style="background-color: rgb(176, 50, 98); color: #fff;">Save</button>
+            <button id="submit" type="submit" class="btn mt-5 btn_bh">Apply Changes</button>
 
-
-            </form>
+          </form>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -146,6 +208,23 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const submitBtn = document.getElementById('submit');
+  const loadingDiv = document.getElementById('loading-bh');
+  const bhBody = document.getElementById('main');
+  const form = document.getElementById('my-form');
+
+
+  submitBtn.addEventListener('click', () => {
+      if (form.checkValidity()) {
+          loadingDiv.style.display = 'block';
+          bhBody.classList.add('blur');
+      } else {
+          form.reportValidity();
+      }
+  });
+</script>
 
 
 </body>

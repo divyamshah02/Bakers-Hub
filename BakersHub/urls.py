@@ -31,6 +31,7 @@ urlpatterns = [
     path('logout/', views.log_out, name='logout'),
     path('app/',views.app,name='app'),
     path('dashboard/',views.dashboard,name='dashboard'),
+    path('plans/',views.plans,name='plans'),
     path('dashboard/last-month/',views.dashboard_last_month,name='dashboard_last_month'),
     path('dashboard/lifetime/',views.dashboard_lifetime,name='dashboard_lifetime'),
     path('dashboard/this-year/',views.dashboard_this_year,name='dashboard_this_year'),
