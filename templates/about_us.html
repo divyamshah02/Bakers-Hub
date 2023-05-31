@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+      shrink-to-fit=no">
+  <!--<meta name="description" content="Optimize your home baking business with our user-friendly app. From recording expenses to managing orders and generating invoices, we make it easy for you. Get started today and take your business to new heights!">-->
+  <meta name="description" content="Track your expenses, manage orders, and analyze your home baking business with Baker's Hub - a user-friendly app. Take your business to new heights with our easy-to-use features. Get started today!">
+  <meta name="author" content="Divyam Shah">
+  <meta name="keywords" content="bakers hub, Baker's Hub, home baking, business app, expense tracking, order management, analysis">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+  <title>Baker's Hub - Expense Tracking, Order Management, and Analysis App for Home Baking Business</title>
+  <link rel="icon" href="/static/assets-cta/images/favicon.png">
+  <!-- Bootstrap core CSS -->
+  <link href="/static/assets-cta/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="/static/assets-cta/css/fontawesome.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/templatemo-eduwell-style.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/owl.css">
+  <link rel="stylesheet" href="/static/assets-cta/css/lightbox.css">
+  <link rel="stylesheet" href="/static/assets-dash/vendor/fonts/boxicons.css" />
+
+  <!--
+-->
+<style>
+  .btn_bh{
+                color: #fff !important;
+                background-color: rgb(176, 50, 98) !important;
+                cursor: default !important;
+            }
+  .tex_col_bh{
+                color: rgb(176, 50, 98) !important;
+            }
+</style>
+</head>
+
+<!-- <body style="background-color: rgba(238, 170, 233, 0.421);"> -->
+
+<body>
+  <!-- ***** Header Area Start ***** -->
+  {% include "cta-header.html" %}
+
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <section class="main-banner rounded-5" id="top"
+    style="background: linear-gradient(rgba(219, 138, 222, 0.473) 0%, rgba(246, 191, 159, 0.489))">
+    <div class="container">
+      <div class="row text-center">
+          <div class="header-text">
+            <h6>Welcome to <b>Baker's Hub</b></h6>
+            <h5>About <em>Us</em></h5>
+            <p class="px-lg-5" style="position: relative; z-index: 2; font-size: large;">
+                <b>
+                    Welcome to <em>Baker's Hub</em>, a dedicated platform designed to support and empower home bakers in managing their businesses with ease. We understand the passion and creativity that goes into baking, and our mission is to provide you with the tools and resources you need to thrive.<br><br>
+At Baker's Hub, we believe that every home baker deserves the opportunity to excel. Our platform offers a comprehensive suite of features, including a user-friendly sales entry system, expense tracker, and powerful report generator. By effortlessly recording your expenses and income from orders, you can gain valuable insights into your profitability and make informed business decisions.<br><br>
+We pride ourselves on creating an intuitive and seamless experience for our users. Our streamlined interface ensures that you can effortlessly navigate through your account, view your transactions, and access detailed reports at any time. Stay on top of your orders with our convenient order notification feature, ensuring that you never miss a beat.<br><br>
+With our upcoming premium version, we are excited to introduce even more benefits to support your success. Enjoy features such as order notifications via WhatsApp or email, weekly reports to track your progress, in-depth reports for comprehensive analysis, and a bill generator to streamline your invoicing process.<br><br>
+Your trust and privacy are our top priorities. We have implemented robust security measures to ensure that your sales and expense data remain safe and confidential. Rest assured that your information is in good hands.<br><br>
+Join the growing community of passionate home bakers who have chosen Baker's Hub to simplify their financial management and unlock their full potential. Whether you're just starting your baking journey or looking to take your business to the next level, we are here to support you every step of the way.<br><br>
+Discover the power of efficient bookkeeping and financial management for your home bakery. Sign up today and experience the difference with Baker's Hub.<br><br>
+                </b></p>
+
+          </div>
+        
+      </div>
+    </div>
+  </section>
+  <!-- ***** Main Banner Area End ***** -->
+
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/assets-cta/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/assets-cta/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets-cta/js/isotope.min.js"></script>
+  <script src="/static/assets-cta/js/owl-carousel.js"></script>
+  <script src="/static/assets-cta/js/lightbox.js"></script>
+  <script src="/static/assets-cta/js/tabs.js"></script>
+  <script src="/static/assets-cta/js/video.js"></script>
+  <script src="/static/assets-cta/js/slick-slider.js"></script>
+  <script src="/static/assets-cta/js/custom.js"></script>
+  <script>
+    // get the target element by ID
+    function scrollToTarget() {
+    const targetElement = document.getElementById('premium_features');
+
+    // scroll to the target element and land slightly above it
+    targetElement.scrollIntoView({
+      block:"start",
+      behavior: 'smooth',
+    });
+    }
+  </script>
+  <script>
+    //according to loftblog tut
+    $('.nav li:first').addClass('active');
+
+    var showSection = function showSection(section, isAnimate) {
+      var
+        direction = section.replace(/#/, ''),
+        reqSection = $('.section').filter('[data-section="' + direction + '"]'),
+        reqSectionPos = reqSection.offset().top - 0;
+
+      if (isAnimate) {
+        $('body, html').animate({
+          scrollTop: reqSectionPos
+        },
+          800);
+      } else {
+        $('body, html').scrollTop(reqSectionPos);
+      }
+
+    };
+
+    var checkSection = function checkSection() {
+      $('.section').each(function () {
+        var
+          $this = $(this),
+          topEdge = $this.offset().top - 80,
+          bottomEdge = topEdge + $this.height(),
+          wScroll = $(window).scrollTop();
+        if (topEdge < wScroll && bottomEdge > wScroll) {
+          var
+            currentId = $this.data('section'),
+            reqLink = $('a').filter('[href*=\\#' + currentId + ']');
+          reqLink.closest('li').addClass('active').
+            siblings().removeClass('active');
+        }
+      });
+    };
+
+    $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
+      e.preventDefault();
+      showSection($(this).attr('href'), true);
+    });
+
+    $(window).scroll(function () {
+      checkSection();
+    });
+  </script>
+</body>
+
+</html>

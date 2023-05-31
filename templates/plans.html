@@ -1,77 +1,227 @@
 {% include "header.html" %}
-<div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
-<main>
-  <h2 class="mb-0" style="color: #000"><strong><b>Plans</b></strong></h2>
+<div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom:
+  100px;">
+  <main>
+    <h2 class="mb-0" style="color: #000"><strong><b>Plans</b></strong></h2>
 
-    <h6 class="mb-4 mt-2" >
-        <b>Choose the plan that fits your budget and helps you manage your home baking business.</b></h6>
-
+    <h6 class="mb-4 mt-2">
+      <b>Choose the plan that fits your budget and helps you manage your home
+        baking business.</b></h6>
     <div class="row row-cols-1 row-cols-md-3 mb-3">
       <div class="col">
-        <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px black;">
+        <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px
+          black;">
           <div class="card-header py-3">
-            <b><h3 class="my-0" style="color: #000; font-weight: 600;">1 Month plan</h3></b>
+            <b><h3 class="my-0" style="color: #000; font-weight: 600;">1 Month
+                plan</h3></b>
           </div>
           <hr class="hr p-0 m-0 pb-1 tex_col_bh">
           <div class="card-body">
-            <h1 class="card-title pricing-card-title"><strike style="font-size: 25px;">₹539</strike> ₹249<small class="text-body-secondary fw-light">/mo</small></h1>
-            <ul class="list-styled mt-3 mb-4">  
+            <h1 class="card-title pricing-card-title"><strike style="font-size:
+                25px;">₹539</strike> ₹249<small class="text-body-secondary
+                fw-light">/mo</small></h1>
+            <ul class="list-styled mt-3 mb-4">
               <li>Validity <b>1 Month</b></li>
               <li>Expense Adder</li>
               <li>Sales Adder</li>
               <li>Analytics</li>
               <li>Bill Generator<small> <u>(Coming soon)</u></small></li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn_bh"><b class="float-start">Pay <strike>₹539</strike> ₹249</b><i class="bx bx-right-arrow-circle bx-sm rounded-circle float-end tex_col_bh" style="background-color: #fff;"></i></button>
+           
+            <button type="button" class="w-100 btn btn-lg btn_bh" data-bs-target="#moplan1"
+            data-bs-toggle="modal"><b class="float-start">Pay <strike>₹539</strike> ₹249</b>
+            <i class="bx bx-right-arrow-circle bx-sm rounded-circle float-end tex_col_bh" 
+            style="background-color: #fff;"></i>
+            </button>
+              <div class="modal fade modalBodyToMove" id="moplan1"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle" style="color:
+                        #000;">
+                        <b>1 Month plan (30 Days)</b>
+                      </h5>
+                      <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-12 mb-2">
+                          <label for="nameWithTitle">Premium will end on: </label><br>
+                          <label class="text-end"
+                            style="color: #000;font-size: larger;"><b>{{day_30}}</b></label>
+                        </div>
+                        <div class="col-12 mb-2">
+                          <label for="nameWithTitle">Total amount payable: </label><br>
+                          <label class="text-end"
+                            style="color: #000;font-size: larger;"><b>₹249</b></label>
+                        </div>
+                        <div class="col-12 mb-2">                        
+                          <label class="text-center"
+                            style="color: #000;font-size: larger;">
+                            <b><u>Note: Money is not refundable in any case</u></b></label>
+                        </div>
+  
+                      </div>                      
+                    </div>
+                    <div class="pb-3" style="text-align: center;">
+
+                      <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_LvT4yvoEZL50bZ" async> </script> </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px black;">
+        <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px
+          black;">
           <div class="card-header py-3">
-            <b><h3 class="my-0" style="color: #000; font-weight: 600;">3 Months plan</h3></b>
+            <b><h3 class="my-0" style="color: #000; font-weight: 600;">3 Months
+                plan</h3></b>
           </div>
           <hr class="hr p-0 m-0 pb-1 tex_col_bh">
           <div class="card-body">
-            <h1 class="card-title pricing-card-title"><strike style="font-size: 25px;">₹420</strike> ₹223<small class="text-body-secondary fw-light">/mo</small></h1>
+            <h1 class="card-title pricing-card-title"><strike style="font-size:
+                25px;">₹420</strike> ₹223<small class="text-body-secondary
+                fw-light">/mo</small></h1>
             <ul class="list-styled mt-3 mb-4">
-                <li>Validity <b>3 Months</b></li>
-                <li>Expense Adder</li>
-                <li>Sales Adder</li>
-                <li>Analytics</li>
-                <li>Bill Generator<small> <u>(Coming soon)</u></small></li>
+              <li>Validity <b>3 Months</b></li>
+              <li>Expense Adder</li>
+              <li>Sales Adder</li>
+              <li>Analytics</li>
+              <li>Bill Generator<small> <u>(Coming soon)</u></small></li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn_bh"><b class="float-start">Pay <strike>₹1260</strike> ₹669</b><i class="bx bx-right-arrow-circle bx-sm rounded-circle float-end tex_col_bh" style="background-color: #fff;"></i></button>
+            <button type="button" class="w-100 btn btn-lg btn_bh" data-bs-target="#moplan2"
+            data-bs-toggle="modal">
+              <b class="float-start">Pay <strike>₹1,260</strike> ₹669</b><i
+                class="bx bx-right-arrow-circle bx-sm rounded-circle float-end
+                tex_col_bh" style="background-color: #fff;"></i>
+            </button>
+              <div class="modal fade modalBodyToMove" id="moplan2"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle" style="color:#000;">
+                        <b>3 Months plan (90 Days)</b>
+                      </h5>
+                      <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-12 mb-2">
+                          <label for="nameWithTitle">Premium will end on: </label><br>
+                          <label class="text-end"
+                            style="color: #000;font-size: larger;"><b>{{day_90}}</b></label>
+                        </div>
+                        <div class="col-12 mb-2">
+                          <label for="nameWithTitle">Total amount payable: </label><br>
+                          <label class="text-end"
+                            style="color: #000;font-size: larger;"><b>₹669</b></label>
+                        </div>
+                        <div class="col-12 mb-2">                        
+                          <label class="text-center"
+                            style="color: #000;font-size: larger;">
+                            <b><u>Note: Money is not refundable in any case</u></b></label>
+                        </div>
+  
+                      </div>                      
+                    </div>
+                    <div class="pb-3" style="text-align: center;">
+
+                      <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_LvT4yvoEZL50bZ" async> </script> </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
       <div class="col">
-        <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px black;">
+        <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px
+          black;">
           <div class="card-header py-3 text-bg-primary border-primary">
-            <b><h3 class="my-0" style="color: #000; font-weight: 600;">6 Months plan</h3></b>
+            <b><h3 class="my-0" style="color: #000; font-weight: 600;">6 Months
+                plan</h3></b>
           </div>
           <hr class="hr p-0 m-0 pb-1 tex_col_bh">
           <div class="card-body">
-            <h1 class="card-title pricing-card-title"><strike style="font-size: 25px;">₹383</strike> ₹203<small class="text-body-secondary fw-light">/mo</small></h1>
+            <h1 class="card-title pricing-card-title"><strike style="font-size:
+                25px;">₹383</strike> ₹203<small class="text-body-secondary
+                fw-light">/mo</small></h1>
             <ul class="list-styled mt-3 mb-4">
-                <li>Validity <b>6 Months</b></li>
-                <li>Expense Adder</li>
-                <li>Sales Adder</li>
-                <li>Analytics</li>
-                <li>Bill Generator<small> <u>(Coming soon)</u></small></li>
+              <li>Validity <b>6 Months</b></li>
+              <li>Expense Adder</li>
+              <li>Sales Adder</li>
+              <li>Analytics</li>
+              <li>Bill Generator<small> <u>(Coming soon)</u></small></li>
             </ul>
-            <button type="button" class="w-100 btn btn-lg btn_bh"><b class="float-start">Pay <strike>₹2298</strike> ₹1218</b><i class="bx bx-right-arrow-circle bx-sm rounded-circle float-end tex_col_bh" style="background-color: #fff;"></i></button>
+            <button type="button" class="w-100 btn btn-lg btn_bh"data-bs-target="#moplan3"
+            data-bs-toggle="modal">
+              <b class="float-start">Pay <strike>₹2,298</strike> ₹1,218</b><i
+                class="bx bx-right-arrow-circle bx-sm rounded-circle float-end
+                tex_col_bh" style="background-color: #fff;"></i></button>
+                <div class="modal fade modalBodyToMove" id="moplan3"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalCenterTitle" style="color:
+                        #000;">
+                        <b>6 Months plan (180 Days)</b>
+                      </h5>
+                      <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-12 mb-2">
+                          <label for="nameWithTitle">Premium will end on: </label><br>
+                          <label class="text-end"
+                            style="color: #000;font-size: larger;"><b>{{day_180}}</b></label>
+                        </div>
+                        <div class="col-12 mb-2">
+                          <label for="nameWithTitle">Total amount payable: </label><br>
+                          <label class="text-end"
+                            style="color: #000;font-size: larger;"><b>₹1,218</b></label>
+                        </div>
+                        <div class="col-12 mb-2">                        
+                          <label class="text-center"
+                            style="color: #000;font-size: larger;">
+                            <b><u>Note: Money is not refundable in any case</u></b></label>
+                        </div>
+  
+                      </div>                      
+                    </div>
+                    <div class="pb-3" style="text-align: center;">
+
+                      <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_LvT4yvoEZL50bZ" async> </script> </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
     </div>
 
-</main>
+  </main>
 </div>
 
 <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
 <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
-<script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script
+  src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script src="/static/assets-dash/vendor/js/menu.js"></script>
 <!-- endbuild -->
 

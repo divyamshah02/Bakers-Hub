@@ -12,11 +12,13 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 import random,datetime,yagmail,os
 from PIL import Image
 from io import BytesIO
+from BakersHub.email_sent import SendMailOTP
 
 def error_log(error,user,url):
     with open("error_log.txt",'a') as error_file:
         date_time = datetime.datetime.now()
-        error_file.write(f'[{date_time}] -> [{user}/{user.first_name}] : [{url}] [{error}]\n')
+        error_file.write(f'[{date_time}] -> [{user}/{user.first_name}] : [{url}] [{error}] - At Line {(error.__traceback__).tb_lineno}\n')
+        # File name - tb_frame.f_code.co_filename
 
 def home(request):    
     error = 0
@@ -49,6 +51,9 @@ def home(request):
         'error':error,
     }    
     return render(request, "index.html",data)
+
+def about_us(request):
+    return render(request,"about_us.html")
 
 def page_not_found(request,exception):
     return render(request,'404.html',status=404)
@@ -142,8 +147,7 @@ def forget_pass(request):
         success = 0
         trial_round = 0              
         email = ''
-        FROM_EMAIL = "divyamshah2020@gmail.com" # Email id of sending id (bakershub)
-        PASSWORD = os.environ.get('password') # Password
+        mail_sender = SendMailOTP()
         if request.method == 'POST':
             # First page view - (here user will enter their email id)
             if request.POST.get('email'):
@@ -151,20 +155,16 @@ def forget_pass(request):
                 user_exist = User.objects.filter(email=email) # Checking if user's email is registered
                 if len(user_exist) > 0:
                     # user has an account (egistered)
-                    try:
-                        # Sending mail
-                        yag = yagmail.SMTP(FROM_EMAIL,PASSWORD)
-                        otp = random.randint(111111,999999) # Generating OTP of 6 digits
-                        # Sending mail with OTP (needs to be change)
-                        yag.send(to=email,subject="OTP - Verification",
-                                    contents=[f"<h3><u>{otp}</u> is your otp to change password.</h3>"])
-                        # Storing otp in the user's database
-                        user_id = user_exist[0].username
-                        UserProfile.objects.filter(user_id = user_id).update(otp = otp)                   
-                        error = 0 # No error
-                        otp_sent = 1 # otp is sent to email & saved in database
-                        trial_round = 1 # Users gets 2 trial and here it is first
-                    except:
+                    otp = random.randint(111111,999999) # Generating OTP of 6 digits
+                    sent_mail = mail_sender.send(email=email,otp=otp)
+                    
+                    if sent_mail:
+                            user_id = user_exist[0].username
+                            UserProfile.objects.filter(user_id = user_id).update(otp = otp)                   
+                            error = 0 # No error
+                            otp_sent = 1 # otp is sent to email & saved in database
+                            trial_round = 1 # Users gets 2 trial and here it is first
+                    else:
                         error = 1 # Email was not sent
                 else:
                     error = 2 # User does not exist                    
@@ -231,6 +231,19 @@ def app(request):
     except:
         return redirect('sign_in')
 
+def check_pre_expr(user):
+    user_profile = UserProfile.objects.get(user_id=user)
+    today = datetime.date.today()
+    end_date = user_profile.premium_end_date
+    if end_date != '0':
+        end_date = str(user_profile.premium_end_date).split('/')
+        end_date = datetime.date(day=int(end_date[0]),month=int(end_date[1]),year=int(end_date[2]))
+        if today > end_date:
+            return False
+        else:
+            days_remaining = end_date - today            
+            return int(days_remaining.days)
+    
 @login_required(login_url=reverse_lazy('sign_in'))
 def plans(request):
     user=request.user
@@ -243,28 +256,60 @@ def plans(request):
         today = datetime.date.today()
         if today <= user_free_end_date:
             remaining_days = (user_free_end_date - today).days
-        else:
-            # return redirect('plans')
-            remaining_days = None
-        
+        else:        
+            remaining_days = None   
+        premium_ended = None
     else:
+        premium_is = check_pre_expr(user)
+        if premium_is == False:
+            premium_ended = True
+        else:
+            if premium_is <=5:
+                premium_ended = premium_is
+            else:
+                premium_ended = False
+        
         remaining_days = None
     
-        
     profile_pfp = user_profile.pfp
     if profile_pfp == "":
         profile_pfp = 0 
     else:    
         profile_pfp = profile_pfp.url 
 
+    today = datetime.date.today()
+    day_30 = (today + datetime.timedelta(days=30)).strftime("%d %B, %Y")
+    day_90 = (today + datetime.timedelta(days=90)).strftime("%d %B, %Y")
+    day_180 = (today + datetime.timedelta(days=180)).strftime("%d %B, %Y")
+        
     data={
         'p_letter':str(user.first_name)[0].lower(), 
         'profile_pfp':profile_pfp,  
         'is_premium':is_premium,  
         'remaining_days':remaining_days,
         'theme':user_profile.theme_selection,
+        'premium_ended':premium_ended,
+        'day_30':day_30,
+        'day_90':day_90,
+        'day_180':day_180,
     }
     return render(request,'plans.html',data)
+
+@login_required(login_url=reverse_lazy('sign_in'))
+def paymentsuccess(request,no_days):
+    user = request.user
+    user_profile = UserProfile.objects.get(user_id=user)
+    today = datetime.date.today()
+    end_date = today + datetime.timedelta(days=no_days)
+    today=today.strftime("%d/%m/%Y")
+    end_date=end_date.strftime("%d/%m/%Y")
+    user_profile.premium_start_date = today
+    user_profile.premium_end_date = end_date
+    user_profile.premium_month_plan = no_days
+    user_profile.premium = True
+    user_profile.payment_id = request.GET.get('payment_id')
+    user_profile.save()
+    return redirect('dashboard')
 
 @login_required(login_url=reverse_lazy('sign_in'))
 def dashboard(request):    
@@ -274,6 +319,29 @@ def dashboard(request):
             # If the session will expire
             request.session.set_expiry(30 * 24 * 60 * 60)
         user = request.user # Storing user
+        user_profile = UserProfile.objects.filter(user_id=user)[0]        
+        is_premium = user_profile.premium
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
+            else:
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            
+            remaining_days = None
         if request.method == 'POST':
             if request.POST.get('sale_edit'):
                 # Getting id of sale for editing
@@ -366,24 +434,13 @@ def dashboard(request):
             profit_perct = 0
             loss_perct = 0    
             
-        user_profile = UserProfile.objects.filter(user_id=user)[0]
         profile_pfp = user_profile.pfp
         if profile_pfp == "":
             profile_pfp = 0 
         else:    
             profile_pfp = profile_pfp.url 
             
-        is_premium = user_profile.premium
-        if is_premium == False:
-            user_free_date_lst = str(user_profile.free_end_date).split('/')
-            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
-            today = datetime.date.today()
-            if today <= user_free_end_date:
-                remaining_days = (user_free_end_date - today).days
-            else:
-                return redirect('plans')
-        else:
-            remaining_days = None
+        
         
         if len(user_expense_info) == 0:
             no_exp = 1
@@ -415,6 +472,7 @@ def dashboard(request):
             'first_login':user_profile.first_login,  
             'end_date':user_profile.free_end_date,
             'theme':user_profile.theme_selection,
+            'premium_ended':premium_ended,
         }        
 
         if user_profile.first_login == False:
@@ -434,140 +492,152 @@ def dashboard_last_month(request):
         if request.user.is_authenticated:
             if request.session.get_expiry_age() <= 0:
                 request.session.set_expiry(30 * 24 * 60 * 60)
-            user = request.user    
-            if request.method == 'POST':
-                if request.POST.get('sale_edit'):
-                    request.session['sale_id'] = request.POST.get('sale_edit')
-                    return redirect('sale_edit')
-                elif request.POST.get('sale_delete'):
-                    Sales.objects.filter(id=request.POST.get('sale_delete')).delete()
-                elif request.POST.get('exp_edit'):
-                    request.session['expense_id'] = request.POST.get('exp_edit')
-                    return redirect('expense_edit')
-                elif request.POST.get('exp_delete'):
-                    Expense.objects.filter(id=request.POST.get('exp_delete')).delete()
-                
-            current_date = datetime.date.today()
-            month = int(current_date.strftime("%m"))
-            year = int(current_date.strftime("%Y"))
-            if month == 1:
-                month = 13
-                year = year-1   
-            last_month = datetime.date(year= year, month=month-1, day=1)
-            month = last_month.strftime("%B")
-            month_num = last_month.strftime("%m")
-            year = last_month.strftime("%Y")
-            
-            # --- Sale Data --- #
-            user_sale_data = Sales.objects.filter(user_id = user)
-            user_sale_info = []
-            user_sale_total_amt = 0
-            for user_sales in user_sale_data:
-                sale_date = user_sales.order_date.split('-')
-                if sale_date[1] == month_num:
-                    temp_sale_data = {
-                        'customer':str(user_sales.customer_name).title(),
-                        'item':f"{(user_sales.order_name).title()} ({user_sales.quantity} {user_sales.qty_weigth})",
-                        'date':user_sales.order_date,
-                        'notes':user_sales.extra_note,                        
-                        'price':user_sales.price,
-                        'id':user_sales.id,                
-                    }
-                    user_sale_total_amt += int(user_sales.price)
-                    user_sale_info.append(temp_sale_data)
-            
-            # --- Expense Data --- #            
-            user_expense_data = Expense.objects.filter(user_id = user)
-            user_expense_info = []
-            user_expense_total_amt = 0
-            for user_expense in user_expense_data:
-                expense_date = user_expense.expense_date.split('-')
-                if expense_date[1] == month_num:
-                    if user_expense.bill != "":
-                        bill = user_expense.bill.url
-                    else:
-                        bill = None
-                    temp_expense_data = {
-                        'item':str(user_expense.expense_name).title(),
-                        'qty':f"{user_expense.expense_quantity} {user_expense.qty_unit}",
-                        'date':user_expense.expense_date,
-                        'price':user_expense.expense_amount,
-                        'id':user_expense.id,              
-                        'notes':user_expense.extra_note,
-                        'bill':bill,
-  
-                    }
-                    user_expense_total_amt += int(user_expense.expense_amount)
-                    user_expense_info.append(temp_expense_data)
-                
-            # --- Constants --- #
-            profit = user_sale_total_amt - user_expense_total_amt
-            formatted_profit = "{:,.0f}".format(profit)
-            
-            formatted_user_expense_total_amt = "{:,.0f}".format(user_expense_total_amt)
-            formatted_user_sale_total_amt = "{:,.0f}".format(user_sale_total_amt)
-            
-            # --- Ratio --- #
-            if profit > 0:
-                profit_perct = int((profit*100) / user_sale_total_amt) 
-                loss_perct = None
-                
-            elif profit < 0:   
-                if user_sale_total_amt == 0:
-                    profit_perct = 0
-                    loss_perct = 100                            
-                else:
-                    profit_perct = int((profit*100) / user_sale_total_amt) 
-                    loss_perct = profit_perct * -1
+        user = request.user    
+        user_profile = UserProfile.objects.filter(user_id=user)[0]
+        is_premium = user_profile.premium        
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
             else:
-                profit_perct = 0
-                loss_perct = 0     
-                
-            user_profile = UserProfile.objects.filter(user_id=user)[0]
-            profile_pfp = user_profile.pfp
-            if profile_pfp == "":
-                profile_pfp = 0 
-            else:    
-                profile_pfp = profile_pfp.url
-            is_premium = user_profile.premium
-            if is_premium == False:
-                user_free_date_lst = str(user_profile.free_end_date).split('/')
-                user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
-                today = datetime.date.today()
-                if today <= user_free_end_date:
-                    remaining_days = (user_free_end_date - today).days
-                else:
-                    return redirect('plans')
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
             else:
-                remaining_days = None
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
             
-            data = {
-                'tab':1,
-                'user':user,
-                'expense_info':user_expense_info,
-                'sale_info':user_sale_info,
-                'profit':formatted_profit,
-                'profit_perct':profit_perct,
-                'loss_perct':loss_perct,
-                'sales':formatted_user_sale_total_amt,
-                'payments':formatted_user_expense_total_amt,
-                'orders':len(user_sale_info),
-                'month':month,
-                'year':year,
-                'p_letter':str(user.first_name)[0].lower(), 
-                'profile_pfp':profile_pfp,         
-                'is_premium':is_premium,           
-                'remaining_days':remaining_days,
-                'first_login':user_profile.first_login,  
-                'end_date':user_profile.free_end_date,
-                'theme':user_profile.theme_selection,                
-            }
-
-            if user_profile.first_login == False:
-                user_profile_obj = UserProfile.objects.get(user_id=user)
-                user_profile_obj.first_login = True
-            return render(request,"dashboard.html",data)
+            remaining_days = None
+        if request.method == 'POST':
+            if request.POST.get('sale_edit'):
+                request.session['sale_id'] = request.POST.get('sale_edit')
+                return redirect('sale_edit')
+            elif request.POST.get('sale_delete'):
+                Sales.objects.filter(id=request.POST.get('sale_delete')).delete()
+            elif request.POST.get('exp_edit'):
+                request.session['expense_id'] = request.POST.get('exp_edit')
+                return redirect('expense_edit')
+            elif request.POST.get('exp_delete'):
+                Expense.objects.filter(id=request.POST.get('exp_delete')).delete()
+            
+        current_date = datetime.date.today()
+        month = int(current_date.strftime("%m"))
+        year = int(current_date.strftime("%Y"))
+        if month == 1:
+            month = 13
+            year = year-1   
+        last_month = datetime.date(year= year, month=month-1, day=1)
+        month = last_month.strftime("%B")
+        month_num = last_month.strftime("%m")
+        year = last_month.strftime("%Y")
         
+        # --- Sale Data --- #
+        user_sale_data = Sales.objects.filter(user_id = user)
+        user_sale_info = []
+        user_sale_total_amt = 0
+        for user_sales in user_sale_data:
+            sale_date = user_sales.order_date.split('-')
+            if sale_date[1] == month_num:
+                temp_sale_data = {
+                    'customer':str(user_sales.customer_name).title(),
+                    'item':f"{(user_sales.order_name).title()} ({user_sales.quantity} {user_sales.qty_weigth})",
+                    'date':user_sales.order_date,
+                    'notes':user_sales.extra_note,                        
+                    'price':user_sales.price,
+                    'id':user_sales.id,                
+                }
+                user_sale_total_amt += int(user_sales.price)
+                user_sale_info.append(temp_sale_data)
+        
+        # --- Expense Data --- #            
+        user_expense_data = Expense.objects.filter(user_id = user)
+        user_expense_info = []
+        user_expense_total_amt = 0
+        for user_expense in user_expense_data:
+            expense_date = user_expense.expense_date.split('-')
+            if expense_date[1] == month_num:
+                if user_expense.bill != "":
+                    bill = user_expense.bill.url
+                else:
+                    bill = None
+                temp_expense_data = {
+                    'item':str(user_expense.expense_name).title(),
+                    'qty':f"{user_expense.expense_quantity} {user_expense.qty_unit}",
+                    'date':user_expense.expense_date,
+                    'price':user_expense.expense_amount,
+                    'id':user_expense.id,              
+                    'notes':user_expense.extra_note,
+                    'bill':bill,
+
+                }
+                user_expense_total_amt += int(user_expense.expense_amount)
+                user_expense_info.append(temp_expense_data)
+            
+        # --- Constants --- #
+        profit = user_sale_total_amt - user_expense_total_amt
+        formatted_profit = "{:,.0f}".format(profit)
+        
+        formatted_user_expense_total_amt = "{:,.0f}".format(user_expense_total_amt)
+        formatted_user_sale_total_amt = "{:,.0f}".format(user_sale_total_amt)
+        
+        # --- Ratio --- #
+        if profit > 0:
+            profit_perct = int((profit*100) / user_sale_total_amt) 
+            loss_perct = None
+            
+        elif profit < 0:   
+            if user_sale_total_amt == 0:
+                profit_perct = 0
+                loss_perct = 100                            
+            else:
+                profit_perct = int((profit*100) / user_sale_total_amt) 
+                loss_perct = profit_perct * -1
+        else:
+            profit_perct = 0
+            loss_perct = 0     
+            
+        profile_pfp = user_profile.pfp
+        if profile_pfp == "":
+            profile_pfp = 0 
+        else:    
+            profile_pfp = profile_pfp.url
+        is_premium = user_profile.premium
+        
+        data = {
+            'tab':1,
+            'user':user,
+            'expense_info':user_expense_info,
+            'sale_info':user_sale_info,
+            'profit':formatted_profit,
+            'profit_perct':profit_perct,
+            'loss_perct':loss_perct,
+            'sales':formatted_user_sale_total_amt,
+            'payments':formatted_user_expense_total_amt,
+            'orders':len(user_sale_info),
+            'month':month,
+            'year':year,
+            'p_letter':str(user.first_name)[0].lower(), 
+            'profile_pfp':profile_pfp,         
+            'is_premium':is_premium,           
+            'remaining_days':remaining_days,
+            'first_login':user_profile.first_login,  
+            'end_date':user_profile.free_end_date,
+            'theme':user_profile.theme_selection, 
+            'premium_ended':premium_ended,               
+        }
+        if user_profile.first_login == False:
+            user_profile_obj = UserProfile.objects.get(user_id=user)
+            user_profile_obj.first_login = True
+        return render(request,"dashboard.html",data)
+    
     except Exception as e:
         user = request.user
         error_log(error=e,user=user,url=request.build_absolute_uri())
@@ -580,6 +650,29 @@ def dashboard_this_year(request):
             if request.session.get_expiry_age() <= 0:
                 request.session.set_expiry(30 * 24 * 60 * 60)
         user = request.user
+        user_profile = UserProfile.objects.filter(user_id=user)[0]
+        is_premium = user_profile.premium
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
+            else:
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            
+            remaining_days = None
         if request.method == 'POST':
             if request.POST.get('sale_edit'):
                 request.session['sale_id'] = request.POST.get('sale_edit')
@@ -659,24 +752,12 @@ def dashboard_this_year(request):
             profit_perct = 0
             loss_perct = 0    
             
-        user_profile = UserProfile.objects.filter(user_id=user)[0]
         profile_pfp = user_profile.pfp
         if profile_pfp == "":
             profile_pfp = 0 
         else:    
             profile_pfp = profile_pfp.url     
         
-        is_premium = user_profile.premium
-        if is_premium == False:
-            user_free_date_lst = str(user_profile.free_end_date).split('/')
-            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
-            today = datetime.date.today()
-            if today <= user_free_end_date:
-                remaining_days = (user_free_end_date - today).days
-            else:
-                return redirect('plans')
-        else:
-            remaining_days = None
         data = {
             'tab':1,
             'user':user,
@@ -696,7 +777,8 @@ def dashboard_this_year(request):
             'remaining_days':remaining_days,
             'first_login':user_profile.first_login,  
             'end_date':user_profile.free_end_date,
-            'theme':user_profile.theme_selection,        
+            'theme':user_profile.theme_selection,   
+            'premium_ended':premium_ended,     
             
         }
 
@@ -718,6 +800,29 @@ def dashboard_lifetime(request):
             if request.session.get_expiry_age() <= 0:
                 request.session.set_expiry(30 * 24 * 60 * 60)
         user = request.user
+        user_profile = UserProfile.objects.filter(user_id=user)[0]
+        is_premium = user_profile.premium
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
+            else:
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            
+            remaining_days = None
         if request.method == 'POST':
             if request.POST.get('sale_edit'):
                 request.session['sale_id'] = request.POST.get('sale_edit')
@@ -792,24 +897,12 @@ def dashboard_lifetime(request):
             profit_perct = 0
             loss_perct = 0  
         
-        user_profile = UserProfile.objects.filter(user_id=user)[0]
         profile_pfp=user_profile.pfp
         if profile_pfp == "":
             profile_pfp = 0 
         else:    
             profile_pfp = profile_pfp.url 
-        
-        is_premium = user_profile.premium
-        if is_premium == False:
-            user_free_date_lst = str(user_profile.free_end_date).split('/')
-            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
-            today = datetime.date.today()
-            if today <= user_free_end_date:
-                remaining_days = (user_free_end_date - today).days
-            else:
-                return redirect('plans')
-        else:
-            remaining_days = None
+            
         
         data = {
             'tab':1,
@@ -831,7 +924,7 @@ def dashboard_lifetime(request):
             'first_login':user_profile.first_login,  
             'end_date':user_profile.free_end_date,  
             'theme':user_profile.theme_selection,
-            
+            'premium_ended':premium_ended,
         
         }
         if user_profile.first_login == False:
@@ -852,6 +945,29 @@ def charts(request):
             if request.session.get_expiry_age() <= 0:
                 request.session.set_expiry(30 * 24 * 60 * 60)    
         user = request.user
+        user_profile = UserProfile.objects.filter(user_id=user)[0]
+        is_premium = user_profile.premium
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
+            else:
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            
+            remaining_days = None
         today = datetime.datetime.now()
         st_date = (today-datetime.timedelta(days=7))
         # Income data
@@ -897,24 +1013,12 @@ def charts(request):
                     tot_amt_cate+=int(category_user_data.price)                                                    
                 category_data.append({'category':category.category,'amt':tot_amt_cate})    
         
-        user_profile = UserProfile.objects.filter(user_id=user)[0]
         profile_pfp = user_profile.pfp
         if profile_pfp == "":
             profile_pfp = 0 
         else:    
             profile_pfp = profile_pfp.url 
-            
-        is_premium = user_profile.premium
-        if is_premium == False:
-            user_free_date_lst = str(user_profile.free_end_date).split('/')
-            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str("20")+str(user_free_date_lst[2])))
-            today = datetime.date.today()
-            if today <= user_free_end_date:
-                remaining_days = (user_free_end_date - today).days
-            else:
-                return redirect('plans')
-        else:
-            remaining_days = None
+                    
             
             
         data={
@@ -931,6 +1035,7 @@ def charts(request):
             'is_premium':is_premium,           
             'remaining_days':remaining_days,
             'theme':user_profile.theme_selection,
+            'premium_ended':premium_ended,
             
             
         }
@@ -994,7 +1099,18 @@ def sale_edit(request):
                     remaining_days = (user_free_end_date - today).days
                 else:
                     return redirect('plans')
+                premium_ended = None
             else:
+                premium_is = check_pre_expr(user)
+                if premium_is == False:
+                    premium_ended = True
+                    return redirect('plans')
+                else:
+                    if premium_is <=5:
+                        premium_ended = premium_is
+                    else:
+                        premium_ended = False
+                
                 remaining_days = None
             
             category_data = Category.objects.filter(user_id = user)
@@ -1018,7 +1134,7 @@ def sale_edit(request):
                 'is_premium':is_premium,           
                 'remaining_days':remaining_days,
                 'theme':user_profile.theme_selection,
-                
+                'premium_ended':premium_ended,
 
             }       
             request.session['sale_id'] = None
@@ -1076,7 +1192,18 @@ def sale_adder(request):
                 remaining_days = (user_free_end_date - today).days
             else:
                 return redirect('plans')
+            premium_ended = None
         else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            
             remaining_days = None
         
         category_data = Category.objects.filter(user_id = user)
@@ -1091,7 +1218,7 @@ def sale_adder(request):
             'is_premium':is_premium,           
             'remaining_days':remaining_days,
             'theme':user_profile.theme_selection,
-            
+            'premium_ended':premium_ended,
                 
         }
         return render(request,"sale_adder.html",data)
@@ -1147,7 +1274,18 @@ def expense_edit(request):
                     remaining_days = (user_free_end_date - today).days
                 else:
                     return redirect('plans')
+                premium_ended = None
             else:
+                premium_is = check_pre_expr(user)
+                if premium_is == False:
+                    premium_ended = True
+                    return redirect('plans')
+                else:
+                    if premium_is <=5:
+                        premium_ended = premium_is
+                    else:
+                        premium_ended = False
+                
                 remaining_days = None
             
             data = {
@@ -1164,7 +1302,7 @@ def expense_edit(request):
                 'is_premium':is_premium,           
                 'remaining_days':remaining_days,
                 'theme':user_profile.theme_selection,
-                
+                'premium_ended':premium_ended,
 
             }       
             request.session['expense_id'] = None
@@ -1242,7 +1380,18 @@ def expense_adder(request):
                 remaining_days = (user_free_end_date - today).days
             else:
                 return redirect('plans')
+            premium_ended = None
         else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            
             remaining_days = None
         user_exp = Expense.objects.filter(user_id = user)
         if len(user_exp)>0:            
@@ -1266,7 +1415,8 @@ def expense_adder(request):
             'frequent_expenses_data':frequent_expenses_data,  
             'is_premium':is_premium,   
             'remaining_days':remaining_days,
-            'theme':user_profile.theme_selection,            
+            'theme':user_profile.theme_selection,   
+            'premium_ended':premium_ended,         
                 
         }
         return render(request,"expense_adder.html",data)
@@ -1324,8 +1474,26 @@ def profile(request):
                 remaining_days = (user_free_end_date - today).days
             else:
                 return redirect('plans')
+            premium_ended = None
+            start_date = None
+            end_date = None
         else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False                    
+            
             remaining_days = None
+            start_date = str(user_profile.premium_start_date).split('/')
+            start_date = datetime.date(day=int(start_date[0]),month=int(start_date[1]),year=int(start_date[2])).strftime("%d %B, %Y")
+            end_date = str(user_profile.premium_end_date).split('/')
+            end_date = datetime.date(day=int(end_date[0]),month=int(end_date[1]),year=int(end_date[2])).strftime("%d %B, %Y")
+            
         data = {
             'first_name':request.user.first_name,
             'last_name':request.user.last_name,
@@ -1335,7 +1503,11 @@ def profile(request):
             'tab':5,   
             'is_premium':is_premium,           
             'remaining_days':remaining_days,
-            'theme':user_profile.theme_selection,            
+            'theme':user_profile.theme_selection, 
+            'premium_ended':premium_ended, 
+            'start_date':start_date,
+            'end_date':end_date,
+            'plan':f'{user_profile.premium_month_plan} Days'
                 
         }
         return render(request,'profile.html',data)
@@ -1367,8 +1539,20 @@ def settings(request):
                 remaining_days = (user_free_end_date - today).days
             else:
                 return redirect('plans')
+            premium_ended = None    
+                    
         else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False                    
             remaining_days = None
+                        
         if profile_pfp == "":
             profile_pfp = 0 
         else:    
@@ -1381,6 +1565,9 @@ def settings(request):
             'is_premium':is_premium,  
             'remaining_days':remaining_days,
             'theme':user_profile.theme_selection,
+            'premium_ended':premium_ended,
+            
+            
         }
         return render(request,'settings.html',data)
     except Exception as e:

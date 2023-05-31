@@ -7,14 +7,18 @@ class UserProfile(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     pfp = models.ImageField(upload_to='users0_pfp')
+    theme_selection = models.CharField(default=0,max_length=2)
     otp = models.CharField(max_length=6)
     first_view = models.CharField(max_length=1,default=1)
-    premium = models.BooleanField(default=False)
     join_date = models.CharField(max_length=255,default=0)
     free_end_date = models.CharField(max_length=255,default=0)
     first_login = models.BooleanField(default=False)
-    theme_selection = models.CharField(default=0,max_length=2)
-        
+    premium = models.BooleanField(default=False)
+    premium_start_date = models.CharField(max_length=255, default=0)
+    premium_end_date = models.CharField(max_length=255, default=0)
+    premium_month_plan = models.CharField(max_length=10,default=0)
+    payment_id = models.CharField(max_length=255,default=0)
+    
 class Category(models.Model):
     user_id = models.CharField(max_length=10)
     category = models.CharField(max_length=255)

@@ -5,15 +5,14 @@
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="{% url 'home' %}" class="logo">
-              <img src="/static/assets-cta/images/logo.png" alt="Baker Hub"
-                style="width: 200px;"/>
+              <img src="/static/assets-cta/images/logo.png" alt="Baker Hub" style="width: 200px;"/>
             </a>
 
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <li><a href="{% url 'home' %}" class="active">Home</a></li>
-              <li><a href="{% url 'premium' %}">Premium</a></li>
+              <li><a href="{% url 'home' %}#plans">Pricing</a></li>
               <li><a href="{% url 'home' %}#features">features</a></li>
               <!-- <li class="has-sub">
                 <a href="javascript:void(0)">Pages</a>
@@ -23,7 +22,7 @@
                   <li><a href="contact-us.html">Contact Us</a></li>
                 </ul>
               </li> -->
-              <li><a href="{% url 'sign_in' %}">Sign in</a></li>
+              <li><a href="{% url 'app' %}">App</a></li>
               <li><a href="{% url 'home' %}#register-section">register</a></li>
             </ul>
             <a class='menu-trigger'>

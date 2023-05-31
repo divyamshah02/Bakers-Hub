@@ -1,605 +1,621 @@
 <!DOCTYPE html>
-<html
-    lang="en"
-    class="light-style layout-menu-fixed"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-dash-path="/static/assets-dash/"
-    data-template="vertical-menu-template-free">
-    <head>
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=no,
-            minimum-scale=1.0, maximum-scale=1.0"
-            />
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
+    data-assets-dash-path="/static/assets-dash/" data-template="vertical-menu-template-free">
 
-        <title>Bakers Hub</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,
+            minimum-scale=1.0, maximum-scale=1.0" />
 
-        <meta name="description" content="" />
+    <title>Baker's Hub</title>
 
-        <!-- Favicon -->
-        <link rel="icon" href="/static/assets-cta/images/favicon.png">        
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet"
-            />
+    <meta name="description" content="" />
 
-        <!-- Icons. Uncomment required icon fonts -->
-        <link rel="stylesheet" href="/static/assets-dash/vendor/fonts/boxicons.css" />
-        <!-- Core CSS -->
-        <link rel="stylesheet" href="/static/assets-dash/vendor/css/core.css"
-            class="template-customizer-core-css" />
-        <link rel="stylesheet" href="/static/assets-dash/vendor/css/theme-default.css"
-            class="template-customizer-theme-css" />
-        <link rel="stylesheet" href="/static/assets-dash/css/demo.css" />
+    <!-- Favicon -->
+    <link rel="icon" href="/static/assets-cta/images/favicon.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet" />
 
-        <!-- Vendors CSS -->
-        <link rel="stylesheet"
-            href="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"
-            />
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/fonts/boxicons.css" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/static/assets-dash/vendor/css/theme-default.css"
+        class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/static/assets-dash/css/demo.css" />
 
-        <!-- Page CSS -->
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-        <!-- Helpers -->
-        <script src="/static/assets-dash/vendor/js/helpers.js"></script>
+    <!-- Page CSS -->
 
-        <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-        <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-        <script src="/static/assets-dash/js/config.js"></script>
-        <style>
-            .mobile-nav {
-                background: #F1F1F1;
-                position: fixed;
-                bottom: 0;
-                height: 55px;
-                width: 100%;
-                display: flex;
-                justify-content: space-around;
-                z-index: 9999;
-                }
-            .bloc-icon {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                
-                }
-            .bloc-icon img {
-                width: 30px;
-                }
-            .up-pro:hover{
-                box-shadow:5px 5px 10px black;
-            }
+    <!-- Helpers -->
+    <script src="/static/assets-dash/vendor/js/helpers.js"></script>
 
-            .bg_bh{
-                /* background: linear-gradient(-145deg, rgb(147, 138, 222) 0%, rgb(159, 220, 246) 100%); */
-                /* background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%); */
-                /* background-color: #a3a2a268; */
-                background: var(--bg-grad);
-            }
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="/static/assets-dash/js/config.js"></script>
+    <style>
+        .mobile-nav {
+            background: #F1F1F1;
+            position: fixed;
+            bottom: 0;
+            height: 55px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 9999;
+        }
 
-            .btn_bh{
-                color: #fff !important;
-                background-color: var(--dark-color) !important;               
-            }
+        .bloc-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            .btn_bh:hover{
-                transform: scale(1.1);
-            }
+        }
 
-            .ele_bg_bh{
-                background-color: var(--dark-color) !important;
-            }
+        .bloc-icon img {
+            width: 30px;
+        }
 
-            .bor_col_bh{
-                border: 1px solid var(--dark-color) !important;
-            }
+        .up-pro:hover {
+            box-shadow: 5px 5px 10px black;
+        }
 
-            .tex_col_bh{
-                color: var(--dark-color) !important;                
-            }
+        .bg_bh {
+            /* background: linear-gradient(-145deg, rgb(147, 138, 222) 0%, rgb(159, 220, 246) 100%); */
+            /* background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%); */
+            /* background-color: #a3a2a268; */
+            background: var(--bg-grad);
+        }
 
-            /* Dashbaord */
-            .list-group-item.active {
-                background-color: var(--dark-color) !important;
-                border-color: var(--dark-color) !important;
-                color: #fff !important;
-            }
+        .btn_bh {
+            color: #fff !important;
+            background-color: var(--dark-color) !important;
+        }
 
-            .list-group-item {
-                border-color: var(--dark-color) !important;
-                color: #000 !important;
-            }
-            .item-hover:hover{
-                background-color: var(--dark-color) !important;
-                color: #fff !important;
-            }
-            .list-group-item-action:hover{
-                background-color: var(--hover-color) !important;
-                color: #fff !important;
-            }
+        .btn_bh:hover {
+            transform: scale(1.1);
+        }
 
-            /* Settings */
-            .form-check-input:checked{
-                background-color: var(--dark-color) !important;
-                border: var(--hover-color) !important;
-                box-shadow: 0 0 0 1px var(--hover-color) !important;
-            }
-            .form-check-input:focus{
-                border: var(--hover-color);
-                box-shadow: 0 0 0 1px var(--hover-color) !important;
-            }
+        .ele_bg_bh {
+            background-color: var(--dark-color) !important;
+        }
 
-            .form-check-input:hover{
-                border: var(--hover-color) !important;
-                box-shadow: 0 0 0 3px var(--hover-color) !important;
-            }
-            
-            .bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
+        .bor_col_bh {
+            border: 1px solid var(--dark-color) !important;
+        }
+
+        .tex_col_bh {
+            color: var(--dark-color) !important;
+        }
+
+        /* Dashbaord */
+        .list-group-item.active {
+            background-color: var(--dark-color) !important;
+            border-color: var(--dark-color) !important;
+            color: #fff !important;
+        }
+
+        .list-group-item {
+            border-color: var(--dark-color) !important;
+            color: #000 !important;
+        }
+
+        .item-hover:hover {
+            background-color: var(--dark-color) !important;
+            color: #fff !important;
+        }
+
+        .list-group-item-action:hover {
+            background-color: var(--hover-color) !important;
+            color: #fff !important;
+        }
+
+        /* Settings */
+        .form-check-input:checked {
+            background-color: var(--dark-color) !important;
+            border: var(--hover-color) !important;
+            box-shadow: 0 0 0 1px var(--hover-color) !important;
+        }
+
+        .form-check-input:focus {
+            border: var(--hover-color);
+            box-shadow: 0 0 0 1px var(--hover-color) !important;
+        }
+
+        .form-check-input:hover {
+            border: var(--hover-color) !important;
+            box-shadow: 0 0 0 3px var(--hover-color) !important;
+        }
+
+        .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
             color: var(--dark-color) !important;
             background-color: var(--hover-color) !important;
-            }
-            .bg-menu-theme .menu-inner > .menu-item.active:before {
-            background: var(--dark-color) !important;
-            }
+        }
 
-            @media screen and (min-width: 1200px) {
-                .mobile-nav {
+        .bg-menu-theme .menu-inner>.menu-item.active:before {
+            background: var(--dark-color) !important;
+        }
+
+        @media screen and (min-width: 1200px) {
+            .mobile-nav {
                 display: none;
-                }
-                }
-            /* .active{
+            }
+        }
+
+        /* .active{
                 background-color: rgba(176, 50, 98, 0.541);
                 color: #fff;
             } */
-        </style>
-        {% if theme == '0' %}
-        <style>
-            :root {
-                --bg-grad: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%);
-                --dark-color: rgb(176, 50, 98);   
-                --hover-color: rgba(176, 50, 98, 0.358);                                          
-            }
-        </style>
-        {% endif %}
-        {% if theme == '1' %}
-        <style>
-            :root {
-                --bg-grad: linear-gradient(-145deg, rgb(147, 138, 222) 0%, rgb(159, 246, 227) 100%);
-                --dark-color: rgb(81, 50, 176);
-                --hover-color: rgba(147, 138, 222, 0.358);
-            }
-        </style>
-        {% endif %}
-        {% if theme == '2' %}
-        <style>
-            :root {
-                --bg-grad: linear-gradient(-145deg, #a3a2a268 0%, #a3a2a268 100%);
-                --dark-color: #696cff;
-                --hover-color: #8f91fa96;
-            }
-        </style>
-        {% endif %}
+    </style>
+    {% if theme == '0' %}
+    <style>
+        :root {
+            --bg-grad: linear-gradient(-145deg, rgba(219, 138, 222, 1) 0%, rgba(246, 191, 159, 1) 100%);
+            --dark-color: rgb(176, 50, 98);
+            --hover-color: rgba(176, 50, 98, 0.358);
+        }
+    </style>
+    {% endif %}
+    {% if theme == '1' %}
+    <style>
+        :root {
+            --bg-grad: linear-gradient(-145deg, rgb(147, 138, 222) 0%, rgb(159, 246, 227) 100%);
+            --dark-color: rgb(81, 50, 176);
+            --hover-color: rgba(147, 138, 222, 0.358);
+        }
+    </style>
+    {% endif %}
+    {% if theme == '2' %}
+    <style>
+        :root {
+            --bg-grad: linear-gradient(-145deg, #a3a2a268 0%, #a3a2a268 100%);
+            --dark-color: #696cff;
+            --hover-color: #8f91fa96;
+        }
+    </style>
+    {% endif %}
 
 
-    </head>
+</head>
 
-    <body class="bg_bh">
-        <!-- Layout wrapper -->
-        <div class="layout-wrapper layout-content-navbar">
-            <div class="layout-container">
-                <!-- Menu -->
-                <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-                    <div class="app-brand demo">
-                        <a href="{% url 'dashboard' %}" class="app-brand-link">
-                            <img src="/static/assets-cta/images/logo.png" alt="Baker Hub"
-                                style="width: 200px;"/>
-                        </a>
+<body class="bg_bh">
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo">
+                    <a href="{% url 'dashboard' %}" class="app-brand-link">
+                        <img src="/static/assets-cta/images/logo.png" alt="Baker Hub" style="width: 200px;" />
+                    </a>
 
-                        <a href="javascript:void(0);" class="layout-menu-toggle
+                    <a href="javascript:void(0);" class="layout-menu-toggle
                             menu-link text-large ms-auto d-block d-xl-none">
-                            <i class="bx bx-chevron-left bx-sm align-middle rounded-circle ele_bg_bh"></i>
+                        <i class="bx bx-chevron-left bx-sm align-middle rounded-circle ele_bg_bh"></i>
+                    </a>
+                </div>
+
+                <div class="menu-inner-shadow"></div>
+
+                <ul class="menu-inner py-1">
+
+                    <!-- Dashboard -->
+                    {% if tab == 1 %}
+                    <li class="menu-item active">
+                        <a href="{% url 'dashboard' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="menu-item">
+                        <a href="{% url 'dashboard' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if tab == 4 %}
+                    <!-- Charts -->
+                    <li class="menu-item active">
+                        <a href="{% url 'charts' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-line-chart"></i>
+                            <div data-i18n="Basic">Charts</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Charts -->
+                    <li class="menu-item">
+                        <a href="{% url 'charts' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-line-chart"></i>
+                            <div data-i18n="Basic">Charts</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Transactions</span>
+                    </li>
+
+                    {% if tab == 2 %}
+
+                    <li class="menu-item active">
+                        <a href="{% url 'sale_adder' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
+                            <div data-i18n="Basic">Add Order</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Add sales -->
+                    <li class="menu-item">
+                        <a href="{% url 'sale_adder' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
+                            <div data-i18n="Basic">Add Order</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if tab == 3 %}
+                    <!-- Add expense -->
+                    <li class="menu-item active">
+                        <a href="{% url 'expense_adder' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-notepad"></i>
+                            <div data-i18n="Basic">Add Expense</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Add expense -->
+                    <li class="menu-item">
+                        <a href="{% url 'expense_adder' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-notepad"></i>
+                            <div data-i18n="Basic">Add Expense</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+
+                    <!-- Process -->
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Actions</span></li>
+                    {% if tab == 5 %}
+                    <!-- Profle -->
+                    <li class="menu-item active">
+                        <a href="{% url 'profile' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Basic">Profile</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Profile -->
+                    <li class="menu-item">
+                        <a href="{% url 'profile' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <div data-i18n="Basic">Profile</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if tab == 6 %}
+                    <!-- Settings -->
+                    <li class="menu-item active">
+                        <a href="{% url 'settings' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-cog"></i>
+                            <div data-i18n="Basic">Settings</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Settings -->
+                    <li class="menu-item">
+                        <a href="{% url 'settings' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-cog"></i>
+                            <div data-i18n="Basic">Settings</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <li class="menu-item">
+                        <a href="{% url 'logout' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-log-out"></i>
+                            <div>Log Out</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <nav class="mobile-nav">
+                    <a href="{% url 'sale_adder' %}" class="bloc-icon">
+                        <!-- <img src="" alt="YOO"> -->
+                        <i class="bx bx-wallet bx-sm text-success p-1 rounded"></i>
+                    </a>
+                    <a href="{% url 'dashboard' %}" class="bloc-icon">
+                        <i class="bx bx-home bx-sm text-primary p-1 rounded"></i>
+                    </a>
+                    <a href="{% url 'expense_adder' %}" class="bloc-icon">
+                        <i class="bx bx-money bx-sm text-danger p-1 rounded"></i>
+                    </a>
+
+                </nav>
+                <!-- Navbar -->
+                <nav class="layout-navbar container-xxl navbar
+                        navbar-expand-xl navbar-detached align-items-center
+                        bg-navbar-theme" id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav
+                            align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
                         </a>
                     </div>
 
-                    <div class="menu-inner-shadow"></div>
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
-                    <ul class="menu-inner py-1">
-
-                        <!-- Dashboard -->
-                        {% if tab == 1 %}
-                        <li class="menu-item active">
-                            <a
-                                href="{% url 'dashboard' %}"
-                                class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                                <div data-i18n="Analytics">Dashboard</div>
-                            </a>    
-                        </li>
-                        {% else %}
-                        <li class="menu-item">
-                            <a
-                                href="{% url 'dashboard' %}"
-                                class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                                <div data-i18n="Analytics">Dashboard</div>
-                            </a>
-                        </li>
-                        {% endif %}
-
-                        {% if tab == 4 %}
-                        <!-- Charts -->
-                        <li class="menu-item active">
-                            <a href="{% url 'charts' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-line-chart"></i>
-                                <div data-i18n="Basic">Charts</div>
-                            </a>
-                        </li>
-                        
-                        {% else %}
-                        <!-- Charts -->
-                        <li class="menu-item">
-                            <a href="{% url 'charts' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-line-chart"></i>
-                                <div data-i18n="Basic">Charts</div>
-                            </a>
-                        </li>
-                        {% endif %}
-
-
-                        <li class="menu-header small text-uppercase">
-                            <span class="menu-header-text">Transactions</span>
-                        </li>
-
-                        {% if tab == 2 %}
-
-                        <li class="menu-item active">
-                            <a href="{% url 'sale_adder' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
-                                <div data-i18n="Basic">Add Order</div>
-                            </a>
-                        </li>
-                        
-                        {% else %}
-                        <!-- Add sales -->
-                        <li class="menu-item">
-                            <a href="{% url 'sale_adder' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-wallet-alt"></i>
-                                <div data-i18n="Basic">Add Order</div>
-                            </a>
-                        </li>
-                        {% endif %}   
-                        
-                        {% if tab == 3 %}
-                        <!-- Add expense -->
-                        <li class="menu-item active">
-                            <a href="{% url 'expense_adder' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-notepad"></i>
-                                <div data-i18n="Basic">Add Expense</div>
-                            </a>
-                        </li>
-                        
-                        {% else %}
-                        <!-- Add expense -->
-                        <li class="menu-item">
-                            <a href="{% url 'expense_adder' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-notepad"></i>
-                                <div data-i18n="Basic">Add Expense</div>
-                            </a>
-                        </li>
-                        {% endif %}
-                 
-
-                        <!-- Process -->
-                        <li class="menu-header small text-uppercase"><span
-                                class="menu-header-text">Actions</span></li>
-                        {% if tab == 5 %}
-                        <!-- Profle -->
-                        <li class="menu-item active">
-                            <a href="{% url 'profile' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-user"></i>
-                                <div data-i18n="Basic">Profile</div>
-                            </a>
-                        </li>
-                        
-                        {% else %}
-                        <!-- Profile -->
-                        <li class="menu-item">
-                            <a href="{% url 'profile' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-user"></i>
-                                <div data-i18n="Basic">Profile</div>
-                            </a>
-                        </li>
-                        {% endif %}       
-
-                        {% if tab == 6 %}
-                        <!-- Settings -->
-                        <li class="menu-item active">
-                            <a href="{% url 'settings' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-cog"></i>
-                                <div data-i18n="Basic">Settings</div>
-                            </a>
-                        </li>
-                        
-                        {% else %}
-                        <!-- Settings -->
-                        <li class="menu-item">
-                            <a href="{% url 'settings' %}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-cog"></i>
-                                <div data-i18n="Basic">Settings</div>
-                            </a>
-                        </li>
-                        {% endif %}       
-
-                        <li class="menu-item">
-                            <a
-                                href="{% url 'logout' %}"
-                                class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-log-out"></i>
-                                <div>Log Out</div>
-                            </a>
-                        </li>
-                    </ul>
-                </aside>
-                <!-- / Menu -->
-
-                <!-- Layout container -->
-                <div class="layout-page">
-                    <nav class="mobile-nav">
-                        <a href="{% url 'sale_adder' %}" class="bloc-icon">
-                            <!-- <img src="" alt="YOO"> -->
-                            <i class="bx bx-wallet bx-sm text-success p-1 rounded"></i>                                                      
-                        </a>
-                        <a href="{% url 'dashboard' %}" class="bloc-icon">
-                            <i class="bx bx-home bx-sm text-primary p-1 rounded"></i>
-                        </a>
-                        <a href="{% url 'expense_adder' %}" class="bloc-icon">
-                            <i class="bx bx-money bx-sm text-danger p-1 rounded"></i>
-                        </a>
-                        
-                    </nav>
-                    <!-- Navbar -->
-                    <nav
-                        class="layout-navbar container-xxl navbar
-                        navbar-expand-xl navbar-detached align-items-center
-                        bg-navbar-theme"
-                        id="layout-navbar">
-                        <div class="layout-menu-toggle navbar-nav
-                            align-items-xl-center me-3 me-xl-0 d-xl-none">
-                            <a class="nav-item nav-link px-0 me-xl-4"
-                                href="javascript:void(0)">
-                                <i class="bx bx-menu bx-sm"></i>
-                            </a>
-                        </div>
-
-                        <div class="navbar-nav-right d-flex align-items-center"
-                            id="navbar-collapse">
-
-                            <ul class="navbar-nav flex-row align-items-center
+                        <ul class="navbar-nav flex-row align-items-center
                                 ms-auto">
-                                <!-- User -->
-                                <li class="nav-item navbar-dropdown
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown
                                     dropdown-user dropdown">
-                                    <a class="nav-link dropdown-toggle
-                                        hide-arrow" href="javascript:void(0);"
-                                        data-bs-toggle="dropdown">
-                                        <div class="avatar avatar-online">
-                                            {% if profile_pfp == 0 %}
-                                            <img
-                                                src="/static/assets-dash/img/avatars/{{p_letter}}.png"
-                                                alt="user-avatar"                                                
-                                                class="w-px-40 h-auto
+                                <a class="nav-link dropdown-toggle
+                                        hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        {% if profile_pfp == 0 %}
+                                        <img src="/static/assets-dash/img/avatars/{{p_letter}}.png" alt="user-avatar"
+                                            class="w-px-40 h-auto
                                                 rounded-circle" />
-                                            {% else %}
-                                            <img
-                                                src="{{profile_pfp}}"
-                                                alt="user-avatar"                                                
-                                                class="w-px-40
-                                                rounded-circle"/>
-                                            {% endif %}
-                                            
-                                        </div>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0
+                                        {% else %}
+                                        <img src="{{profile_pfp}}" alt="user-avatar" class="w-px-40
+                                                rounded-circle" />
+                                        {% endif %}
+
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'profile' %}">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0
                                                         me-3">
-                                                        <div class="avatar
+                                                    <div class="avatar
                                                             avatar-online">
-                                                            {% if profile_pfp == 0 %}
-                                                            <img
-                                                                src="/static/assets-dash/img/avatars/{{p_letter}}.png"
-                                                                alt="user-avatar"                                                
-                                                                class="w-px-40 h-auto
+                                                        {% if profile_pfp == 0 %}
+                                                        <img src="/static/assets-dash/img/avatars/{{p_letter}}.png"
+                                                            alt="user-avatar" class="w-px-40 h-auto
                                                                 rounded-circle" />
-                                                            {% else %}
-                                                            <img
-                                                                src="{{profile_pfp}}"
-                                                                alt="user-avatar"                                                
-                                                                class="w-px-40
+                                                        {% else %}
+                                                        <img src="{{profile_pfp}}" alt="user-avatar" class="w-px-40
                                                                 rounded-circle" />
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <span class="fw-semibold
-                                                            d-block">{{user.first_name}} {{user.last_name}}</span>
-                                                        <small
-                                                            class="text-muted">{{user.email}}</small>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="dropdown-divider"></div>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{% url 'profile' %}">
-                                                <i class="bx bx-user me-2"></i>
-                                                <span class="align-middle">My Profile</span>
-                                            </a>
-                                        </li>                                        
-                                        <li>
-                                            <div class="dropdown-divider"></div>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{% url 'logout' %}">
-                                                <i class="bx bx-power-off me-2"></i>
-                                                <span class="align-middle">Log
-                                                    Out</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <!--/ User -->
-                            </ul>
-                        </div>
-                    </nav>
-                    {% if first_login == False %}
-                    <style>
-                        /* CSS for confetti */
-                        @keyframes confetti-fall {
-                          0% {
-                            transform: translateY(0) rotate(0deg);
-                          }
-                          100% {
-                            transform: translateY(100vh) rotate(1080deg);
-                          }
-                        }
-                    
-                        .confetti-container {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            overflow: hidden;
-                        }
-                    
-                        .confetti {
-                          position: absolute;
-                          width: 10px;
-                          height: 10px;
-                          background-color: transparent;
-                          background-image: linear-gradient(to right, #FF3C40, #FFBE0B, #FBFF02, #18FF92, #00A6FF, #B45309, #FF13D4);
-                          background-size: 200% 100%;
-                          animation: confetti-fall 5s linear infinite;
-                        }
-                    
-                        .confetti.single-color {
-                          background-image: none;
-                          background-color: #F44336;
-                        }
-                    
-                        .confetti.gold {
-                          background-image: none;
-                          background-color: gold;
-                        }
-                    
-                        .confetti.silver {
-                          background-image: none;
-                          background-color: silver;
-                        }
-                    
-                        .confetti.bronze {
-                          background-image: none;
-                          background-color: #CD7F32;
-                        }
-                    </style>
-                    <div class="buy-now">
-                        <a href="{% url 'plans' %}" class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold
+                                                            d-block">{{user.first_name}} {{user.last_name}}</span>
+                                                    <small class="text-muted">{{user.email}}</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'profile' %}">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle">My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'logout' %}">
+                                            <i class="bx bx-power-off me-2"></i>
+                                            <span class="align-middle">Log
+                                                Out</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--/ User -->
+                        </ul>
                     </div>
-                    <div class="confetti-container"></div>
-                    <script>
-                        // JavaScript for confetti
-                        document.addEventListener("DOMContentLoaded", function(event) {
-                          var confettiContainer = document.querySelector('.confetti-container');
-                          var confettiInterval;
-                    
-                          // Create confetti elements
-                          function createConfetti() {
+                </nav>
+                {% if first_login == False %}
+                <style>
+                    /* CSS for confetti */
+                    @keyframes confetti-fall {
+                        0% {
+                            transform: translateY(0) rotate(0deg);
+                        }
+
+                        100% {
+                            transform: translateY(100vh) rotate(1080deg);
+                        }
+                    }
+
+                    .confetti-container {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        overflow: hidden;
+                    }
+
+                    .confetti {
+                        position: absolute;
+                        width: 10px;
+                        height: 10px;
+                        background-color: transparent;
+                        background-image: linear-gradient(to right, #FF3C40, #FFBE0B, #FBFF02, #18FF92, #00A6FF, #B45309, #FF13D4);
+                        background-size: 200% 100%;
+                        animation: confetti-fall 5s linear infinite;
+                    }
+
+                    .confetti.single-color {
+                        background-image: none;
+                        background-color: #F44336;
+                    }
+
+                    .confetti.gold {
+                        background-image: none;
+                        background-color: gold;
+                    }
+
+                    .confetti.silver {
+                        background-image: none;
+                        background-color: silver;
+                    }
+
+                    .confetti.bronze {
+                        background-image: none;
+                        background-color: #CD7F32;
+                    }
+                </style>
+                <div class="buy-now">
+                    <a href="{% url 'plans' %}" class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+                </div>
+                <div class="confetti-container"></div>
+                <script>
+                    // JavaScript for confetti
+                    document.addEventListener("DOMContentLoaded", function (event) {
+                        var confettiContainer = document.querySelector('.confetti-container');
+                        var confettiInterval;
+
+                        // Create confetti elements
+                        function createConfetti() {
                             var confetti = document.createElement("div");
                             confetti.className = "confetti";
                             confetti.style.left = Math.random() * 100 + "vw";
                             confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
                             confettiContainer.appendChild(confetti);
-                            setTimeout(function() {
-                              confetti.remove();
+                            setTimeout(function () {
+                                confetti.remove();
                             }, 5000); // Remove confetti after 5 seconds
-                          }
-                    
-                          // Generate confetti at regular intervals
-                          function startConfetti() {
-                            confettiInterval = setInterval(function() {
-                              createConfetti();
+                        }
+
+                        // Generate confetti at regular intervals
+                        function startConfetti() {
+                            confettiInterval = setInterval(function () {
+                                createConfetti();
                             }, 100); // Generate confetti every 0.1 seconds
-                          }
-                    
-                          // Stop generating confetti after 5 seconds
-                          setTimeout(function() {
+                        }
+
+                        // Stop generating confetti after 5 seconds
+                        setTimeout(function () {
                             clearInterval(confettiInterval);
-                          }, 5000);
-                    
-                          // Start generating confetti
-                          startConfetti();
-                        });
-                    </script>
-                    <div class="container-xxl flex-grow-1" style="margin-top: 20px;">
-                    <div class="bs-toast toast fade show up-pro float-end ele_bg_bh" role="alert" aria-live="assertive" aria-atomic="true" style="color: #fff; width: 100%;">
+                        }, 5000);
+
+                        // Start generating confetti
+                        startConfetti();
+                    });
+                </script>
+                <div class="container-xxl flex-grow-1" style="margin-top: 20px;">
+                    <div class="bs-toast toast fade show up-pro float-end ele_bg_bh" role="alert" aria-live="assertive"
+                        aria-atomic="true" style="color: #fff; width: 100%;">
                         <div class="toast-header" style="color: #fff;">
-                          <i class="bx bx-bell me-2"></i>
-                          <div class="me-auto fw-semibold">Bakers Hub</div>
-                          <!-- <small>11 mins ago</small> -->
-                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" style="background-color: #00000068"></button>
+                            <i class="bx bx-bell me-2"></i>
+                            <div class="me-auto fw-semibold">Baker's Hub</div>
+                            <!-- <small>11 mins ago</small> -->
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"
+                                style="background-color: #00000068"></button>
                         </div>
                         <div class="toast-body">
-                          Congratulations You received 15 days of free trail ending on {{end_date}}!<br>
-                          <a href = "{% url 'plans' %}"><button class="btn btn-danger mt-3">Upgrade Now</button></a>
+                            Congratulations You received 15 days of free trail ending on {{end_date}}!<br>
+                            <a href="{% url 'plans' %}"><button class="btn btn-danger mt-3">Upgrade Now</button></a>
                         </div>
                     </div>
-                    </div>
-                    {% else %}                    
-                    {% if is_premium == True %}
-                    {% else %}                    
-                    <div class="buy-now">
-                        <a href="{% url 'plans' %}" class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
-                    </div>
-                    <div class="container-xxl flex-grow-1" style="margin-top: 20px;">
-                    {% if remaining_days == None %}
-                    <div class="bs-toast toast fade show up-pro float-end ele_bg_bh" role="alert" aria-live="assertive" aria-atomic="true" style="color: #fff;">
+                </div>
+                {% else %}
+                {% if is_premium == True %}
+                <div class="container-xxl flex-grow-1" style="margin-top: 20px;">
+                {% if premium_ended == True %}
+                    <div class="bs-toast toast fade show up-pro float-end ele_bg_bh" role="alert" aria-live="assertive"
+                        aria-atomic="true" style="color: #fff;">
                         <div class="toast-header" style="color: #fff;">
-                          <i class="bx bx-bell me-2"></i>
-                          <div class="me-auto fw-semibold">Bakers Hub</div>
-                          <!-- <small>11 mins ago</small> -->
-                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" style="background-color: #00000068"></button>
+                            <i class="bx bx-bell me-2"></i>
+                            <div class="me-auto fw-semibold">Baker's Hub</div>
+                            <!-- <small>11 mins ago</small> -->
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"
+                                style="background-color: #00000068"></button>
                         </div>
                         <div class="toast-body">
-                          Your free trail has ended!
-                          <a href = "{% url 'plans' %}"><button class="btn btn-danger mt-3">Upgrade Now</button></a>
+                            Your premium has ended!
+                            <a href="{% url 'plans' %}"><button class="btn btn-danger mt-3">Upgrade Now</button></a>
                         </div>
                     </div>
+                </div>
+                {% else %}
+                {% if premium_ended == False %}
+                </div>
+                {% else %}
+                <div class="bs-toast toast fade show up-pro float-end ele_bg_bh" role="alert" aria-live="assertive"
+                    aria-atomic="true" style="color: #fff;">
+                    <div class="toast-header" style="color: #fff;">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">Baker's Hub</div>
+                        <!-- <small>11 mins ago</small> -->
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"
+                            style="background-color: #00000068"></button>
                     </div>
-                    {% else %}
-                    <div class="bs-toast toast fade show up-pro float-end ele_bg_bh" role="alert" aria-live="assertive" aria-atomic="true" style="color: #fff;">
-                        <div class="toast-header " style="color: #fff;">
-                          <i class="bx bx-bell me-2"></i>
-                          <div class="me-auto fw-semibold">Bakers Hub</div>
-                          <!-- <small>11 mins ago</small> -->
-                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" style="background-color: #00000068"></button>
-                        </div>
-                        <div class="toast-body">
-                          You only have {{remaining_days}} days left for free service!<br>
-                          <a href = "{% url 'plans' %}"><button class="btn btn-danger mt-3">Upgrade Now</button></a>
-                        </div>
+                    <div class="toast-body">
+                        Your premium will end after {{premium_ended}} days!
+                        <a href="{% url 'plans' %}"><button class="btn btn-danger mt-3">Upgrade Now</button></a>
                     </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% else %}
+            <div class="buy-now">
+                <a href="{% url 'plans' %}" class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+            </div>
+            <div class="container-xxl flex-grow-1" style="margin-top: 20px;">
+                {% if remaining_days == None %}
+                <div class="bs-toast toast fade show up-pro float-end ele_bg_bh" role="alert" aria-live="assertive"
+                    aria-atomic="true" style="color: #fff;">
+                    <div class="toast-header" style="color: #fff;">
+                        <i class="bx bx-bell me-2"></i>
+                        <div class="me-auto fw-semibold">Baker's Hub</div>
+                        <!-- <small>11 mins ago</small> -->
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"
+                            style="background-color: #00000068"></button>
                     </div>
-                    {% endif %}
-                    {% endif %}
-                    {% endif %}                   
-                    
+                    <div class="toast-body">
+                        Your free trail has ended!
+                        <a href="{% url 'plans' %}"><button class="btn btn-danger mt-3">Upgrade Now</button></a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="bs-toast toast fade show up-pro float-end ele_bg_bh" role="alert" aria-live="assertive"
+                aria-atomic="true" style="color: #fff;">
+                <div class="toast-header " style="color: #fff;">
+                    <i class="bx bx-bell me-2"></i>
+                    <div class="me-auto fw-semibold">Baker's Hub</div>
+                    <!-- <small>11 mins ago</small> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"
+                        style="background-color: #00000068"></button>
+                </div>
+                <div class="toast-body">
+                    You only have {{remaining_days}} days left for free service!<br>
+                    <a href="{% url 'plans' %}"><button class="btn btn-danger mt-3">Upgrade Now</button></a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endif %}

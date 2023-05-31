@@ -15,7 +15,7 @@ Table of contents
 04. header
 05. banner
 06. features
-07. testimonials
+07. plans
 08. register
 09. footer
 10. preloader
@@ -993,15 +993,15 @@ section.simple-cta p {
 
 /* 
 ---------------------------------------------
-testimonials
+plans
 --------------------------------------------- 
 */
 
-section.testimonials {
+section.plans {
   position: relative;
 }
 
-section.testimonials:before {
+section.plans:before {
   position: absolute;
   content: '';
   background-image: url(../images/testimonials-left-dec.png);
@@ -1012,7 +1012,7 @@ section.testimonials:before {
   z-index: 1;
 }
 
-section.testimonials:after {
+section.plans:after {
   position: absolute;
   content: '';
   background-image: url(../images/testimonials-right-dec.png);
@@ -1023,7 +1023,7 @@ section.testimonials:after {
   z-index: 1;
 }
 
-.testimonials .item {
+.plans .item {
   border-radius: 15px;
   padding: 30px;
   background-color: #fff;
@@ -1033,29 +1033,29 @@ section.testimonials:after {
   z-index: 2;
 }
 
-.testimonials .item:hover {
+.plans .item:hover {
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.06);
 }
 
-.testimonials .item p {
+.plans .item p {
   font-size: 16px;
   font-style: italic;
 }
 
-.testimonials .item h4 {
+.plans .item h4 {
   margin-top: 30px;
   font-size: 20px;
   font-weight: 900;
   position: relative;
 }
 
-.testimonials .item span {
+.plans .item span {
   font-size: 13px;
   font-weight: 700;
   color: #dc8cdb;
 }
 
-.testimonials .item img {
+.plans .item img {
   max-width: 44px;
   z-index: 2;
   position: absolute;
@@ -1063,12 +1063,12 @@ section.testimonials:after {
   bottom: 30px
 }
 
-.testimonials .owl-dots {
+.plans .owl-dots {
   text-align: center;
   margin-top: 30px;
 }
 
-.testimonials .owl-dots .owl-dot {
+.plans .owl-dots .owl-dot {
   width: 10px;
   height: 10px;
   background-color: #ddd;
@@ -1076,7 +1076,7 @@ section.testimonials:after {
   margin: 0px 4px;
 }
 
-.testimonials .owl-dots .active {
+.plans .owl-dots .active {
   background-color: #dc8cdb;
 }
 
@@ -1609,7 +1609,7 @@ section.featured-product {
 section.featured-product:before {
   position: absolute;
   content: '';
-  background-image: url(../images/testimonials-left-dec.png);
+  background-image: url(../images/plans-left-dec.png);
   left: 0px;
   top: -140px;
   width: 593px;
@@ -1620,7 +1620,7 @@ section.featured-product:before {
 section.featured-product:after {
   position: absolute;
   content: '';
-  background-image: url(../images/testimonials-right-dec.png);
+  background-image: url(../images/plans-right-dec.png);
   right: 0px;
   bottom: -140px;
   width: 632px;

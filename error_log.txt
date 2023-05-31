@@ -8,3 +8,16 @@
 [2023-05-20 22:25:59.406649] -> [8211430303/Divyam Shah] : [http://127.0.0.1:8000/dashboard/] [invalid literal for int() with base 10: '200.5']
 [2023-05-20 22:32:31.720971] -> [Divyam/Divyam] : [http://127.0.0.1:8000/expense/] [NOT NULL constraint failed: user_0_expense.qty_unit]
 [2023-05-20 22:36:07.049425] -> [Divyam/Divyam] : [http://127.0.0.1:8000/expense/] [NOT NULL constraint failed: user_0_expense.qty_unit]
+[2023-05-23 17:45:51.046321] -> [Divyam/Divyam] : [http://127.0.0.1:8000/dashboard/] [cannot access local variable 'user_profile' where it is not associated with a value]
+[2023-05-23 19:43:56.032497] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line 223
+[2023-05-23 19:46:54.960981] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line <frame at 0x0000013345B526C0, file 'C:\\Users\\divya\\OneDrive\\Desktop\\BakersHub\\BakersHub\\views.py', line 233, code app>
+[2023-05-23 19:49:30.525089] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line C:\Users\divya\OneDrive\Desktop\BakersHub\BakersHub\views.py
+[2023-05-23 19:50:38.946819] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line ['C:\\Users\\divya\\OneDrive\\Desktop\\BakersHub\\BakersHub\\views.py']
+[2023-05-23 19:51:00.214733] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line ['C:\\Users\\divya\\OneDrive\\Desktop\\BakersHub\\BakersHub\\views.py']
+[2023-05-23 19:51:26.854802] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line C:\Users\divya\OneDrive\Desktop\BakersHub\BakersHub\views.py
+[2023-05-23 19:51:58.431076] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line ['C:\\Users\\divya\\OneDrive\\Desktop\\BakersHub\\BakersHub\\views.py']
+[2023-05-23 19:52:11.919110] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line C:\Users\divya\OneDrive\Desktop\BakersHub\BakersHub\views.py
+[2023-05-23 19:53:23.033336] -> [Divyam/Divyam] : [http://127.0.0.1:8000/app/] [name 'reuest' is not defined] - At Line C:\Users\divya\OneDrive\Desktop\BakersHub\BakersHub\views.py
+[2023-05-30 19:59:38.318571] -> [Divyam/Divyam] : [http://127.0.0.1:8000/dashboard/] [cannot access local variable 'premium_ended' where it is not associated with a value] - At Line 466
+[2023-05-31 00:27:34.608707] -> [4219612952/Divyam Shah] : [http://127.0.0.1:8000/profile/] [cannot access local variable 'endstart_date' where it is not associated with a value] - At Line 1494
+[2023-05-31 09:58:44.587815] -> [Divyam/Divyam] : [http://127.0.0.1:8000/dashboard/last-month/] [cannot access local variable 'is_premium' where it is not associated with a value] - At Line 497
