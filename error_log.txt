@@ -21,3 +21,12 @@
 [2023-05-30 19:59:38.318571] -> [Divyam/Divyam] : [http://127.0.0.1:8000/dashboard/] [cannot access local variable 'premium_ended' where it is not associated with a value] - At Line 466
 [2023-05-31 00:27:34.608707] -> [4219612952/Divyam Shah] : [http://127.0.0.1:8000/profile/] [cannot access local variable 'endstart_date' where it is not associated with a value] - At Line 1494
 [2023-05-31 09:58:44.587815] -> [Divyam/Divyam] : [http://127.0.0.1:8000/dashboard/last-month/] [cannot access local variable 'is_premium' where it is not associated with a value] - At Line 497
+[2023-06-01 17:47:23.450106] -> [Divyam/Divyam] : [http://127.0.0.1:8000/charts/] [name 'Q' is not defined] - At Line 1005
+[2023-06-01 17:52:14.138512] -> [Divyam/Divyam] : [http://127.0.0.1:8000/charts/] [day is out of range for month] - At Line 1003
+[2023-06-02 23:32:38.446412] -> [4219612952/Divyam Shah] : [http://127.0.0.1:8000/dashboard/] [list index out of range] - At Line 322
+[2023-06-03 21:04:49.616573] -> [Divyam/Divyam] : [http://127.0.0.1:8000/help/] [cannot access local variable 'new_number' where it is not associated with a value] - At Line 1547
+[2023-06-04 15:52:43.499719] -> [Divyam/Divyam] : [http://127.0.0.1:8000/charts/] [year 202023 is out of range] - At Line 952
+[2023-06-04 15:52:43.536617] -> [Divyam/Divyam] : [http://127.0.0.1:8000/dashboard/] [year 202023 is out of range] - At Line 326
+[2023-06-13 20:16:42.250646] -> [Divyam/Divyam] : [http://127.0.0.1:8000/profile/] [name 'requet' is not defined] - At Line 1458
+[2023-06-13 20:16:42.271590] -> [Divyam/Divyam] : [http://127.0.0.1:8000/dashboard/] [name 'requet' is not defined] - At Line 333
+[2023-06-13 20:18:54.143822] -> [Divyam/Divyam] : [access log issue] [name 'reqest' is not defined] - At Line 25

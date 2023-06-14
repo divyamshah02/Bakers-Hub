@@ -192,7 +192,7 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="{% url 'dashboard' %}" class="app-brand-link">
-                        <img src="/static/assets-cta/images/logo.png" alt="Baker Hub" style="width: 200px;" />
+                        <img src="/static/assets-cta/images/logo_1.png" alt="Baker Hub" style="width: 200px;" />
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle
@@ -200,6 +200,8 @@
                         <i class="bx bx-chevron-left bx-sm align-middle rounded-circle ele_bg_bh"></i>
                     </a>
                 </div>
+
+                <hr style="padding-top: 1px; margin: 0 20px 10px ; color: var(--dark-color);">
 
                 <div class="menu-inner-shadow"></div>
 
@@ -307,6 +309,25 @@
                     {% endif %}
 
                     {% if tab == 6 %}
+                    <!-- Profle -->
+                    <li class="menu-item active">
+                        <a href="{% url 'help' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-help-circle"></i>
+                            <div data-i18n="Basic">Help</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Profile -->
+                    <li class="menu-item">
+                        <a href="{% url 'help' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-help-circle"></i>
+                            <div data-i18n="Basic">Help</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if tab == 7 %}
                     <!-- Settings -->
                     <li class="menu-item active">
                         <a href="{% url 'settings' %}" class="menu-link">

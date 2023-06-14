@@ -23,7 +23,7 @@ class Category(models.Model):
     user_id = models.CharField(max_length=10)
     category = models.CharField(max_length=255)
     
-class Sales(models.Model):
+class Sale(models.Model):
     user_id = models.CharField(max_length=10)
     customer_name = models.CharField(max_length=255)
     order_name = models.CharField(max_length=255)
@@ -45,3 +45,13 @@ class Expense(models.Model):
     bill = models.ImageField(upload_to='users0_bill',default=None,null=True)
     extra_note = models.TextField()
     expense_date = models.CharField(max_length=255)
+    
+class Ticket(models.Model):
+    ticket_number = models.CharField(max_length=5)
+    user_id = models.CharField(max_length=10)
+    from_email = models.CharField(max_length=255)
+    issue = models.TextField()
+    date_time = models.CharField(max_length=255)
+    subject = models.TextField()
+    solved = models.BooleanField(default=False)
+    

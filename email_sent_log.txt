@@ -1,0 +1,18 @@
+### --- 04/06/June --- ###
+[2023-06-04 15:50:47.407777] -> [14 Days Free Trial] - [Divyam]/[divyamshah1234@gmail.com]
+[2023-06-04 15:50:50.105685] -> [Free Trial Ending in -42 days] - [Snehi]/[snehi99shah@gmail.com]
+[2023-06-04 15:50:52.914578] -> [Free Trial Ending in -730485 days] - [yo]/[v@v.com]
+[2023-06-04 15:50:55.556978] -> [Free Trial Ending in -730485 days] - [ddd]/[d@d.com]
+[2023-06-04 15:50:58.308426] -> [Free Trial Ending in -730485 days] - [chindi]/[n@n.com]
+[2023-06-04 15:51:01.005004] -> [Free Trial Ending in -730481 days] - [Razorpay Trail]/[trial@trial.com]
+[2023-06-04 15:51:04.421096] -> [Free Trial Ended] - [Umang]/[umangvataliya025@gmail.com]
+
+
+### --- 04/06/June --- ###
+[2023-06-04 18:48:54.334873] -> [Free Trial Ending in -730485 days] - [yo]/[v@v.com]
+[2023-06-04 18:48:57.714692] -> [Free Trial Ending in -730485 days] - [ddd]/[d@d.com]
+[2023-06-04 18:49:00.751656] -> [Free Trial Ending in -730485 days] - [chindi]/[n@n.com]
+[2023-06-04 18:49:04.052987] -> [Free Trial Ending in -730481 days] - [Razorpay Trail]/[trial@trial.com]
+[2023-06-04 18:49:07.234854] -> [Free Trial Ending in -730480 days] - [De]/[a@mailinator.com]
+[2023-06-04 18:49:10.915552] -> [Free Trial Ending in -730478 days] - [Umang ]/[umangvataliya025@gmail.com]
+[2023-06-04 18:49:14.063524] -> [Free Trial Ending in -730472 days] - [Divyam Shah]/[divyamshah2020@gmail.com]

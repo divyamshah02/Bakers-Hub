@@ -1,0 +1,145 @@
+{% include "header.html" %}
+<style>
+    .blur {
+        filter: blur(5px);
+    }
+
+    #loading-bh {
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        color: var(--dark-color);
+        left: 50%;
+        display: none;
+    }
+</style>
+    <div class="spinner-border loading-bh" id="loading-bh">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <!-- Content wrapper -->
+    <div class="content-wrapper" style="background-color: transparent;" id="main">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+            <!-- Basic Layout -->
+            <div class="row">
+                <div class="col-xl">
+                    <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
+                        <div class="card-header d-flex
+                                            justify-content-between
+                                            align-items-center">
+                            <h2 class="mb-0" style="color: #000"><strong><b>Help</b></strong></h2>
+                            <small class="float-end" style="color: #252222">Support</small>
+                        </div>
+                        <div class="card-body rounded-bottom">
+                            <form method="POST" id="my-form">
+                                {% csrf_token %}
+                                {% if error == 1 %}
+                                <div class="py-2 px-2 rounded m-2"
+                                    style="background-color: rgba(255, 113, 113, 0.508); color: red; border: 2px solid black;">
+                                    <b>Fatal Error - Your problem was not registered!<br>Contact us directly through e-mail: support@bakershub.in</b>
+                                </div>
+                                {% else %}
+                                {% if success == 1 %}
+                                <div class="py-2 px-2 rounded m-2"
+                                    style="background-color: rgba(113, 255, 151, 0.341); color: green; border: 2px solid black;">
+                                    <b>Your problem is registered! We will contact to you through Email.</b>
+                                </div>
+                                {% endif %}
+                                {% endif %}
+
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label class="form-label" for="email" style="color: #000">Email<span
+                                            class="text-danger" style="font-size:
+                                                            large;">*</span></label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Registered mail id" aria-label="Registered mail id" required value="{{user_email}}" />
+                                </div>
+
+                                <!-- Subject -->
+                                <div class="mb-3">
+                                    <label class="form-label" for="subject" style="color: #000">Subject<span class="text-danger" style="font-size:
+                                                            large;">*</span></label>
+                                    <input type="text" class="form-control" id="subject" name="subject"
+                                        placeholder="Subject" aria-label="Subject" required />
+                                </div>
+
+                               
+                                <!-- Problem -->
+                                <div class="mb-5">
+                                    <label class="form-label" for="problem" style="color: #000">Problem<span class="text-danger" style="font-size: large;">*</span></label>
+                                    <textarea id="problem" name="problem" class="form-control" rows="4"
+                                        placeholder="Give all the related data for faster support!" required></textarea>
+                                </div>
+                            
+                                <!-- Submit -->
+                                <button id="help_btn" type="submit" class="btn btn_bh">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+    </div>
+    <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- <div class="buy-now">
+            <a
+                href="{% url 'home' %}#cta-premium"
+                target="_blank"
+                class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+        </div> -->
+
+    <!-- Core JS -->
+    <script>
+        const submitBtn = document.getElementById('help_btn');
+        const loadingDiv = document.getElementById('loading-bh');
+        const bhBody = document.getElementById('main');
+        const form = document.getElementById('my-form');
+
+
+        submitBtn.addEventListener('click', () => {
+            if (form.checkValidity()) {
+                loadingDiv.style.display = 'block';
+                bhBody.classList.add('blur');
+            } else {
+                form.reportValidity();
+            }
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!-- build:js assets-dash/vendor/js/core.js -->
+    <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+    <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+    <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+    <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/static/assets-dash/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="/static/assets-dash/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>

@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/static/assets-cta/css/lightbox.css">
   <link rel="stylesheet" href="/static/assets-dash/vendor/fonts/boxicons.css" />
 
+
   <!--
 -->
 <style>
@@ -63,7 +64,7 @@
               and take your business to new heights!</b></p>
 
             <div class="main-button-gradient">
-              <div class="scroll-to-section"><a href="#register-section">Get The App!</a></div>
+              <div class="scroll-to-section"><a href="#app">Get The App!</a></div>
             </div>
           </div>
         </div>
@@ -336,18 +337,68 @@
     </div>
   </section>
 
-  <section class="register" id="register-section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-7">
+  <section id="app">
+      <div class="row text-center">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h6>Mobile App</h6>
+            <h4>Choose your <em>Platform</em></h4>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 pt-5 mb-5">
+          <a href="https://play.google.com/store/apps/details?id=app.bakershub.android" target="_blank">
+          <img src="/static/assets-cta/images/google_logo.png" alt="Play Store Logo" style="width: 300px;">
+          <h6 style="color: #000;"><b>Google Play Store</b></h6>
+          </a>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 pt-5 mb-5">
+          <a>
+          <img src="/static/assets-cta/images/apple_logo.png" alt="App Store Logo" style="width: 300px;"         data-bs-toggle="modal"
+          data-bs-target="#modalCenter">
+          <h6 style="color: #000;"><b>App Store</b></h6>
+          </a>
+        </div>
+        <!-- Modal -->
+      <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalCenterTitle">Launching Soon!!</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+                  <label for="nameWithTitle" class="form-label float-start">Our iOS app is almost here, <br>but in the meantime, you can still enjoy our services through our convenient web app!
+                    <br><span style="color: #000;">
+                      <b><u>Note: Make sure to bookmark / create shortcut of the web app.</u></b>
+                    </span>
+                    </label>
+            </div>
+            <div class="modal-footer">
+              <a href="{% url 'app' %}"><button type="button" class="btn btn-primary">Access Web App</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </section>
+
+<section class="register" id="register-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7">
           <div id="map">
 
-            <!-- You just need to go to Google Maps for your own map point, and copy the embed code from Share -> Embed a map section -->
+            <!-- You just need to go to Google Maps for your own map point, and copy the embed code from Share -> Embed a map section-->
             <img src="/static/assets-cta/images/people-working-together-online.png" style="border:0; border-radius: 15px; position: relative;
                 z-index: 2;" alt="Register"/>
           </div>
-        </div>
-        <div class="col-lg-5">
+      </div>
+      <div class="col-lg-5">
           <form id="register" method="post">
             {% csrf_token %}
             <div class="row">
@@ -403,28 +454,31 @@
               </div>
             </div>
           </form>
-        </div>
-        <div class="col-lg-12">
+      </div>
+      <div class="col-lg-12">
           <ul class="social-icons">
             <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
             <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
             <li><a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
           </ul>
-        </div>
-        <div class="col-lg-12">
-          <footer class="content-footer footer bg-footer-theme
-              text-center">
-            <br>
-            <div class="mb-3">
-              © <script>document.write(new Date().getFullYear());</script> Copyright<br>All rights reserverd to
-                    <span><b><a href="{% url 'home' %}" style="color:#2f32eb;">Baker's Hub</a></b></span><br>
-            </div>
-          </footer>
-        </div>
       </div>
-    </div>
-  </section>
+      <div class="col-lg-12">
+        <footer class="content-footer footer bg-footer-theme text-center">
+          <div class="my-3" style="color: #000;"><b>
+              © <script>document.write(new Date().getFullYear());</script> All rights reserverd to</b> <a href="{% url 'home' %}" style="color: rgb(176, 50, 98);"><b><u>Baker's Hub</u></b><br>
+              <span style="color: #000;">
+              <a href="{% url 'privacy_policy' %}" style="color: #000;"><b><u>Privacy Policy</u></b></a> |
+              <a href="{% url 'terms_conds' %}" style="color: #000;"><b><u>Terms and Conditions</u></b></a> |
+              <a href="mailto:support@bakershub.in" title="support@bakershub.in" style="color: #000;"><b><u>Contact Us</u></b></a>
+              </span>
+          </div>
+        </footer>
+      </div>
 
+    </div>
+  </div>
+</section
+-->
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
@@ -437,6 +491,9 @@
   <script src="/static/assets-cta/js/video.js"></script>
   <script src="/static/assets-cta/js/slick-slider.js"></script>
   <script src="/static/assets-cta/js/custom.js"></script>
+  <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+  <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+  <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
   <script>
     // get the target element by ID
     function scrollToTarget() {
@@ -486,7 +543,6 @@
         }
       });
     };
-
     $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
       e.preventDefault();
       showSection($(this).attr('href'), true);

@@ -54,6 +54,11 @@
   <link rel="stylesheet" href="/static/assets-cta/css/owl.css">
   <link rel="stylesheet" href="/static/assets-cta/css/lightbox.css">
   <style>
+    :root {
+            --bg-grad: linear-gradient(-145deg, rgba(219, 138, 222, 1) 0%, rgba(246, 191, 159, 1) 100%);
+            --dark-color: rgb(176, 50, 98);
+            --hover-color: rgba(176, 50, 98, 0.358);
+        }
     .blur{
       filter: blur(5px);        
     }
@@ -65,6 +70,21 @@
       left: 50%;     
       display: none;
     }
+    .form-check-input:checked {
+            background-color: var(--dark-color) !important;
+            border: var(--hover-color) !important;
+            box-shadow: 0 0 0 1px var(--hover-color) !important;
+        }
+
+        .form-check-input:focus {
+            border: var(--hover-color);
+            box-shadow: 0 0 0 1px var(--hover-color) !important;
+        }
+
+        .form-check-input:hover {
+            border: var(--hover-color) !important;
+            box-shadow: 0 0 0 3px var(--hover-color) !important;
+        }
   </style>
   </head>
 
@@ -104,8 +124,7 @@
                 {% endif %}  
                 <div class="mb-3">                    
                     <label for="name" class="form-label" style="color: black;"><b>Name</b></label>
-                    <input required
-                      type="text"
+                    <input required type="text"
                       class="form-control"
                       id="name"
                       name="name"
@@ -114,7 +133,7 @@
                       pattern="[A-Za-z ]+"
                       autofocus
                     />
-                  </div>                                               
+                </div>                                               
                 <div class="mb-3">                    
                   <label for="email" class="form-label" style="color: black;"><b>Email</b></label>
                   <input required
@@ -140,7 +159,21 @@
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
-                </div>                 
+                </div>  
+                <div class="mb-3">                 
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="t&c" required/>
+                    <label class="form-check-label" for="t&c" data-bs-toggle="modal"
+                    data-bs-target="#t_c_modal" style="color: black;"><u><b>Terms & Conditions</b></u></label>
+                  </div>
+                               
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="privacy_policy" required/>
+                    <label class="form-check-label" for="privacy_policy" data-bs-toggle="modal"
+                    data-bs-target="#privacy_policy_modal" style="color: black;"><u><b>Privacy Policy</b></u></label>
+                  </div>
+                </div>                                               
+
                 <div class="mb-3">
                   <button id="register" class="btn d-grid w-100" type="submit" style="background-color: rgb(176, 50, 98); color: #fff;">Register</button>
                 </div>
@@ -161,9 +194,81 @@
     <div class="spinner-border loading-bh" id="loading-bh">
         <span class="visually-hidden">Loading...</span>
     </div> 
+    <div class="modal fade" id="privacy_policy_modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="privacy_policy_modalTitle">Privacy Policy</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" style="height: 500px;">
+            <div class="row">              
+              <iframe id="p_p_iframe" src="{% url 'privacy_policy' %}" height="400"y></iframe>
+            </div>                      
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="modal fade" id="t_c_modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="t_c_modalTitle">Terms & Conditions</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" style="height: 500px;">
+            <div class="row">              
+              <iframe id="t_c_iframe" src="{% url 'terms_conds' %}" height="400"y></iframe>
+            </div>                      
+        </div>
+      </div>
+      </div>
+    </div>
+
+
       
     <!-- / Content -->   
+    <script>
+      window.addEventListener("DOMContentLoaded", function() {
+        var iframe = document.getElementById("t_c_iframe");
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        var footer = iframeDoc.querySelector("footer"); 
+        var links = iframeDoc.querySelectorAll("a");
 
+        links.forEach(function(link) {
+          link.addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+          });
+        });       
+        if (footer) {
+          footer.style.display = "none";
+        }
+        var iframe_p = document.getElementById("p_p_iframe");
+        var iframeDoc_p = iframe_p.contentDocument || iframe_p.contentWindow.document;
+        var footer_p = iframeDoc_p.querySelector("footer"); 
+        var links_p = iframeDoc_p.querySelectorAll("a");
+
+        links_p.forEach(function(link) {
+          link.addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+          });
+        });       
+        if (footer_p) {
+          footer_p.style.display = "none";
+        }
+
+      });
+    </script>
     <!-- Core JS -->
     <script>
         const submitBtn = document.getElementById('register');

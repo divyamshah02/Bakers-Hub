@@ -1,5 +1,0 @@
-https://merchant.razorpay.com/policy/LtTKaufZnsXth1/shipping
-https://merchant.razorpay.com/policy/LtTKaufZnsXth1/contact_us
-https://merchant.razorpay.com/policy/LtTKaufZnsXth1/refund
-https://merchant.razorpay.com/policy/LtTKaufZnsXth1/terms
-https://merchant.razorpay.com/policy/LtTKaufZnsXth1/privacy

@@ -14,20 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from BakersHub import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404
+from django.views.generic import RedirectView
+
 
 urlpatterns = [
     # path('<path>/',views.maintenance,name='maintenance'),
     path('admin/', admin.site.urls),
+    path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
+    path('report/',views.report,name='report'),
     path('',views.home,name='home'),
     path('about_us/',views.about_us,name='about_us'),
-    path('premium/',views.premium,name='premium'),
+    # path('premium/',views.premium,name='premium'),
     path('register/',views.register,name='register'),
     path('sign_in/',views.sign_in,name='sign_in'),
+    path('privacy-policy/',views.privacy_policy,name='privacy_policy'),
+    path('terms&conditions/',views.terms_conds,name='terms_conds'),
     path('forget_password/',views.forget_pass,name='forget_pass'),
     path('logout/', views.log_out, name='logout'),
     path('app/',views.app,name='app'),
@@ -42,9 +48,11 @@ urlpatterns = [
     path('charts/',views.charts,name='charts'),
     path('order/',views.sale_adder,name='sale_adder'),
     path('expense/',views.expense_adder,name='expense_adder'),
+    path('help/',views.help,name='help'),
     path('profile/',views.profile,name='profile'),
     path('settings/',views.settings,name='settings'),
     path('api/add-category/',views.api_add_category,name='api_add_category'),
+    path('get_user_data/',views.get_all_users,name='api_get_user'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = views.page_not_found
