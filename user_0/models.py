@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -14,6 +15,7 @@ class UserProfile(models.Model):
     free_end_date = models.CharField(max_length=255,default=0)
     first_login = models.BooleanField(default=False)
     premium = models.BooleanField(default=False)
+    freemium = models.BooleanField(default=False)
     premium_start_date = models.CharField(max_length=255, default=0)
     premium_end_date = models.CharField(max_length=255, default=0)
     premium_month_plan = models.CharField(max_length=10,default=0)
@@ -55,3 +57,30 @@ class Ticket(models.Model):
     subject = models.TextField()
     solved = models.BooleanField(default=False)
     
+class ShoppingList(models.Model):
+    user_id = models.CharField(max_length=10)
+    title = models.CharField(max_length=255)
+    
+class ItemShopping(models.Model):
+    shopping_id = models.CharField(max_length=10)
+    item = models.CharField(max_length=255)
+    bought = models.BooleanField(default=False) 
+    added = models.BooleanField(default=False)
+    
+class TaskList(models.Model):
+    user_id = models.CharField(max_length=10)
+    task = models.CharField(max_length=255)
+    created = models.DateTimeField(default=timezone.now)
+    completed =  models.BooleanField(default=False)
+
+class Product(models.Model):
+    user_id = models.CharField(max_length=10)
+    created = models.DateTimeField(default=timezone.now)
+    name= models.CharField(max_length=255)
+
+class ItemPrice(models.Model):
+    product_id = models.CharField(max_length=10)
+    item = models.CharField(max_length=255)
+    price = models.CharField(max_length=10)
+    qty = models.CharField(max_length=10)
+    qty_unit = models.CharField(max_length=10)

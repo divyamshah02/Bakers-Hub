@@ -1,4 +1,3 @@
-# SUPER-USER (Divyam - navkar108)
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -6,15 +5,17 @@ from django.http import JsonResponse,HttpResponse
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.db.models import Count
-from user_0.models import UserProfile,Category,Expense,Sale,Ticket
+from user_0.models import UserProfile,Category,Expense,Sale,Ticket,ShoppingList,ItemShopping,TaskList,Product,ItemPrice
 from django.core.files.uploadedfile import InMemoryUploadedFile
-import random,datetime
+import random,datetime,json
 from PIL import Image
 from io import BytesIO
 from BakersHub.email_sent import SendMail
 
+
+## -------------------- LOGGERS -------------------- ##
 def error_log(error,user,url):
-    with open("error_log.txt",'a') as error_file:
+    with open("logs/error_log.txt",'a') as error_file:
         date_time = datetime.datetime.now()
         error_file.write(f'[{date_time}] -> [{user}/{user.first_name}] : [{url}] [{error}] - At Line {(error.__traceback__).tb_lineno}\n')
         # File name - tb_frame.f_code.co_filename
@@ -23,47 +24,40 @@ def access_log(request):
     try:
         user = request.user
         url = str(request.build_absolute_uri()).split('/')
-        with open("access_log.txt",'a') as access_log:
+        with open("logs/access_log.txt",'a') as access_log:
             date_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
             access_log.write(f"[{date_time}] -> [{user.first_name}/{user}] : [{url[-2]}]\n")
     except Exception as e:
         error_log(error=e, user=request.user, url='access log error')
 
+## -------------------- Website -------------------- ##
 def home(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        client_ip = x_forwarded_for.split(',')[0].strip()
+    else:
+        client_ip = request.META.get('REMOTE_ADDR')
+
+    with open("logs/access_log.txt",'a') as access_log:
+        user_agent = str(request.META.get('HTTP_USER_AGENT', ''))
+        date_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
+        access_log.write(f"[{date_time}] : [Website]/[{request.method}] - {client_ip} - {user_agent}\n")
+
     error = 0
     if request.method=="POST":
-            # Storing details in variables
-            name = request.POST.get('name')
-            email = request.POST.get('email')
-            password = request.POST.get('password')
-            join_date = (datetime.date.today()).strftime("%d/%m/%Y")
-            user_free_end_date = datetime.date.today()+datetime.timedelta(days=14)
-            free_end_date = user_free_end_date.strftime("%d/%m/%Y")
-            user_info = User.objects.filter(email=email) #Collecting Information
-            if len(user_info) == 0:
-                # User is not registered
-                new_id = True
-                # This loop is for generating unique User Id
-                while new_id:
-                # It checks user id is already used if yes than generates new id
-                    uid = random.randint(1111111111,9999999999)
-                    if len(User.objects.filter(username = uid)) == 0:
-                        new_id = False
-                # Creating new user
-                user = User.objects.create_user(username=uid,email=email,password=password)
-                user.first_name = name # Saving name
-                user.save()
-                # Logging user
-                user = authenticate(request, username=uid, password=password)
-                login(request,user)
-                request.session.set_expiry(30 * 24 * 60 * 60) # Storing user data in session (remembering the user)
-                # Saving the user data in database (own - BH)
-                user_profile = UserProfile(user_id=user,email=email,first_name=name,join_date=join_date,free_end_date=free_end_date)
-                user_profile.save()
+         return redirect('https://www.google.com')
+    #    # Storing details in variables
+    #    name = request.POST.get('name')
+    #    email = request.POST.get('email')
+    #    subject = request.POST.get('subject')
+    #    message = request.POST.get('message')
 
-                return redirect('dashboard')
-            else:
-                error = 1
+    #    with open("logs/contact_log.txt",'a') as contact_log:
+    #        date_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
+    #        contact_log.write(f"{date_time} | {name} - {email}: {subject}\n{message}\n\n")
+
+
+
 
 
     data = {
@@ -87,12 +81,33 @@ def premium(request):
     return render(request,'premium.html')
 
 def privacy_policy(request):
+    # all_data = UserProfile.objects.all()
+    # new_data = ''
+    # for data in all_data:
+    #     end_date = datetime.date(day=int(str(data.premium_end_date).split('/')[0]),month=int(str(data.premium_end_date).split('/')[1]),year=int(str(data.premium_end_date).split('/')[2]))
+    #     new_date = end_date+datetime.timedelta(days=60)
+    #     user_obj = UserProfile.objects.get(user_id = data.user_id)
+    #     user_obj.premium_end_date = new_date.strftime("%d/%m/%Y")
+    #     user_obj.save()
+    #     new_data = new_data + f'{new_date} - saved, '
+    # return HttpResponse(new_data)
+    # try:
+    #     trail_obg = User.objects.get(username = '4945222629')
+    #     trail_obg.set_password('app_trial')
+    #     trail_obg.save()
+    # except Exception as e:
+    #     user = request.user
+    #     error_log(error=e,user=user,url=request.build_absolute_uri())
+    #     return redirect('home')
     return render(request,'privacy_policy.html')
 
 def terms_conds(request):
     return render(request,'terms&conds.html')
 
+## -------------------- App -------------------- ##
+# ---------- Account Management ---------- #
 def register(request):
+    email_query = request.GET.get('email')
     error = 0 #No Error
     if request.method=="POST":
             # Storing details in variables
@@ -100,7 +115,8 @@ def register(request):
             email = request.POST.get('email')
             password = request.POST.get('password')
             join_date = (datetime.date.today()).strftime("%d/%m/%Y")
-            user_free_end_date = datetime.date.today()+datetime.timedelta(days=14)
+            # user_free_end_date = datetime.date.today()+datetime.timedelta(days=14)
+            user_free_end_date = datetime.date.today()+datetime.timedelta(days=60)
             free_end_date = user_free_end_date.strftime("%d/%m/%Y")
             user_info = User.objects.filter(email=email) #Collecting Information
             if len(user_info) == 0:
@@ -121,20 +137,73 @@ def register(request):
                 login(request,user)
                 request.session.set_expiry(30 * 24 * 60 * 60) # Storing user data in session (remembering the user)
                 # Saving the user data in database (own - BH)
-                user_profile = UserProfile(user_id=user,email=email,first_name=name,join_date=join_date,free_end_date=free_end_date)
+                # user_profile = UserProfile(user_id=user,email=email,first_name=name,join_date=join_date,free_end_date=free_end_date)
+                user_profile = UserProfile(user_id=user,email=email,first_name=name,join_date=join_date,free_end_date=free_end_date,premium_start_date = join_date, premium_end_date=free_end_date,premium = True,premium_month_plan=60,first_login = True,payment_id='FREE')
                 user_profile.save()
 
-                return redirect('dashboard')
+                return redirect('app')
             else:
                 # User is already registered
                 error = 1
 
     data = {
         'error':error,
+        'email_query':email_query,
     }
     return render(request, "register.html",data)
 
 def sign_in(request):
+    error = 0 # No error
+    email = None # For validation in html
+    level = 0
+
+    try :
+        if request.method == 'POST':
+            # Storing data in variables
+            sign_level = request.POST.get('level')
+
+            if sign_level == '0':
+                email = request.POST.get('email')
+                if email:
+                    user_info = User.objects.filter(email=email) # Checking user in database
+                    if len(user_info) > 0:
+                        level = 1
+                    else:
+                        return redirect(f'/register/?email={email}')
+
+
+            elif sign_level == '1':
+                level = 1
+                email = request.POST.get('email')
+                password = request.POST.get('password')
+                user_info = User.objects.filter(email=email) # Checking user in database
+
+                if len(user_info) > 0:
+                    # User data is available
+                    username = user_info[0] # It is an object that stores user id
+                    user = authenticate(request, username=username, password=password) # Authenticating user
+
+                    if user is not None:
+                        # User is authenticated
+                        login(request, user)
+                        request.session.set_expiry(30 * 24 * 60 * 60) # Storing user data in session (remembering the user)
+                        return redirect('app')
+
+                    else:
+                        error = 2 # Wrong password
+                else:
+                    error = 1 # Not Register
+
+    except:
+        error = 3 # Fatal error
+    data = {
+        'error':error,
+        'email':email,
+        'level':level,
+    }
+    return render(request,"app_sign_in.html",data)
+
+def sign_in_old(request):
     error = 0 # No error
     email = None # For validation in html
     try :
@@ -143,6 +212,7 @@ def sign_in(request):
             email = request.POST.get('email')
             password = request.POST.get('password')
             user_info = User.objects.filter(email=email) # Checking user in database
+
             if len(user_info) > 0:
                 # User data is available
                 username = user_info[0] # It is an object that stores user id
@@ -151,7 +221,7 @@ def sign_in(request):
                     # User is authenticated
                     login(request, user)
                     request.session.set_expiry(30 * 24 * 60 * 60) # Storing user data in session (remembering the user)
-                    return redirect('dashboard')
+                    return redirect('app')
                 else:
                     error = 2 # Wrong password
             else:
@@ -244,8 +314,15 @@ def log_out(request):
     logout(request)
     return redirect('sign_in')
 
+# ---------- Main App ---------- #
 def app(request):
     try:
+        if request.user.is_authenticated:
+            user = request.user
+            url = str(request.build_absolute_uri()).split('/')
+            with open("logs/access_log.txt",'a') as access_log:
+                date_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
+                access_log.write(f"[{date_time}] -> [{user.first_name}/{user}] : [{url[-2]}] [{str(request.META.get('HTTP_USER_AGENT', ''))}]\n")
         user=request.user
         user_view = UserProfile.objects.filter(user_id=user)[0].first_view
         if user_view == '1':
@@ -257,7 +334,9 @@ def app(request):
     except:
         return redirect('sign_in')
 
+# ---------- Checks User's Premium Expiry Function ---------- #
 def check_pre_expr(user):
+    '''Checks User's Premium Expiry'''
     user_profile = UserProfile.objects.get(user_id=user)
     today = datetime.date.today()
     end_date = user_profile.premium_end_date
@@ -270,6 +349,7 @@ def check_pre_expr(user):
             days_remaining = end_date - today
             return int(days_remaining.days)
 
+# ---------- Plan ---------- #
 @login_required(login_url=reverse_lazy('sign_in'))
 def plans(request):
     access_log(request)
@@ -335,14 +415,20 @@ def paymentsuccess(request,no_days):
     user_profile.premium_end_date = end_date
     user_profile.premium_month_plan = no_days
     user_profile.premium = True
+    user_profile.freemium = False
     user_profile.payment_id = request.GET.get('payment_id')
     user_profile.save()
     return redirect('dashboard')
 
+# ---------- Dashboard ---------- #
 @login_required(login_url=reverse_lazy('sign_in'))
 def dashboard(request):
     try:
-        access_log(request)
+        user = request.user
+        url = str(request.build_absolute_uri()).split('/')
+        with open("logs/access_log.txt",'a') as access_log:
+            date_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
+            access_log.write(f"[{date_time}] -> [{user.first_name}/{user}] : [{url[-2]}] [{str(request.META.get('HTTP_USER_AGENT', ''))}]\n")
         # Remembering the user in session
         if request.session.get_expiry_age() <= 0:
             # If the session will expire
@@ -970,6 +1056,7 @@ def dashboard_lifetime(request):
         error_log(error=e,user=user,url=request.build_absolute_uri())
         return redirect('sign_in')
 
+# ---------- Analytics ---------- #
 @login_required(login_url=reverse_lazy('sign_in'))
 def charts(request):
     try:
@@ -1036,7 +1123,6 @@ def charts(request):
         st_date_cate = today.replace(day=1)
         st_date_cate = st_date_cate - datetime.timedelta(days=1)
         curr_month_category_data = Sale.objects.filter(user_id=user,order_date__gte=st_date_cate)
-        print(len(curr_month_category_data))
         category_data = []
         if len(user_category) == 0:
             category_data = None
@@ -1075,6 +1161,97 @@ def charts(request):
 
         }
         return render(request,'charts.html',data)
+    except Exception as e:
+        user = request.user
+        error_log(error=e,user=user,url=request.build_absolute_uri())
+        return redirect('dashboard')
+
+# ---------- Sale Adder ---------- #
+@login_required(login_url=reverse_lazy('sign_in'))
+def sale_adder(request):
+    try:
+        access_log(request)
+        sale_add = None
+        user = request.user
+        if request.method == "POST":
+            try:
+                add_sale = Sale(user_id = user,
+                                    customer_name=request.POST.get('customer_name'),
+                                    order_name=request.POST.get('order_name'),
+                                    quantity=request.POST.get('quantity'),
+                                    qty_weigth=request.POST.get('unit'),
+                                    price=request.POST.get('price'),
+                                    date_of_delivery=request.POST.get('date_of_delivery'),
+                                    time_of_delivery=request.POST.get('time_of_delivery'),
+                                    extra_note=request.POST.get('extra_note'),
+                                    order_date=request.POST.get('order_date'),
+                                    category=request.POST.get('category'),
+                                    )
+                add_sale.save()
+                sale_add = {
+                    'customer_name':request.POST.get('customer_name'),
+                    'order_name':request.POST.get('order_name'),
+                    'quantity':request.POST.get('quantity'),
+                    'unit':request.POST.get('unit'),
+                    'price':request.POST.get('price'),
+                    'date_of_delivery':request.POST.get('date_of_delivery'),
+                    'time_of_delivery':request.POST.get('time_of_delivery'),
+                }
+            except:
+                sale_add = 1
+
+        user_profile = UserProfile.objects.filter(user_id=user)[0]
+        profile_pfp = user_profile.pfp
+        if profile_pfp == "":
+            profile_pfp = 0
+        else:
+            profile_pfp = profile_pfp.url
+
+        is_premium = user_profile.premium
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
+            else:
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+
+            remaining_days = None
+
+        meta_data = str(request.META.get('HTTP_USER_AGENT', ''))
+        android_user = True
+        if 'iphone' in meta_data.lower():
+            android_user = False
+
+        category_data = Category.objects.filter(user_id = user)
+        data = {
+            'tab':2,
+            'sale':sale_add,
+            'p_letter':str(user.first_name)[0].lower(),
+            'profile_pfp':profile_pfp,
+            'user':user,
+            'category_data':category_data,
+            'category_len':len(category_data),
+            'is_premium':is_premium,
+            'remaining_days':remaining_days,
+            'theme':user_profile.theme_selection,
+            'premium_ended':premium_ended,
+            'android_user':android_user,
+
+        }
+        return render(request,"sale_adder.html",data)
     except Exception as e:
         user = request.user
         error_log(error=e,user=user,url=request.build_absolute_uri())
@@ -1180,176 +1357,7 @@ def sale_edit(request):
         error_log(error=e,user=user,url=request.build_absolute_uri())
         return redirect('dashboard')
 
-@login_required(login_url=reverse_lazy('sign_in'))
-def sale_adder(request):
-    try:
-        access_log(request)
-        sale_add = None
-        user = request.user
-        if request.method == "POST":
-            try:
-                add_sale = Sale(user_id = user,
-                                    customer_name=request.POST.get('customer_name'),
-                                    order_name=request.POST.get('order_name'),
-                                    quantity=request.POST.get('quantity'),
-                                    qty_weigth=request.POST.get('unit'),
-                                    price=request.POST.get('price'),
-                                    date_of_delivery=request.POST.get('date_of_delivery'),
-                                    time_of_delivery=request.POST.get('time_of_delivery'),
-                                    extra_note=request.POST.get('extra_note'),
-                                    order_date=request.POST.get('order_date'),
-                                    category=request.POST.get('category'),
-                                    )
-                add_sale.save()
-                sale_add = {
-                    'customer_name':request.POST.get('customer_name'),
-                    'order_name':request.POST.get('order_name'),
-                    'quantity':request.POST.get('quantity'),
-                    'unit':request.POST.get('unit'),
-                    'price':request.POST.get('price'),
-                    'date_of_delivery':request.POST.get('date_of_delivery'),
-                    'time_of_delivery':request.POST.get('time_of_delivery'),
-                }
-            except:
-                sale_add = 1
-
-        user_profile = UserProfile.objects.filter(user_id=user)[0]
-        profile_pfp = user_profile.pfp
-        if profile_pfp == "":
-            profile_pfp = 0
-        else:
-            profile_pfp = profile_pfp.url
-
-        is_premium = user_profile.premium
-        if is_premium == False:
-            user_free_date_lst = str(user_profile.free_end_date).split('/')
-            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str(user_free_date_lst[2])))
-            today = datetime.date.today()
-            if today <= user_free_end_date:
-                remaining_days = (user_free_end_date - today).days
-            else:
-                return redirect('plans')
-            premium_ended = None
-        else:
-            premium_is = check_pre_expr(user)
-            if premium_is == False:
-                premium_ended = True
-                return redirect('plans')
-            else:
-                if premium_is <=5:
-                    premium_ended = premium_is
-                else:
-                    premium_ended = False
-
-            remaining_days = None
-
-        category_data = Category.objects.filter(user_id = user)
-        data = {
-            'tab':2,
-            'sale':sale_add,
-            'p_letter':str(user.first_name)[0].lower(),
-            'profile_pfp':profile_pfp,
-            'user':user,
-            'category_data':category_data,
-            'category_len':len(category_data),
-            'is_premium':is_premium,
-            'remaining_days':remaining_days,
-            'theme':user_profile.theme_selection,
-            'premium_ended':premium_ended,
-
-        }
-        return render(request,"sale_adder.html",data)
-    except Exception as e:
-        user = request.user
-        error_log(error=e,user=user,url=request.build_absolute_uri())
-        return redirect('dashboard')
-
-@login_required(login_url=reverse_lazy('sign_in'))
-def expense_edit(request):
-    try:
-        access_log(request)
-        user = request.user
-        expense_edit = None
-        if request.method == 'POST':
-            try:
-                request.session['expense_id'] = request.POST.get('exp_id')
-                Expense.objects.filter(id=request.session.get('expense_id')).update(
-                                        expense_name = request.POST.get('expense_name'),
-                                        expense_amount = request.POST.get('expense_amount'),
-                                        expense_quantity =request.POST.get('expense_quantity'),
-                                        qty_unit = request.POST.get('qty_unit'),
-                                        extra_note = request.POST.get('extra_note'),
-                                        expense_date = request.POST.get('expense_date'),
-                                    )
-                expense_edit = {
-                    'name': request.POST.get('expense_name'),
-                    'price':request.POST.get('expense_amount'),
-                    'qty':request.POST.get('expense_quantity'),
-                    'unit':request.POST.get('qty_unit'),
-                    'date':request.POST.get('expense_date'),
-                }
-            except:
-                expense_edit = 1
-        if(request.session.get('expense_id')) is None:
-            return redirect('dashboard')
-        else:
-            expense_id = request.session.get('expense_id')
-            expense_data = Expense.objects.filter(id = expense_id)[0]
-
-            user_profile = UserProfile.objects.filter(user_id=user)[0]
-            profile_pfp = user_profile.pfp
-            if profile_pfp == "":
-                profile_pfp = 0
-            else:
-                profile_pfp = profile_pfp.url
-
-            is_premium = user_profile.premium
-            if is_premium == False:
-                user_free_date_lst = str(user_profile.free_end_date).split('/')
-                user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str(user_free_date_lst[2])))
-                today = datetime.date.today()
-                if today <= user_free_end_date:
-                    remaining_days = (user_free_end_date - today).days
-                else:
-                    return redirect('plans')
-                premium_ended = None
-            else:
-                premium_is = check_pre_expr(user)
-                if premium_is == False:
-                    premium_ended = True
-                    return redirect('plans')
-                else:
-                    if premium_is <=5:
-                        premium_ended = premium_is
-                    else:
-                        premium_ended = False
-
-                remaining_days = None
-
-            data = {
-                'expense_name':expense_data.expense_name,
-                'expense_amount':expense_data.expense_amount,
-                'quantity':expense_data.expense_quantity,
-                'weight':expense_data.qty_unit,
-                'extra_notes':str(expense_data.extra_note).strip(),
-                'expense_date':expense_data.expense_date,
-                'expense':expense_edit,
-                'id':expense_id,
-                'p_letter':str(user.first_name)[0].lower(),
-                'profile_pfp':profile_pfp,
-                'is_premium':is_premium,
-                'remaining_days':remaining_days,
-                'theme':user_profile.theme_selection,
-                'premium_ended':premium_ended,
-
-            }
-            request.session['expense_id'] = None
-            return render(request,'expense_edit.html',data)
-    except Exception as e:
-        user = request.user
-        error_log(error=e,user=user,url=request.build_absolute_uri())
-        return redirect('dashboard')
-
+# ---------- Expense Adder ---------- #
 @login_required(login_url=reverse_lazy('sign_in'))
 def expense_adder(request):
     try:
@@ -1446,6 +1454,11 @@ def expense_adder(request):
         else:
             frequent_expenses_data = None
 
+        meta_data = str(request.META.get('HTTP_USER_AGENT', ''))
+        android_user = True
+        if 'iphone' in meta_data.lower():
+            android_user = False
+
         data = {
             'tab':3,
             'expense':expense_add,
@@ -1456,6 +1469,7 @@ def expense_adder(request):
             'remaining_days':remaining_days,
             'theme':user_profile.theme_selection,
             'premium_ended':premium_ended,
+            'android_user':android_user,
 
         }
         return render(request,"expense_adder.html",data)
@@ -1464,6 +1478,320 @@ def expense_adder(request):
         error_log(error=e,user=user,url=request.build_absolute_uri())
         return redirect('dashboard')
 
+@login_required(login_url=reverse_lazy('sign_in'))
+def expense_edit(request):
+    try:
+        access_log(request)
+        user = request.user
+        expense_edit = None
+        if request.method == 'POST':
+            try:
+                request.session['expense_id'] = request.POST.get('exp_id')
+                Expense.objects.filter(id=request.session.get('expense_id')).update(
+                                        expense_name = request.POST.get('expense_name'),
+                                        expense_amount = request.POST.get('expense_amount'),
+                                        expense_quantity =request.POST.get('expense_quantity'),
+                                        qty_unit = request.POST.get('qty_unit'),
+                                        extra_note = request.POST.get('extra_note'),
+                                        expense_date = request.POST.get('expense_date'),
+                                    )
+                expense_edit = {
+                    'name': request.POST.get('expense_name'),
+                    'price':request.POST.get('expense_amount'),
+                    'qty':request.POST.get('expense_quantity'),
+                    'unit':request.POST.get('qty_unit'),
+                    'date':request.POST.get('expense_date'),
+                }
+            except:
+                expense_edit = 1
+        if(request.session.get('expense_id')) is None:
+            return redirect('dashboard')
+        else:
+            expense_id = request.session.get('expense_id')
+            expense_data = Expense.objects.filter(id = expense_id)[0]
+
+            user_profile = UserProfile.objects.filter(user_id=user)[0]
+            profile_pfp = user_profile.pfp
+            if profile_pfp == "":
+                profile_pfp = 0
+            else:
+                profile_pfp = profile_pfp.url
+
+            is_premium = user_profile.premium
+            if is_premium == False:
+                user_free_date_lst = str(user_profile.free_end_date).split('/')
+                user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str(user_free_date_lst[2])))
+                today = datetime.date.today()
+                if today <= user_free_end_date:
+                    remaining_days = (user_free_end_date - today).days
+                else:
+                    return redirect('plans')
+                premium_ended = None
+            else:
+                premium_is = check_pre_expr(user)
+                if premium_is == False:
+                    premium_ended = True
+                    return redirect('plans')
+                else:
+                    if premium_is <=5:
+                        premium_ended = premium_is
+                    else:
+                        premium_ended = False
+
+                remaining_days = None
+
+            data = {
+                'expense_name':expense_data.expense_name,
+                'expense_amount':expense_data.expense_amount,
+                'quantity':expense_data.expense_quantity,
+                'weight':expense_data.qty_unit,
+                'extra_notes':str(expense_data.extra_note).strip(),
+                'expense_date':expense_data.expense_date,
+                'expense':expense_edit,
+                'id':expense_id,
+                'p_letter':str(user.first_name)[0].lower(),
+                'profile_pfp':profile_pfp,
+                'is_premium':is_premium,
+                'remaining_days':remaining_days,
+                'theme':user_profile.theme_selection,
+                'premium_ended':premium_ended,
+
+            }
+            request.session['expense_id'] = None
+            return render(request,'expense_edit.html',data)
+    except Exception as e:
+        user = request.user
+        error_log(error=e,user=user,url=request.build_absolute_uri())
+        return redirect('dashboard')
+
+# ---------- Shopping List ---------- #
+@login_required(login_url=reverse_lazy('sign_in'))
+def shopping_list(request):
+    try:
+        access_log(request)
+        user = request.user
+        user_profile = UserProfile.objects.filter(user_id=user)[0]
+        profile_pfp = user_profile.pfp
+        is_premium = user_profile.premium
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
+            else:
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            remaining_days = None
+        if profile_pfp == "":
+            profile_pfp = 0
+        else:
+            profile_pfp = profile_pfp.url
+
+        if request.method == 'POST':
+            title = request.POST.get('shopping_title')
+            new_list = ShoppingList(user_id = user, title=title)
+            new_list.save()
+
+        shopping_list = ShoppingList.objects.filter(user_id=user)
+        shopping_data = []
+        for shopping_list_data in shopping_list:
+            item_list = ItemShopping.objects.filter(shopping_id = shopping_list_data.id)
+            item_data=[]
+            for items in item_list:
+                item_dict = {
+                    'id':items.shopping_id,
+                    'it_id':items.id,
+                    'item':items.item,
+                    'bought':items.bought,
+                    'added':items.added,
+                }
+                item_data.append(item_dict)
+            temp_shp_dict = {
+                'id':shopping_list_data.id,
+                'title':shopping_list_data.title,
+                'item_data':item_data,
+            }
+            shopping_data.append(temp_shp_dict)
+
+        data={
+                'p_letter':str(user.first_name)[0].lower(),
+                'profile_pfp':profile_pfp,
+                'tab':8,
+                'is_premium':is_premium,
+                'remaining_days':remaining_days,
+                'theme':user_profile.theme_selection,
+                'premium_ended':premium_ended,
+                'shopping_list':shopping_data,
+            }
+        return render(request,'shopping_list.html',data)
+    except Exception as e:
+        user = request.user
+        error_log(error=e,user=user,url=request.build_absolute_uri())
+        return redirect('dashboard')
+# ---------- Task List ---------- #
+@login_required(login_url=reverse_lazy('sign_in'))
+def task_list(request):
+    try:
+        access_log(request)
+        user = request.user
+        if request.method == 'POST':
+            task = request.POST.get('task')
+            new_task = TaskList(user_id = user,task = task)
+            new_task.save()
+
+
+        user_profile = UserProfile.objects.filter(user_id=user)[0]
+        profile_pfp = user_profile.pfp
+        is_premium = user_profile.premium
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
+            else:
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            remaining_days = None
+        if profile_pfp == "":
+            profile_pfp = 0
+        else:
+            profile_pfp = profile_pfp.url
+
+        all_task = TaskList.objects.filter(user_id = user)
+
+
+        data={
+                'p_letter':str(user.first_name)[0].lower(),
+                'profile_pfp':profile_pfp,
+                'tab':9,
+                'is_premium':is_premium,
+                'remaining_days':remaining_days,
+                'theme':user_profile.theme_selection,
+                'premium_ended':premium_ended,
+                'all_task':all_task,
+            }
+        return render(request,'task_list.html',data)
+    except Exception as e:
+        user = request.user
+        error_log(error=e,user=user,url=request.build_absolute_uri())
+        return redirect('dashboard')
+
+@login_required(login_url=reverse_lazy('sign_in'))
+def complete_task(request,id):
+    user = request.user
+    try:
+        task_details = TaskList.objects.get(user_id = user,id=id)
+        if task_details.completed == True:
+            task_details.completed = False
+        else:
+            task_details.completed = True
+        task_details.save()
+        return redirect('task_list')
+    except:
+        return redirect('task_list')
+
+# ---------- Price Calculator ---------- #
+@login_required(login_url=reverse_lazy('sign_in'))
+def price_calculator(request):
+    try:
+        access_log(request)
+        user = request.user
+        if request.method == 'POST':
+            if request.POST.get('product_name'):
+                product_name = request.POST.get('product_name')
+                new_product = Product(user_id = user, name = product_name)
+                new_product.save()
+        user_profile = UserProfile.objects.filter(user_id=user)[0]
+        profile_pfp = user_profile.pfp
+        is_premium = user_profile.premium
+        if is_premium == False:
+            user_free_date_lst = str(user_profile.free_end_date).split('/')
+            user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str(user_free_date_lst[2])))
+            today = datetime.date.today()
+            if today <= user_free_end_date:
+                remaining_days = (user_free_end_date - today).days
+            else:
+                return redirect('plans')
+            premium_ended = None
+        else:
+            premium_is = check_pre_expr(user)
+            if premium_is == False:
+                premium_ended = True
+                return redirect('plans')
+            else:
+                if premium_is <=5:
+                    premium_ended = premium_is
+                else:
+                    premium_ended = False
+            remaining_days = None
+        if profile_pfp == "":
+            profile_pfp = 0
+        else:
+            profile_pfp = profile_pfp.url
+
+        all_products = Product.objects.filter(user_id = user)
+        product_data = []
+
+        for product in all_products:
+            item_list = ItemPrice.objects.filter(product_id = product.id)
+            item_data=[]
+            for items in item_list:
+                item_dict = {
+                    'id':items.product_id,
+                    'it_id':items.id,
+                    'item':items.item,
+                    'price':float(items.price),
+                    'qty':items.qty,
+                    'qty_unit':items.qty_unit,
+                }
+                item_data.append(item_dict)
+            temp_pro_dict = {
+                'id':product.id,
+                'name':product.name,
+                'item_data':item_data,
+            }
+            product_data.append(temp_pro_dict)
+
+
+        data={
+                'p_letter':str(user.first_name)[0].lower(),
+                'profile_pfp':profile_pfp,
+                'tab':10,
+                'is_premium':is_premium,
+                'remaining_days':remaining_days,
+                'theme':user_profile.theme_selection,
+                'premium_ended':premium_ended,
+                'product_data':product_data,
+            }
+        return render(request,'price_calculator.html',data)
+    except Exception as e:
+        user = request.user
+        error_log(error=e,user=user,url=request.build_absolute_uri())
+        return redirect('dashboard')
+
+# ---------- Profile ---------- #
 @login_required(login_url=reverse_lazy('sign_in'))
 def profile(request):
     try:
@@ -1556,6 +1884,27 @@ def profile(request):
         error_log(error=e,user=user,url=request.build_absolute_uri())
         return redirect('dashboard')
 
+# ---------- Delete Account ---------- #
+@login_required(login_url=reverse_lazy('sign_in'))
+def delete_acc(request):
+
+        access_log(request)
+        user = request.user
+        UserProfile.objects.filter(user_id=user).delete()
+        User.objects.filter(username=user).delete()
+        Sale.objects.filter(user_id=user).delete()
+        Expense.objects.filter(user_id=user).delete()
+        Category.objects.filter(user_id=user).delete()
+        ShoppingList_all = ShoppingList.objects.filter(user_id=user)
+        for list_shp in ShoppingList_all:
+            ItemShopping.objects.filter(shopping_id=list_shp.id)    .delete()
+        ShoppingList.objects.filter(user_id=user).delete()
+
+        return redirect('sign_in')
+    # except:
+    #     return redirect('sign_in')
+
+# ---------- Help ---------- #
 @login_required(login_url=reverse_lazy('sign_in'))
 def help(request):
     try:
@@ -1653,6 +2002,7 @@ def help(request):
         error_log(error=e,user=user,url=request.build_absolute_uri())
         return redirect('dashboard')
 
+# ---------- Settings ---------- #
 @login_required(login_url=reverse_lazy('sign_in'))
 def settings(request):
     try:
@@ -1713,9 +2063,10 @@ def settings(request):
         error_log(error=e,user=user,url=request.build_absolute_uri())
         return redirect('dashboard')
 
+## -------------------- Admin -------------------- ##
+# ---------- Report ---------- #
 @login_required(login_url=reverse_lazy('sign_in'))
 def report(request):
-    access_log(request)
     user = request.user
     if user.is_staff:
         pass
@@ -1723,29 +2074,101 @@ def report(request):
         return redirect('dashboard')
     all_users = UserProfile.objects.all()
     premium_users = 0
+    freemium_users = 0
+    this_mon_users=0
+    this_mon_premium_users = 0
+    this_mon_freemium_users = 0
+    month_num = int(datetime.date.today().strftime("%m"))
     for users in all_users:
+        if int(str(users.join_date).split('/')[1]) == month_num:
+            this_mon_users+=1
+
         if users.premium:
             premium_users +=1
+            if int(str(users.premium_start_date).split('/')[1]) == month_num:
+                this_mon_premium_users += 1
+                if users.freemium:
+                    this_mon_freemium_users += 1
+            if users.freemium:
+                freemium_users+=1
     total_exp = len(Expense.objects.all())
     total_sales = len(Sale.objects.all())
     today = datetime.date.today()
-    today.replace(day=1)
+    today = today.replace(day=1)
     today = today - datetime.timedelta(days=1)
-    this_mon_users = UserProfile.objects.filter(join_date__gte=today)
-    this_mon_premium_users = 0
-    for this_mon_user in this_mon_users:
-        if this_mon_user.premium:
-            this_mon_premium_users +=1
+
+
+    with open('logs/access_log.txt','r') as access_file:
+        access_data = access_file.readlines()
+
+    with open('logs/mic_log.txt','r') as mic_file:
+        mic_data = mic_file.readlines()
+
+
+    Windows = 0
+    Macintosh = 0
+    iPhone = 0
+    Android = 0
+    total_web_visitors = 0
+    total_app_visitors = 0
+    iOS_app_user = 0
+    android_app_user = 0
+    windows_app_user = 0
+    macintosh_app_user = 0
+    ios_mic = 0
+    android_mic = 0
+
+    for a_data in access_data:
+        if '[Website]' in a_data:
+            total_web_visitors += 1
+            if 'iPhone' in a_data:
+                iPhone+=1
+            elif 'Android' in a_data:
+                Android+=1
+            elif 'Windows' in a_data:
+                Windows+=1
+            elif 'Macintosh' in a_data:
+                Macintosh+=1
+        elif '[app]' in a_data:
+            total_app_visitors+=1
+            if 'iPhone' in a_data:
+                iOS_app_user+=1
+            elif 'Android' in a_data:
+                android_app_user+=1
+            elif 'Windows' in a_data:
+                windows_app_user+=1
+            elif 'Macintosh' in a_data:
+                macintosh_app_user+=1
+
+    for mic_details in mic_data:
+        if 'iOS -' in mic_details:
+            ios_mic += 1
+        else:
+            android_mic += 1
 
     data={
         'all_users':len(all_users),
         'premium_users':premium_users,
+        'freemium_users':freemium_users,
         'total_exp':total_exp,
         'total_sales':total_sales,
-        'this_mon_users':len(this_mon_users),
+        'this_mon_users':this_mon_users,
         'this_mon_premium_users':this_mon_premium_users,
+        'this_mon_freemium_users':this_mon_freemium_users,
         'theme':'1',
         'month':datetime.date.today().strftime("%B"),
+        'Windows':Windows,
+        'Macintosh':Macintosh,
+        'iPhone':iPhone,
+        'Android':Android,
+        'total_app_visitors':total_app_visitors,
+        'total_web_visitors':total_web_visitors,
+        'iOS_app_user':iOS_app_user,
+        'android_app_user':android_app_user,
+        'windows_app_user':windows_app_user,
+        'macintosh_app_user':macintosh_app_user,
+        'ios_mic':ios_mic,
+        'android_mic':android_mic,
     }
 
     return render(request,'report.html',data)
@@ -1760,7 +2183,86 @@ def report(request):
     #                     </body>
     #                     ''')
 
-## ---- API FUNCTIONS ---- ##
+# ---------- Freemium ---------- #
+@login_required(login_url=reverse_lazy('sign_in'))
+def freemium(request):
+    error = 0
+    user = request.user
+    if user.is_staff:
+        pass
+    else:
+        return redirect('dashboard')
+    if request.method == "POST":
+        email = request.POST.get('email')
+        duration = int(request.POST.get('duration'))
+        user_data = UserProfile.objects.filter(email=email)
+        if len(user_data) == 0:
+            error = 1
+        else:
+            user_obj = UserProfile.objects.get(email=email)
+            today = datetime.date.today()
+            end_date = today + datetime.timedelta(days=duration)
+            today=today.strftime("%d/%m/%Y")
+            end_date=end_date.strftime("%d/%m/%Y")
+            user_obj.premium_start_date = today
+            user_obj.premium_end_date = end_date
+            user_obj.premium_month_plan = duration
+            user_obj.freemium = True
+            user_obj.premium = True
+            user_obj.save()
+            error = 2
+    data = {
+        'error':error,
+    }
+    return render(request,'freemium.html',data)
+
+## -------------------- Template -------------------- ##
+@login_required(login_url=reverse_lazy('sign_in'))
+def view_template(request):
+    access_log(request)
+    user = request.user
+    user_profile = UserProfile.objects.filter(user_id=user)[0]
+    profile_pfp = user_profile.pfp
+    is_premium = user_profile.premium
+    if is_premium == False:
+        user_free_date_lst = str(user_profile.free_end_date).split('/')
+        user_free_end_date = datetime.date(day=int(user_free_date_lst[0]),month=int(user_free_date_lst[1]),year=int(str(user_free_date_lst[2])))
+        today = datetime.date.today()
+        if today <= user_free_end_date:
+            remaining_days = (user_free_end_date - today).days
+        else:
+            return redirect('plans')
+        premium_ended = None
+    else:
+        premium_is = check_pre_expr(user)
+        if premium_is == False:
+            premium_ended = True
+            return redirect('plans')
+        else:
+            if premium_is <=5:
+                premium_ended = premium_is
+            else:
+                premium_ended = False
+        remaining_days = None
+    if profile_pfp == "":
+        profile_pfp = 0
+    else:
+        profile_pfp = profile_pfp.url
+
+
+    data={
+            'p_letter':str(user.first_name)[0].lower(),
+            'profile_pfp':profile_pfp,
+            'tab':8,
+            'is_premium':is_premium,
+            'remaining_days':remaining_days,
+            'theme':user_profile.theme_selection,
+            'premium_ended':premium_ended,
+        }
+    return render(request,'shopping_list.html',data)
+
+## -------------------- API -------------------- ##
+# ---------- Category | Sale Adder ---------- #
 def api_add_category(request):
     if request.method == 'POST':
         #(needs to be change)
@@ -1770,6 +2272,7 @@ def api_add_category(request):
         category_add.save()
         return JsonResponse({'success': True})
 
+# ---------- Get ALL Users ---------- #
 def get_all_users(request):
     header_data = request.META.get('HTTP_TOKEN')
     if header_data=='9054413199':
@@ -1784,13 +2287,93 @@ def get_all_users(request):
                 'email':user_data.email,
                 'user_id':user_data.user_id,
             }
-            print(user_data.free_end_date)
             all_user_list.append(temp_user_dict)
         return JsonResponse({'success':True,'all_data':all_user_list})
     else:
         return JsonResponse({'success':False})
 
-## ---- EXTRA FUNCTIONS ---- ##
+# ---------- Items | Shopping List ---------- #
+def api_add_item(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        item = data.get('item')
+        shopping_id = data.get('shopping_id')
+        new_item = ItemShopping(shopping_id=shopping_id,item=item)
+        new_item.save()
+        return JsonResponse({'success': True,'item_id':new_item.id})
+
+def api_save_item(request):
+    if request.method == 'POST':
+        all_item = True
+        ind = 0
+        while all_item:
+            ind+=1
+            if request.POST.get(f'da{ind}'):
+                if request.POST.get(f'ch{ind}') == 'on':
+                    item_id = request.POST.get(f'id{ind}')
+                    item_bought = ItemShopping.objects.get(id=item_id)
+                    item_bought.bought = True
+                    item_bought.save()
+                else:
+                    item_id = request.POST.get(f'id{ind}')
+                    item_bought = ItemShopping.objects.get(id=item_id)
+                    item_bought.bought = False
+                    item_bought.save()
+
+            else:
+                all_item = False
+    return JsonResponse({'success': True})
+
+def add_item(request):
+    user = request.user
+    if request.method == 'POST':
+        productNumber = request.POST.get('productNumber')
+        item_name = request.POST.get('item_name')
+        price = request.POST.get('price')
+        quantity = request.POST.get('quantity')
+        unit = request.POST.get('unit')
+        verify_product = Product.objects.filter(user_id=user,id=productNumber)
+
+        if len(verify_product) > 0:
+            new_item = ItemPrice(product_id = productNumber, item = item_name, price = price, qty = quantity, qty_unit = unit)
+            new_item.save()
+
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})
+
+# ---------- Report Generator API ---------- #
+@login_required(login_url=reverse_lazy('sign_in'))
+def api_report_gen(request):
+    user = request.user
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    sale_data = Sale.objects.filter(user_id=user,order_date__gt = start_date,order_date__lt = end_date)
+    exp_data = Expense.objects.filter(user_id=user,expense_date__gt = start_date,expense_date__lt= end_date)
+    sale_info = ''
+    exp_info = ''
+    all_data = ''
+    for sale in sale_data:
+        sale_info = sale_info + sale.order_name + ' :- ' + sale.order_date + '<br>'
+    for exp in exp_data:
+        exp_info = exp_info + exp.expense_name + ' :- ' + exp.expense_date + '<br>'
+
+    all_data = sale_info + '<br><br><br>' + exp_info
+
+
+    return HttpResponse(all_data)
+
+
+
+# ---------- Mic | Sale / Expense Adder ---------- #
+def api_mic_click(request):
+    user=request.user
+    feature = request.POST.get('Feature')
+    with open("logs/mic_log.txt",'a') as access_log:
+        date_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
+        access_log.write(f"[{date_time}] -> [{user.first_name}/{user}] | {feature} : [{str(request.META.get('HTTP_USER_AGENT', ''))}]\n")
+    return JsonResponse({'success': True})
+
+## -------------------- Extra Functions -------------------- ##
 def extra_code():
 #Extras
         # Saving all user joining dates to userprofile database
@@ -1832,5 +2415,5 @@ def extra_code():
             # user_obj_pro.free_end_date = user_free_end_date.strftime("%d/%m/%Y")
 
         #     user_obj_pro.save()
-             
-    pass  
+
+    pass

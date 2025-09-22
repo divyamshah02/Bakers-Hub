@@ -1,0 +1,340 @@
+{% include "header.html" %}
+<style>
+    .blur {
+        filter: blur(5px);
+    }
+
+    #loading-bh {
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        color: var(--dark-color);
+        left: 50%;
+        display: none;
+    }
+</style>
+    <div class="spinner-border loading-bh" id="loading-bh">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <!-- Content wrapper -->
+    <div class="content-wrapper" style="background-color: transparent;" id="main">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+            <!-- Basic Layout -->
+            <div class="row">
+                <div class="col-xl">
+                    <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
+                        <div class="card-header d-flex
+                                            justify-content-between
+                                            align-items-center">
+                            <h2 class="mb-0" style="color: #000"><strong><b>Price Calculator</b></strong></h2>
+                            <small class="float-end" style="color: #252222">Stock</small>
+                        </div>
+                        <div class="card-body rounded-bottom">
+                            <div class="col-12">
+                                <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <h4 class="mb-0" style="color: #000"><strong><b>Add new product</b></strong></h4>
+                                        </div>
+                                        <form method="post">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product_name" style="color: #000">Product Name <span
+                                                    class="text-danger" style="font-size: large;">*</span></label>
+                                            <input type="text" class="form-control" id="product_name" name="product_name" autofocus
+                                                placeholder="Name" aria-label="Product Name" required style="border: 1px solid black;"/>
+                                        </div>
+                                        <button id="add_order" type="submit" class="btn btn_bh">Add</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                {% for product in product_data reversed%}
+                                <div class="card mt-4" style="box-shadow: 5px 5px 10px black;" data-bs-toggle="modal" data-bs-target="#modal{{product.id}}">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <h4 class="mb-0" style="color: #000"><strong><b>{{product.name}}</b></strong></h4>
+                                        </div>
+                                        <span class="fw-semibold d-block mb-1" style="cursor: pointer;"><b><u>Manage</u></b></span>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="modal{{product.id}}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content p-2">
+                                        <div class="modal-header mb-0 p-2">
+                                            <h4 class="modal-title mb-0" id="modalCenterTitle" style="color: #000"><strong><b>{{product.name}}</b></strong></h4>
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body p-2">
+                                          <div class="row mb-3">
+
+                                            <form method="post" id="formItem{{product.id}}">
+                                                <div class="row">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="product_id" value="{{product.id}}">
+                                                <div class="col-12">
+                                                    <label class="form-label mt-1 mb-0" for="itemInput{{product.id}}" style="color: #000">item name<span
+                                                            class="text-danger" style="font-size: large;">*</span></label>                                                
+                                                    <input type="text" class="form-control" id="itemInput{{product.id}}" name="item_name" autofocus
+                                                        placeholder="Name" aria-label="Item name" required style="border: 1px solid black;"/>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-label mt-1 mb-0" for="priceInput{{product.id}}" style="color: #000">item price<span
+                                                        class="text-danger" style="font-size: large;">*</span></label>  
+                                                    <input type="number" pattern="[0-9]*[.,]?[0-9]+" step="0.01" min="0.01" class="form-control" id="priceInput{{product.id}}" name="item_price"
+                                                    placeholder="Price" aria-label="Item price" required style="border: 1px solid black;"/>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label class="form-label mt-1 mb-0" for="qtyInput{{product.id}}" style="color: #000">quantity<span
+                                                        class="text-danger" style="font-size: large;">*</span></label>  
+                                                    <input type="number" pattern="[0-9]*[.,]?[0-9]+" step="0.01" min="0.01" class="form-control" id="qtyInput{{product.id}}" name="item_qty"
+                                                    placeholder="Quantity" aria-label="Item qty" required style="border: 1px solid black;"/>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label mt-1 mb-0" for="qtyWeigth{{product.id}}" style="color: #000">unit<span
+                                                        class="text-danger" style="font-size: large;">*</span></label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <!-- <input type="text" class="form-control" id="qtyInput{{list.id}}" name="item_qty"
+                                                    placeholder="Quantity" aria-label="Item qty" required style="border: 1px solid black;"/> -->
+                                                    <select class="form-select" id="qtyWeigth{{product.id}}" name="unit" style="border: 1px solid black;">
+                                                        <option value="Kg">Kg</option>
+                                                        <option value="Grams">Grams</option>
+                                                        <option value="Piece">Piece</option>
+                                                        <option value="Ltr">Ltr</option>
+                                                        <option value="Ml">Ml</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6">                                                    
+                                                    <button type="button" onclick="addItem({{product.id}})" class="btn btn_bh" style="width: 100%;">Add</button>
+                                                </div>
+                                                </div>
+                                            </form>
+
+                                                <hr class="rounded" style="padding-top: 2px; margin-top: 30px; color: var(--dark-color);">
+                                                <div class="form-check" style="padding: 0 13px;">
+                                                    <div class="table-responsive">                                                        
+                                                        <table class="table align-middle" id="itemTable{{product.id}}">
+                                                            <tbody class="table-border-bottom-0">
+                                                                <th>Item</th>
+                                                                <th>Price</th>
+                                                                <th>Qty</th>
+
+                                                                {% for item in product.item_data reversed %}                                                                                                                                     
+                                                                <tr>
+                                                                    <td>
+                                                                        <label class="form-check-label text-wrap p-0" style="color: black;"><b>{{item.item}}</b></label>                                                                                                                                                        
+                                                                    </td>
+                                                                    <td>
+                                                                        <label class="form-check-label text-wrap p-0" style="color: black;"><b><u>₹{{item.price}}</u></b></label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label class="form-check-label text-wrap p-0" style="color: black;"><b>{{item.qty}} {{item.qty_unit}}</b></label>
+                                                                    </td>
+                                                                </tr>
+                                                                {% endfor %}
+
+                                                                
+                                                                <tr style="border-top: 2px black solid;">
+                                                                    <td>
+                                                                        <label class="form-check-label text-wrap p-0" style="color: black;"><b>Total</b></label>                                                                                                                                                        
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label class="form-check-label text-wrap p-0" id='total_val{{product.id}}' style="color: black; font-weight: bolder; text-decoration: underline;"><b></b></label>                                                                                                                                                        
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>                                                        
+                                                    </div>
+                                                </div>
+                                          </div>
+                                        </div>
+                                        <!-- <div class="modal-footer p-2">
+                                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button><br><br><br>
+                                          <button type="button" onclick="saveChanges(1)" class="btn btn_bh">Save changes</button>
+                                        </div> -->
+                                      </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+    </div>
+    <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- <div class="buy-now">
+            <a
+                href="{% url 'home' %}#cta-premium"
+                target="_blank"
+                class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+        </div> -->
+
+    <!-- Core JS -->
+
+    <script>
+        function addItem(productNumber) {  
+            const form = document.getElementById('formItem'+productNumber);
+            if (form.checkValidity()) {
+                const item_name = document.getElementById('itemInput'+productNumber).value;
+                const price = document.getElementById('priceInput'+productNumber).value;
+                const quantity = document.getElementById('qtyInput'+productNumber).value;
+                const unit = document.getElementById('qtyWeigth'+productNumber).value;        
+                
+                // Assuming you have a table with id "product_table"
+                const table = document.getElementById('itemTable'+productNumber).getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow(1);
+                const cell1 = newRow.insertCell(0);
+                var label1 = document.createElement('label');
+                label1.className = 'form-check-label text-wrap p-0';
+                label1.style.color = 'black';
+                label1.style.fontWeight = 'bold';
+                label1.textContent = item_name;
+                cell1.appendChild(label1);
+
+
+                const cell2 = newRow.insertCell(1);
+                var label2 = document.createElement('label');
+                label2.className = 'form-check-label text-wrap p-0';
+                label2.style.color = 'black';
+                label2.style.fontWeight = 'bold';
+                label2.style.textDecoration = 'underline';
+                label2.textContent = '₹'+price;
+                cell2.appendChild(label2);
+
+                const cell3 = newRow.insertCell(2);
+                var label3 = document.createElement('label');
+                label3.className = 'form-check-label text-wrap p-0';
+                label3.style.color = 'black';
+                label3.style.fontWeight = 'bold';
+                label3.textContent = quantity + ' ' + unit;
+                cell3.appendChild(label3);
+
+                const conte = document.getElementById('total_val'+productNumber)
+                var conte_int = parseInt(conte.textContent.replace(/[^\d]/g, ''), 10);
+                conte.textContent = conte_int + Number(price)
+                conte.textContent = '₹' + conte.textContent
+                
+        
+                // Clear the form fields
+                document.getElementById('itemInput'+productNumber).value = '';
+                document.getElementById('priceInput'+productNumber).value = '';
+                document.getElementById('qtyInput'+productNumber).value = '';
+                document.getElementById('qtyWeigth'+productNumber).value = '';  
+                
+                $.ajax({
+                    url: '{% url "add_item" %}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    data: {
+                        'productNumber': productNumber,
+                        'item_name': item_name,
+                        'price': price,
+                        'quantity': quantity,
+                        'unit': unit,                   
+                    },
+                    success: function (response) {
+                        // Handle successful response from server
+                        console.log(response);
+                    },
+                    error: function (xhr, errmsg, err) {
+                        // Handle error response from server
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+
+                
+            } else {
+                form.reportValidity();
+            }
+
+            
+        }
+    </script>
+
+    <script>
+        {% for prodd in product_data %}
+
+            var total = 0
+            {% for ite in prodd.item_data %}
+                total = total + {{ite.price}}
+            {% endfor %}
+            document.getElementById('total_val'+{{prodd.id}}).textContent = '₹'+total
+            
+            
+        {% endfor %}
+    </script>
+
+    <script>
+        const submitBtn = document.getElementById('add_order');
+        const loadingDiv = document.getElementById('loading-bh');
+        const bhBody = document.getElementById('main');
+        const form = document.getElementById('my-form');
+
+
+        submitBtn.addEventListener('click', () => {
+            if (form.checkValidity()) {
+                loadingDiv.style.display = 'block';
+                bhBody.classList.add('blur');
+            } else {
+                form.reportValidity();
+            }
+        });
+    </script>
+
+    <script>
+        var today = new Date();
+        var formattedDate = today.toISOString().substr(0, 10);
+        document.getElementById("order_date").value = formattedDate;
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+
+    <!-- build:js assets-dash/vendor/js/core.js -->
+    <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+    <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+    <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+    <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/static/assets-dash/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="/static/assets-dash/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>

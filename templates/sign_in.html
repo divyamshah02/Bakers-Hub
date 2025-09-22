@@ -25,11 +25,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1,
       shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Sign in to Baker's hub to get your baking business's insights and reports now">
+  <meta name="author" content="Divyam Shah">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-  <title>Bakers Hub</title>
+  <title>Sign in</title>
   <link rel="icon" href="/static/assets-cta/images/favicon.png">
   <!-- Bootstrap core CSS -->
   <link href="/static/assets-cta/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -48,13 +48,13 @@ https://templatemo.com/tm-573-eduwell
 
 -->
 </head>
-  <body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%); padding-bottom: 90%;">    
+  <body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%); padding-bottom: 90%;">
     <section class="register" id="register-section" style="margin-top: 0; padding-top: 0px; padding-bottom: 100px;">
       <div class="container">
         <div class="row">
           <div class="col-lg-7 d-none d-lg-block">
             <div id="map">
-  
+
               <!-- You just need to go to Google Maps for your own map point, and copy the embed code from Share -> Embed a map section -->
               <img src="/static/assets-cta/images/people-working-together-online.png" style="border:0; border-radius: 15px; position: relative;
                   z-index: 2;" />
@@ -72,7 +72,7 @@ https://templatemo.com/tm-573-eduwell
                   </div>
                 </div>
                 <div class="col-lg-12">
-                  {% if error == 1 %}                 
+                  {% if error == 1 %}
                   <div class="mb-4 py-2 px-2 text-danger rounded m-2"
                     style="background-color: rgba(255, 113, 113, 0.508);"><b>
                       E-mail Id is not registered!
@@ -83,7 +83,7 @@ https://templatemo.com/tm-573-eduwell
                     style="background-color: rgba(255, 113, 113, 0.508);"><b>
                       Wrong Password!
                       </a></b>
-                  </div>                  
+                  </div>
                   {% elif error == 3 %}
                   <div class="mb-4 px-2 text-danger rounded m-2"
                     style="background-color: rgba(255, 113, 113, 0.508);"><b>
@@ -93,7 +93,7 @@ https://templatemo.com/tm-573-eduwell
                   {% endif %}
                 </div>
                 <div class="col-lg-12">
-                  {% if error == 2 %}  
+                  {% if error == 2 %}
                   <fieldset>
                     <input type="email" name="email" id="email" value="{{email}}"
                     placeholder="Enter your registered Email" required>
@@ -102,8 +102,8 @@ https://templatemo.com/tm-573-eduwell
                     <fieldset>
                       <input type="Password" name="password" id="password" placeholder="Password" required autofocus>
                     </fieldset>
-                  </div> 
-                  {% else %}             
+                  </div>
+                  {% else %}
                   <fieldset>
                     <input type="email" name="email" id="email"
                     placeholder="Enter your registered Email" required autofocus>
@@ -113,16 +113,16 @@ https://templatemo.com/tm-573-eduwell
                   <fieldset>
                     <input type="Password" name="password" id="password" placeholder="Password" required>
                   </fieldset>
-                </div>                                              
+                </div>
                 {% endif %}
                 <div class="col-lg-8">
-                  <p class="mb-0">                                    
+                  <p class="mb-0">
                     <a href="{% url 'forget_pass' %}">
                       <b><span style="color: #dc8cdb;">Forgot password?</span></b>
                     </a>
                   </p>
                   <p class="mb-3">
-                    <span>Don't have an account?</span>                    
+                    <span>Don't have an account?</span>
                     <a href="{% url 'home' %}">
                       <b><span style="color: #dc8cdb;">Register instead</span></b>
                     </a>
@@ -135,11 +135,11 @@ https://templatemo.com/tm-573-eduwell
                 </div>
               </div>
             </form>
-          </div>          
+          </div>
         </div>
       </div>
     </section>
-       
+
 
     <!-- Core JS -->
     <script src="/static/assets-cta/vendor/jquery/jquery.min.js"></script>

@@ -36,6 +36,11 @@
                     <div class="card-body rounded-bottom">
                         <form method="POST" id="my-form" enctype="multipart/form-data">
                             {% csrf_token %}
+                            <div class="py-2 px-2 rounded m-2" id="mic_error"
+                                    style="background-color: rgba(255, 113, 113, 0.508); color: red; border: 2px solid black;display: none;">
+                                    <b>
+                                        Fatal Error - Your device is not compatible for this feature!</b>
+                            </div>
                             {% if frequent_expenses_data == None %}
                             {% else %}
                             <div class="mb-3" style="color: #000">
@@ -85,8 +90,16 @@
                                 <label class="form-label" for="expense_name" style="color: #000;">Expense Name<span
                                         class="text-danger" style="font-size:
                                                             large;">*</span></label>
-                                <input type="text" class="form-control" id="expense_name" name="expense_name"
-                                    placeholder="Butter" aria-label="Expense name" required />
+                                <div class="row">
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" id="expense_name" name="expense_name"
+                                        placeholder="Butter" aria-label="Expense name" required />
+                                    </div>
+                                    <div class="col-2">
+                                        <i class="bx bx-microphone bx-md" style="color: var(--dark-color);" onclick="fillNextTextBox()"></i>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="expense_amount" style="color: #000;">Expense Amount<span class="text-danger" style="font-size: large;">*</span></label>
@@ -192,6 +205,109 @@
         </div> -->
 
 <!-- Core JS -->
+
+    {% if android_user == True %}
+        
+    <script>
+        let textBoxes = []; // Array to store the IDs of the text boxes.
+        let currentTextBoxIndex = 0; // Index to keep track of the current text box.
+
+        // Add the IDs of your text boxes to the 'textBoxes' array.
+        textBoxes.push('expense_name'); 
+        textBoxes.push('expense_amount');
+        textBoxes.push('expense_quantity');
+        textBoxes.push('extra_note');
+        
+        
+
+        function fillNextTextBox() {
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.lang = 'en-US';
+            recognition.maxAlternatives = 1;
+            console.log(currentTextBoxIndex)
+            if (currentTextBoxIndex === 0){
+                $.ajax({
+                    url: '{% url "mic_clicked" %}',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    data: {
+                        'Feature': 'Expense Adder',                    
+                    },
+                    success: function (response) {
+                        // Handle successful response from server
+                        console.log(response);
+                    },
+                    error: function (xhr, errmsg, err) {
+                        // Handle error response from server
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            };
+            if (currentTextBoxIndex < textBoxes.length) {
+                const currentTextBoxId = textBoxes[currentTextBoxIndex];
+                const currentTextBox = document.getElementById(currentTextBoxId);
+                const listeningIndicator = document.createElement('div');
+
+                currentTextBox.focus();
+                // currentTextBox.classList.add('custom_border');
+                listeningIndicator.textContent = 'Listening...';
+                listeningIndicator.style.color="rgb(255, 0, 0)";
+                currentTextBox.parentNode.insertBefore(listeningIndicator, currentTextBox.nextSibling);
+
+
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    currentTextBox.value = transcript;
+                    listeningIndicator.remove();
+                    // Move to the next text box or end the recognition.
+                    if (currentTextBoxIndex < textBoxes.length - 1) {
+                        currentTextBoxIndex++;
+                        fillNextTextBox();
+                    } else {
+                        recognition.stop();
+                    }
+                };
+
+                recognition.start();
+            }
+        }
+
+        // Call the fillNextTextBox function to start the process.
+        // fillNextTextBox();
+    </script>
+
+    {% else %}
+
+    <script>
+        function fillNextTextBox() {
+            document.getElementById('mic_error').style.display = 'block';
+            $.ajax({
+                url: '{% url "mic_clicked" %}',
+                type: 'POST',
+                headers: {
+                    'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()
+                },
+                data: {
+                    'Feature': 'iOS - Expense Adder',                    
+                },
+                success: function (response) {
+                    // Handle successful response from server
+                    console.log(response);
+                },
+                error: function (xhr, errmsg, err) {
+                    // Handle error response from server
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        }
+    </script>
+
+    {% endif %}
+
+
 <script>
     var today = new Date();
     var formattedDate = today.toISOString().substr(0, 10);

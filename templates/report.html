@@ -39,149 +39,8 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="/static/assets-dash/js/config.js"></script>
-    <style>
-        .mobile-nav {
-            background: #F1F1F1;
-            position: fixed;
-            bottom: 0;
-            height: 55px;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            z-index: 9999;
-        }
-
-        .bloc-icon {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        .bloc-icon img {
-            width: 30px;
-        }
-
-        .up-pro:hover {
-            box-shadow: 5px 5px 10px black;
-        }
-
-        .bg_bh {
-            /* background: linear-gradient(-145deg, rgb(147, 138, 222) 0%, rgb(159, 220, 246) 100%); */
-            /* background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%); */
-            /* background-color: #a3a2a268; */
-            background: var(--bg-grad);
-        }
-
-        .btn_bh {
-            color: #fff !important;
-            background-color: var(--dark-color) !important;
-        }
-
-        .btn_bh:hover {
-            transform: scale(1.1);
-        }
-
-        .ele_bg_bh {
-            background-color: var(--dark-color) !important;
-        }
-
-        .bor_col_bh {
-            border: 1px solid var(--dark-color) !important;
-        }
-
-        .tex_col_bh {
-            color: var(--dark-color) !important;
-        }
-
-        /* Dashbaord */
-        .list-group-item.active {
-            background-color: var(--dark-color) !important;
-            border-color: var(--dark-color) !important;
-            color: #fff !important;
-        }
-
-        .list-group-item {
-            border-color: var(--dark-color) !important;
-            color: #000 !important;
-        }
-
-        .item-hover:hover {
-            background-color: var(--dark-color) !important;
-            color: #fff !important;
-        }
-
-        .list-group-item-action:hover {
-            background-color: var(--hover-color) !important;
-            color: #fff !important;
-        }
-
-        /* Settings */
-        .form-check-input:checked {
-            background-color: var(--dark-color) !important;
-            border: var(--hover-color) !important;
-            box-shadow: 0 0 0 1px var(--hover-color) !important;
-        }
-
-        .form-check-input:focus {
-            border: var(--hover-color);
-            box-shadow: 0 0 0 1px var(--hover-color) !important;
-        }
-
-        .form-check-input:hover {
-            border: var(--hover-color) !important;
-            box-shadow: 0 0 0 3px var(--hover-color) !important;
-        }
-
-        .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
-            color: var(--dark-color) !important;
-            background-color: var(--hover-color) !important;
-        }
-
-        .bg-menu-theme .menu-inner>.menu-item.active:before {
-            background: var(--dark-color) !important;
-        }
-
-        @media screen and (min-width: 1200px) {
-            .mobile-nav {
-                display: none;
-            }
-        }
-
-        /* .active{
-                background-color: rgba(176, 50, 98, 0.541);
-                color: #fff;
-            } */
-    </style>
-    {% if theme == '0' %}
-    <style>
-        :root {
-            --bg-grad: linear-gradient(-145deg, rgba(219, 138, 222, 1) 0%, rgba(246, 191, 159, 1) 100%);
-            --dark-color: rgb(176, 50, 98);
-            --hover-color: rgba(176, 50, 98, 0.358);
-        }
-    </style>
-    {% endif %}
-    {% if theme == '1' %}
-    <style>
-        :root {
-            --bg-grad: linear-gradient(-145deg, rgb(147, 138, 222) 0%, rgb(159, 246, 227) 100%);
-            --dark-color: rgb(81, 50, 176);
-            --hover-color: rgba(147, 138, 222, 0.358);
-        }
-    </style>
-    {% endif %}
-    {% if theme == '2' %}
-    <style>
-        :root {
-            --bg-grad: linear-gradient(-145deg, #a3a2a268 0%, #a3a2a268 100%);
-            --dark-color: #696cff;
-            --hover-color: #8f91fa96;
-        }
-    </style>
-    {% endif %}
-
-
+  
+    
 </head>
 
 <body style="background-color: #696cff;">
@@ -209,11 +68,130 @@
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
+                                    <i class="bx bxl-play-store bx-md text-primary bg-label-primary p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>Total App Visitors</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{total_app_visitors}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bxl-chrome bx-md text-primary bg-label-primary p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>Total Web Visitors</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{total_web_visitors}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bxl-android bx-md text-primary bg-label-primary p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>Android App Users</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{android_app_user}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bxl-apple bx-md text-primary bg-label-primary p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>iOS App Users</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{iOS_app_user}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
                                     <i class="bx bx-user-circle bx-md text-info bg-label-info p-1 rounded" style="border: #000 1px solid;"></i>
                                 </div>
                             </div>
                             <span class="fw-semibold d-block mb-1"><b>Total Users</b></span>
                             <h3 class="card-title mb-2">{{all_users}}</h3>
+                            <!-- <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> +{{profit_perct}}%
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bx-user-circle bx-md text-info bg-label-info p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>{{month}} Users</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{this_mon_users}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bx-microphone bx-md text-info bg-label-info p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>iOS Mic Clicks</b></span>
+                            <h3 class="card-title mb-2">{{ios_mic}}</h3>
+                            <!-- <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> +{{profit_perct}}%
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bx-microphone bx-md text-info bg-label-info p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>Android Mic Clicks</b></span>
+                            <h3 class="card-title mb-2">{{android_mic}}</h3>
                             <!-- <small class="text-success fw-semibold">
                                 <i class="bx bx-up-arrow-alt"></i> +{{profit_perct}}%
                             </small> -->
@@ -244,11 +222,11 @@
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
-                                    <i class="bx bx-user-circle bx-md text-info bg-label-info p-1 rounded" style="border: #000 1px solid;"></i>
+                                    <i class="bx bx-user-check bx-md text-success bg-label-success p-1 rounded" style="border: #000 1px solid;"></i>
                                 </div>
                             </div>
-                            <span class="fw-semibold d-block mb-1"><b>{{month}} Users</b></span>
-                            <h3 class="card-title text-nowrap mb-2">{{this_mon_users}}</h3>
+                            <span class="fw-semibold d-block mb-1"><b>{{month}} premium users</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{this_mon_premium_users}}</h3>
                             <!-- <small class="text-danger fw-semibold">
                                 <i class="bx bx-down-arrow-alt"></i>
                                 &nbsp;</small> -->
@@ -264,8 +242,26 @@
                                     <i class="bx bx-user-check bx-md text-success bg-label-success p-1 rounded" style="border: #000 1px solid;"></i>
                                 </div>
                             </div>
-                            <span class="fw-semibold d-block mb-1"><b>{{month}} premium users</b></span>
-                            <h3 class="card-title text-nowrap mb-2">{{this_mon_premium_users}}</h3>
+                            <span class="fw-semibold d-block mb-1"><b>Total Freemium Users</b></span>
+                            <h3 class="card-title mb-2">{{freemium_users}}</h3>
+                            <!-- <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i>
+                                &nbsp;
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bx-user-check bx-md text-success bg-label-success p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>{{month}} freemium users</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{this_mon_freemium_users}}</h3>
                             <!-- <small class="text-danger fw-semibold">
                                 <i class="bx bx-down-arrow-alt"></i>
                                 &nbsp;</small> -->
@@ -306,6 +302,76 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bxl-android bx-md text-primary bg-label-primary p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>Android Visitors</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{Android}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bxl-apple bx-md text-primary bg-label-primary p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>iPhone Visitors</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{iPhone}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bxl-windows bx-md text-primary bg-label-primary p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>Windows Visitors</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{Windows}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <i class="bx bx-laptop bx-md text-primary bg-label-primary p-1 rounded" style="border: #000 1px solid;"></i>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1"><b>MacBook Visitors</b></span>
+                            <h3 class="card-title text-nowrap mb-2">{{Macintosh}}</h3>
+                            <!-- <small class="text-danger fw-semibold">
+                                <i class="bx bx-down-arrow-alt"></i>
+                                &nbsp;</small> -->
+                        </div>
+                    </div>
+                </div>
+                
+
             </div>
         </div>
     </div>

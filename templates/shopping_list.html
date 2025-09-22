@@ -1,0 +1,341 @@
+{% include "header.html" %}
+<style>
+    .blur {
+        filter: blur(5px);
+    }
+
+    #loading-bh {
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        color: var(--dark-color);
+        left: 50%;
+        display: none;
+    }
+</style>
+    <div class="spinner-border loading-bh" id="loading-bh">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <!-- Content wrapper -->
+    <div class="content-wrapper" style="background-color: transparent;" id="main">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+            <!-- Basic Layout -->
+            <div class="row">
+                <div class="col-xl">
+                    <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
+                        <div class="card-header d-flex
+                                            justify-content-between
+                                            align-items-center">
+                            <h2 class="mb-0" style="color: #000"><strong><b>Shopping List</b></strong></h2>
+                            <small class="float-end" style="color: #252222">Stock</small>
+                        </div>
+                        <div class="card-body rounded-bottom">
+                            <div class="col-12">
+                                <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <h4 class="mb-0" style="color: #000"><strong><b>Create new</b></strong></h4>
+                                        </div>
+                                        <form method="post">
+                                        {% csrf_token %}
+
+                                        <div class="mb-3">
+                                            <label class="form-label" for="shopping_title" style="color: #000">List title<span
+                                                    class="text-danger" style="font-size: large;">*</span></label>
+                                            <input type="text" class="form-control" id="shopping_title" name="shopping_title" autofocus
+                                                placeholder="Name" aria-label="shopping list title" required style="border: 1px solid black;"/>
+                                        </div>
+                                        <button id="add_order" type="submit" class="btn btn_bh">Create</button>
+                                        <!-- <span class="fw-semibold d-block mb-1"><b>Total App Visitors</b></span>                                                                                -->
+                                        </form>
+                                    </div>
+                                </div>
+                                {% for list in shopping_list %}
+                                <div class="card mt-4" style="box-shadow: 5px 5px 10px black;" data-bs-toggle="modal" data-bs-target="#modal{{list.id}}">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <h4 class="mb-0" style="color: #000"><strong><b>{{list.title}}</b></strong></h4>
+                                        </div>
+                                        <span class="fw-semibold d-block mb-1"><b>Add items</b></span>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="modal{{list.id}}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header mb-0">
+                                            <h4 class="modal-title mb-0" id="modalCenterTitle" style="color: #000"><strong><b>{{list.title}}</b></strong></h4>
+                                          <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="row mb-3">
+                                                <div class="col-12">
+                                                    <label class="form-label" for="item_name" style="color: #000">item name<span
+                                                            class="text-danger" style="font-size: large;">*</span></label>
+                                                </div>
+                                                <div class="col-10">
+                                                <input type="text" class="form-control" id="itemInput{{list.id}}" name="item_name" autofocus
+                                                    placeholder="Name" aria-label="Item name" required style="border: 1px solid black;"/>
+                                                </div>
+                                                <div class="col-2 p-0 text-center">
+                                                    <a href="#" onclick="addItem({{list.id}})"><i id="add_item" class="bx bx-plus-circle bx-md" style="color: var(--dark-color);"></i></a>
+                                                </div>
+                                                <hr class="rounded" style="padding-top: 2px; margin-top: 30px; color: var(--dark-color);">
+                                                <div class="form-check" style="padding: 0 13px;">
+                                                    <div class="table-responsive">
+                                                        <form id="form{{list.id}}">
+                                                            <table class="table align-middle" id="itemTable{{list.id}}">
+                                                                <tbody class="table-border-bottom-0">
+                                                                    {% for item in list.item_data %}
+                                                                    <input type="hidden" name="da{{ forloop.counter }}" value="{{item.id}}">
+                                                                    <input type="hidden" value="{{item.it_id}}" name="id{{ forloop.counter }}">
+                                                                    <tr>
+                                                                        <td>
+                                                                            {% if item.bought == True %}
+                                                                            <input class="form-check-input m-0 p-0" style="border: 1px solid var(--dark-color);" checked type="checkbox" required onclick="toggleStrikeThrough('item{{item.id}}{{item.it_id}}')" name="ch{{ forloop.counter }}"/>
+                                                                            {% else %}
+                                                                            <input class="form-check-input m-0 p-0" style="border: 1px solid var(--dark-color);" type="checkbox" required onclick="toggleStrikeThrough('item{{item.id}}{{item.it_id}}')" name="ch{{ forloop.counter }}"/>
+                                                                            {% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if item.bought == True %}
+                                                                            <label for="item{{item.id}}{{item.it_id}}" class="form-check-label text-wrap p-0" style="color: gray; text-decoration: line-through;"><b>{{item.item}}</b></label>
+                                                                            {% else %}
+                                                                            <label for="item{{item.id}}{{item.it_id}}" class="form-check-label text-wrap p-0" style="color: black;"><b>{{item.item}}</b></label>
+
+                                                                            {% endif %}
+
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button><br><br><br>
+                                          <button type="button" onclick="saveChanges({{list.id}})" class="btn btn_bh">Save changes</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+    </div>
+    <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- <div class="buy-now">
+            <a
+                href="{% url 'home' %}#cta-premium"
+                target="_blank"
+                class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+        </div> -->
+
+    <!-- Core JS -->
+    <script>
+        const submitBtn = document.getElementById('add_order');
+        const loadingDiv = document.getElementById('loading-bh');
+        const bhBody = document.getElementById('main');
+        const form = document.getElementById('my-form');
+
+
+        submitBtn.addEventListener('click', () => {
+            if (form.checkValidity()) {
+                loadingDiv.style.display = 'block';
+                bhBody.classList.add('blur');
+            } else {
+                form.reportValidity();
+            }
+        });
+    </script>
+    <script>
+        var today = new Date();
+        var formattedDate = today.toISOString().substr(0, 10);
+        document.getElementById("order_date").value = formattedDate;
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <script>
+        function addItem(itid) {
+        // // Get the item name from the input field
+        var itemName = document.getElementById('itemInput'+itid).value;
+        if (itemName.trim() === '') {
+            itemAdder = document.getElementById('itemInput'+itid)
+            itemAdder.style.border = '2px solid red';
+            itemAdder.focus();
+            return;
+        }
+        else{
+            itemAdder = document.getElementById('itemInput'+itid)
+            itemAdder.style.border = '1px solid black';
+            itemAdder.value = '';
+            itemAdder.focus();
+
+        }
+        var csrftoken = getCookie('csrftoken');
+        // Make the API call to add the item to the list in Django
+        // Replace 'apiEndpoint' with the actual API endpoint for adding items
+        fetch("{% url 'api_add_item' %}", {
+            method: 'POST',
+            body: JSON.stringify({'item': itemName,'shopping_id':itid}),
+            headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+            var itemId = data.item_id
+            console.log(itemId)
+            // On successful API response, add the item to the table
+            var table = document.getElementById('itemTable'+ itid).getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(0);
+            var rowCount = table.rows.length + 1;
+            var checkboxCell = newRow.insertCell(0);
+            var checkbox = document.createElement('input');
+            checkbox.className = 'form-check-input m-0 p-0';
+            checkbox.style.border = '1px solid var(--dark-color)';
+            checkbox.type = 'checkbox';
+            checkbox.id = 'checkbox';
+            checkbox.name = 'ch' + rowCount;
+            checkbox.required = true;
+            checkbox.onclick = function() {
+                toggleStrikeThrough('item'+itid+itemId);
+            };
+            checkboxCell.appendChild(checkbox);
+
+            var itemNameCell = newRow.insertCell(1);
+            var itemNameLabel = document.createElement('label');
+            itemNameLabel.htmlFor = 'item' + itid + itemId;
+            itemNameLabel.className = 'form-check-label text-wrap p-0';
+            itemNameLabel.style.color = 'black';
+            itemNameLabel.style.fontWeight = 'bold';
+            itemNameLabel.textContent = itemName;
+            itemNameCell.appendChild(itemNameLabel);
+
+            var shoppingForm = document.getElementById('form'+itid)
+            var itemText = document.createElement('input')
+            itemText.type = 'hidden';
+            itemText.name ='da' + rowCount;
+            itemText.value = itid;
+            shoppingForm.appendChild(itemText)
+
+            var itemTextId = document.createElement('input')
+            itemTextId.type = 'hidden';
+            itemTextId.name ='id' + rowCount;
+            itemTextId.value = itemId;
+            shoppingForm.appendChild(itemText)
+            })
+            .catch(error => {
+            // Handle API error
+            console.error('Error:', error);
+            });
+        }
+
+        function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Check if the cookie name matches the one we are looking for
+            if (cookie.substring(0, name.length + 1) === name + '=') {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+            }
+        }
+        return cookieValue;
+        }
+
+    </script>
+
+    <script>
+        function toggleStrikeThrough(itemId) {
+        var label = document.querySelector('label[for="' + itemId + '"]');
+        if (label) {
+            if (label.style.textDecoration === 'line-through') {
+            label.style.textDecoration = 'none';
+            label.style.color = 'black';
+            } else {
+            label.style.textDecoration = 'line-through';
+            label.style.color = 'gray';
+            }
+        }
+        }
+
+    </script>
+
+    <script>
+        function saveChanges(liid) {
+        var form = document.getElementById('form'+liid);
+        var formData = new FormData(form);
+
+        var csrftoken = getCookie('csrftoken');
+
+        fetch('{% url 'api_save_item' %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+            'X-CSRFToken': csrftoken
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+            // Handle the response if needed
+            var modalElement = document.getElementById('modal'+liid);
+            var modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+            })
+            .catch(error => {
+            console.error('Error:', error);
+            });
+        }
+    </script>
+    <!-- build:js assets-dash/vendor/js/core.js -->
+    <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+    <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+    <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+    <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/static/assets-dash/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="/static/assets-dash/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>

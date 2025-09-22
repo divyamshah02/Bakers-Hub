@@ -3,6 +3,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import datetime as dt
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+
 
 class SendMail:
     def __init__(self):
@@ -13,8 +18,8 @@ class SendMail:
         self.sender_email = 'support@bakershub.in'
         temp_tem = 'Navkar@108'
         self.sender_password = temp_tem
-        
-        
+
+
     def send_otp(self,email,otp):
         # Recipient email address
         self.recipient_email = email
@@ -39,12 +44,12 @@ class SendMail:
 
                 # Send the email
                 server.sendmail(self.sender_email, self.recipient_email, self.message.as_string())
-            
+
             return True
-                
+
         except:
             return False
-        
+
     def send_support(self,data):
         try:
             today = dt.datetime.today().strftime("%d/%m/%Y - %H:%M")
@@ -75,12 +80,12 @@ Profile Link: www.bakershub.in/admin/user_0/userprofile/{data['user_no']} </h4>
             return today
         except:
             return None
-            
+
     def support_user(self,data):
             try:
                 today = dt.datetime.today().strftime("%d/%m/%Y - %H:%M")
                 self.recipient_email = data['email']
-                self.message = MIMEMultipart()            
+                self.message = MIMEMultipart()
                 self.message['From'] = f"Baker's Hub Support <{self.sender_email}>"
                 self.message['To'] = self.recipient_email
                 self.message['Subject'] = f"[##{data['tid']}##] Support Request Recieved"
@@ -94,7 +99,7 @@ Profile Link: www.bakershub.in/admin/user_0/userprofile/{data['user_no']} </h4>
                 We strive to solve your problem as quickly as possible.<br><br>
                 Regards,<br>
                 Baker's Hub<br>
-                www.bakershub.in<br></h4>           
+                www.bakershub.in<br></h4>
                 <small>{today}</small>
                 '''
                 self.message.attach(MIMEText(self.body, 'html'))
@@ -107,4 +112,19 @@ Profile Link: www.bakershub.in/admin/user_0/userprofile/{data['user_no']} </h4>
                 return True
             except:
                 return False
-                
+
+def trail():
+    import smtplib
+    to = 'divyamshah1234@gmail.com'
+    user = 'support@sweetmist.in'#your secureserver mail_id(godaddy)
+    pwd = 'Navkar@108'
+
+    smtpserver = smtplib.SMTP("smtpout.asia.secureserver.net",80)
+    smtpserver.ehlo
+    smtpserver.login(user, pwd)
+    header = 'To:' + to + '\n' + 'From: ' + user + '\n' + 'Subject:testing \n'
+    print("header")
+    msg = header + '\n Thank you for registring.\n\n'
+    smtpserver.sendmail(user, to, msg)
+    print('done!')
+    smtpserver.close()

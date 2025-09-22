@@ -152,11 +152,24 @@
                 background-color: rgba(176, 50, 98, 0.541);
                 color: #fff;
             } */
+
+        .blur {
+            filter: blur(5px);
+        }
+    
+        #loading-bh {
+            position: absolute;
+            z-index: 999;
+            top: 50%;
+            color: var(--dark-color);
+            left: 45% !important;
+            display: none;
+        }
     </style>
     {% if theme == '0' %}
     <style>
         :root {
-            --bg-grad: linear-gradient(-145deg, rgba(219, 138, 222, 1) 0%, rgba(246, 191, 159, 1) 100%);
+            --bg-grad: linear-gradient(-145deg, rgb(194, 96, 133) 0%, rgba(246, 191, 159, 1) 100%);
             --dark-color: rgb(176, 50, 98);
             --hover-color: rgba(176, 50, 98, 0.358);
         }
@@ -185,8 +198,11 @@
 </head>
 
 <body class="bg_bh">
+    <div class="spinner-border loading-bh" id="loading-bh">
+        <span class="visually-hidden">Loading...</span>
+    </div>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-wrapper layout-content-navbar" id="main_body">
         <div class="layout-container">
             <!-- Menu -->
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -286,6 +302,63 @@
                     </li>
                     {% endif %}
 
+                    {% if tab == 8 %}
+                    <!-- Profle -->
+                    <li class="menu-item active">
+                        <a href="{% url 'shopping_list' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
+                            <div data-i18n="Basic">Shopping List</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Profile -->
+                    <li class="menu-item">
+                        <a href="{% url 'shopping_list' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
+                            <div data-i18n="Basic">Shopping List</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if tab == 9 %}
+                    <!-- Profle -->
+                    <li class="menu-item active">
+                        <a href="{% url 'task_list' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-list-check"></i>
+                            <div data-i18n="Basic">Task List</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Profile -->
+                    <li class="menu-item">
+                        <a href="{% url 'task_list' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-list-check"></i>
+                            <div data-i18n="Basic">Task List</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if tab == 10 %}
+                    <!-- Profle -->
+                    <li class="menu-item active">
+                        <a href="{% url 'price_calculator' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
+                            <div data-i18n="Basic">Price Calculator</div>
+                        </a>
+                    </li>
+
+                    {% else %}
+                    <!-- Profile -->
+                    <li class="menu-item">
+                        <a href="{% url 'price_calculator' %}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
+                            <div data-i18n="Basic">Price Calculator</div>
+                        </a>
+                    </li>
+                    {% endif %}
+
 
                     <!-- Process -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Actions</span></li>
@@ -347,11 +420,13 @@
                     {% endif %}
 
                     <li class="menu-item">
-                        <a href="{% url 'logout' %}" class="menu-link">
+                        <a data-bs-toggle="modal" data-bs-target="#modalCenter" class="menu-link"
+                        style="cursor: pointer;">
                             <i class="menu-icon tf-icons bx bx-log-out"></i>
                             <div>Log Out</div>
                         </a>
                     </li>
+                    <br><br>
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -359,14 +434,13 @@
             <!-- Layout container -->
             <div class="layout-page">
                 <nav class="mobile-nav">
-                    <a href="{% url 'sale_adder' %}" class="bloc-icon">
-                        <!-- <img src="" alt="YOO"> -->
+                    <a href="{% url 'sale_adder' %}" class="bloc-icon" id="bottom_icons" onclick="load()">
                         <i class="bx bx-wallet bx-sm text-success p-1 rounded"></i>
                     </a>
-                    <a href="{% url 'dashboard' %}" class="bloc-icon">
+                    <a href="{% url 'dashboard' %}" class="bloc-icon" id="bottom_icons" onclick="load()">
                         <i class="bx bx-home bx-sm text-primary p-1 rounded"></i>
                     </a>
-                    <a href="{% url 'expense_adder' %}" class="bloc-icon">
+                    <a href="{% url 'expense_adder' %}" class="bloc-icon" id="bottom_icons" onclick="load()">
                         <i class="bx bx-money bx-sm text-danger p-1 rounded"></i>
                     </a>
 
@@ -442,10 +516,10 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{% url 'logout' %}">
+                                        <a class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#modalCenter">
                                             <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log
-                                                Out</span>
+                                            <span class="align-middle">Log Out</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -640,3 +714,47 @@
         {% endif %}
         {% endif %}
         {% endif %}
+        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalCenterTitle">Confirm log Out</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                 <h3>Are you sure you want to log out of your account?</h3>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <a href="{% url 'logout' %}"><button type="button" class="btn btn_bh">log Out</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            const submitBtn = document.getElementById('bottom_icons');
+            const loadingDiv = document.getElementById('loading-bh');
+            const bhBody = document.getElementById('main_body');
+            const form = document.getElementById('my-form');
+    
+    
+            submitBtn.addEventListener('click', () => {   
+                console.log('hello');             
+                loadingDiv.style.display = 'block';
+                bhBody.classList.add('blur');                
+            });
+
+            function load(){
+                console.log('hello');             
+                loadingDiv.style.display = 'block';
+                bhBody.classList.add('blur'); 
+            }
+        </script>

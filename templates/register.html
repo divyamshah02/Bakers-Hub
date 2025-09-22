@@ -14,9 +14,10 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Bakers Hub</title>
+    <title>Register</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content="Register to Baker's Hub today to get insights of your baking business and be on top of your business." />
+    <meta name="author" content="Divyam Shah">
 
     <!-- Favicon -->
     <link rel="icon" href="/static/assets-cta/images/favicon.png">
@@ -60,14 +61,14 @@
             --hover-color: rgba(176, 50, 98, 0.358);
         }
     .blur{
-      filter: blur(5px);        
+      filter: blur(5px);
     }
     #loading-bh {
       position: absolute;
-      z-index: 999;  
-      top: 50%;      
+      z-index: 999;
+      top: 50%;
       color: rgb(176, 50, 98);
-      left: 50%;     
+      left: 45%;
       display: none;
     }
     .form-check-input:checked {
@@ -88,41 +89,63 @@
   </style>
   </head>
 
-  <body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%);">    
-    <!-- Content -->    
+  <body style="background: linear-gradient(-145deg, rgb(194, 96, 133) 0%, rgba(246,191,159,1) 100%);">
+    <!-- Content -->
     <div class="container-xxl" id="main">
       <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">     
+        <div class="authentication-inner">
           <div class="row">
             <div class="col-12 p-5 text-center">
               <img src="/static/assets-cta/images/logo.png" alt="Baker Hub" style="width: 250px; position: relative; z-index: 10;"/>
             </div>
-          </div>       
+          </div>
           <!-- Register -->
-          
+
           <div class="card" style="background-color: transparent; border: 2px solid black;">
             <div class="card-body">
-              <!-- Logo -->              
+              <!-- Logo -->
               <!-- /Logo -->
-              <h4 class="mb-2 text-end-black" style="color: black;">Welcome to Bakers Hub! 👋</h4>              
-              <p class="mb-4" style="color: black;">Please register your account and start the adventure</p>
+              {% if email_query == None %}                    
+              <h4 class="mb-2 text-end-black" style="color: black;">Welcome to Bakers Hub! 👋</h4>
+              <p class="mb-4" style="color: black;">Register your account and start the adventure</p>
+              {% else %}   
+              <h4 class="mb-2 text-end-black" style="color: black;">Uhh Oh! you don't have an account! 🙁</h4>
+              <p class="mb-4" style="color: black;">Register your account and start the adventure</p>               
+              {% endif %}
 
-              <form class="mb-3" method="POST" id="my-form"> 
+              <form class="mb-3" method="POST" id="my-form">
               {% csrf_token %}
-                {% if error == 1 %}                 
+                {% if error == 1 %}
                   <div class="mb-4 py-2 px-2 text-danger rounded m-2"
                     style="background-color: rgba(255, 113, 113, 0.508);"><b>
                       E-mail Id is already registered!
                       </a></b>
-                  </div>                             
+                  </div>
                   {% elif error == 2 %}
                   <div class="mb-4 px-2 text-danger rounded m-2"
                     style="background-color: rgba(255, 113, 113, 0.508);"><b>
                       Fatal Error Please Try Again!
                       </a></b>
                   </div>
-                {% endif %}  
-                <div class="mb-3">                    
+                {% endif %}
+                
+                <div class="mb-3">
+                  <label for="email" class="form-label" style="color: black;"><b>Email</b></label>
+                  <input required
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email_disabled"
+                    {% if email_query == None %}
+                    {% else %}
+                    value = {{email_query}}
+                    disabled
+                    {% endif %}
+                    placeholder="Enter your email"
+                  />
+                </div>
+              <input type="hidden" name="email" value="{{email_query}}">
+                <div class="mb-3">
                     <label for="name" class="form-label" style="color: black;"><b>Name</b></label>
                     <input required type="text"
                       class="form-control"
@@ -133,20 +156,10 @@
                       pattern="[A-Za-z ]+"
                       autofocus
                     />
-                </div>                                               
-                <div class="mb-3">                    
-                  <label for="email" class="form-label" style="color: black;"><b>Email</b></label>
-                  <input required
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"                   
-                  />
-                </div>
+                </div>                
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password" style="color: black;"><b>Password</b></label>                    
+                    <label class="form-label" for="password" style="color: black;"><b>Password</b></label>
                   </div>
                   <div class="input-group input-group-merge">
                     <input required
@@ -159,20 +172,20 @@
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
-                </div>  
-                <div class="mb-3">                 
+                </div>
+                <div class="mb-3">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="t&c" required/>
                     <label class="form-check-label" for="t&c" data-bs-toggle="modal"
                     data-bs-target="#t_c_modal" style="color: black;"><u><b>Terms & Conditions</b></u></label>
                   </div>
-                               
+
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="privacy_policy" required/>
                     <label class="form-check-label" for="privacy_policy" data-bs-toggle="modal"
                     data-bs-target="#privacy_policy_modal" style="color: black;"><u><b>Privacy Policy</b></u></label>
                   </div>
-                </div>                                               
+                </div>
 
                 <div class="mb-3">
                   <button id="register" class="btn d-grid w-100" type="submit" style="background-color: rgb(176, 50, 98); color: #fff;">Register</button>
@@ -193,7 +206,7 @@
     </div>
     <div class="spinner-border loading-bh" id="loading-bh">
         <span class="visually-hidden">Loading...</span>
-    </div> 
+    </div>
     <div class="modal fade" id="privacy_policy_modal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -207,9 +220,9 @@
             ></button>
           </div>
           <div class="modal-body" style="height: 500px;">
-            <div class="row">              
+            <div class="row">
               <iframe id="p_p_iframe" src="{% url 'privacy_policy' %}" height="400"y></iframe>
-            </div>                      
+            </div>
         </div>
       </div>
       </div>
@@ -227,42 +240,42 @@
             ></button>
           </div>
           <div class="modal-body" style="height: 500px;">
-            <div class="row">              
+            <div class="row">
               <iframe id="t_c_iframe" src="{% url 'terms_conds' %}" height="400"y></iframe>
-            </div>                      
+            </div>
         </div>
       </div>
       </div>
     </div>
 
 
-      
-    <!-- / Content -->   
+
+    <!-- / Content -->
     <script>
       window.addEventListener("DOMContentLoaded", function() {
         var iframe = document.getElementById("t_c_iframe");
         var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        var footer = iframeDoc.querySelector("footer"); 
+        var footer = iframeDoc.querySelector("footer");
         var links = iframeDoc.querySelectorAll("a");
 
         links.forEach(function(link) {
           link.addEventListener("click", function(event) {
             event.preventDefault(); // Prevent the default link behavior
           });
-        });       
+        });
         if (footer) {
           footer.style.display = "none";
         }
         var iframe_p = document.getElementById("p_p_iframe");
         var iframeDoc_p = iframe_p.contentDocument || iframe_p.contentWindow.document;
-        var footer_p = iframeDoc_p.querySelector("footer"); 
+        var footer_p = iframeDoc_p.querySelector("footer");
         var links_p = iframeDoc_p.querySelectorAll("a");
 
         links_p.forEach(function(link) {
           link.addEventListener("click", function(event) {
             event.preventDefault(); // Prevent the default link behavior
           });
-        });       
+        });
         if (footer_p) {
           footer_p.style.display = "none";
         }
@@ -275,8 +288,8 @@
         const loadingDiv = document.getElementById('loading-bh');
         const bhBody = document.getElementById('main');
         const form = document.getElementById('my-form');
-      
-  
+
+
         submitBtn.addEventListener('click', () => {
           if (form.checkValidity()){
             loadingDiv.style.display = 'block';

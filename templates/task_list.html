@@ -1,0 +1,157 @@
+{% include "header.html" %}
+<style>
+    .blur {
+        filter: blur(5px);
+    }
+
+    #loading-bh {
+        position: absolute;
+        z-index: 999;
+        top: 50%;
+        color: var(--dark-color);
+        left: 50%;
+        display: none;
+    }
+</style>
+    <div class="spinner-border loading-bh" id="loading-bh">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <!-- Content wrapper -->
+    <div class="content-wrapper" style="background-color: transparent;" id="main">
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+            <!-- Basic Layout -->
+            <div class="row">
+                <div class="col-xl">
+                    <div class="card mb-4" style="background-color: transparent; border: 2px solid black;">
+                        <div class="card-header d-flex
+                                            justify-content-between
+                                            align-items-center">
+                            <h2 class="mb-0" style="color: #000"><strong><b>Task List</b></strong></h2>
+                            <small class="float-end" style="color: #252222">To - Do's</small>
+                        </div>
+                        <div class="card-body rounded-bottom">
+                            <div class="col-12">
+                                <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                                    <div class="card-body">
+                                        <div class="card-title d-flex align-items-start justify-content-between">
+                                            <h4 class="mb-0" style="color: #000"><strong><b>New Task</b></strong></h4>
+                                        </div>
+                                        <form method="post">
+                                        {% csrf_token %}
+
+                                        <div class="mb-3">                                            
+                                            <input type="text" class="form-control" id="task" name="task" autofocus
+                                                placeholder="Enter new task" aria-label="New task" required style="border: 1px solid black;"/>
+                                        </div>
+                                        <button id="add_order" type="submit" class="btn btn_bh">Add</button>
+                                        <!-- <span class="fw-semibold d-block mb-1"><b>Total App Visitors</b></span>                                                                                -->
+                                        </form>
+                                        <div class="col-12">
+                                            <table class="table align-middle" style="background-color: transparent;" id="itemTable{{list.id}}">
+                                                <tbody class="table-border-bottom-0" style="background-color: transparent;">
+                                                    {% for task in all_task reversed %}
+                                                    <tr style="background-color: transparent;">
+                                                        {% if task.completed == True %}
+                                                        <td style="background-color: transparent;">
+                                                            <input class="form-check-input m-0 p-0" onclick="complete_task({{task.id}})" style="border: 1px solid var(--dark-color);" type="checkbox" checked/>
+                                                        </td>
+                                                        <td style="background-color: transparent;">
+                                                            <label class="form-check-label text-wrap p-0 pb-2"><a href="{% url 'complete_task' task.id %}" style="color: inherit; text-decoration: line-through;"><b>{{task.task}}</a></b></label>
+                                                        </td> 
+                                                        {% else %}
+                                                        <td style="background-color: transparent;">
+                                                            <input class="form-check-input m-0 p-0" onclick="complete_task({{task.id}})" style="border: 1px solid var(--dark-color);" type="checkbox"/>
+                                                        </td>
+                                                        <td style="background-color: transparent;">
+                                                            <label class="form-check-label text-wrap p-0 pb-2"><a href="{% url 'complete_task' task.id %}" style="color: inherit; text-decoration: none;"><b>{{task.task}}</a></b></label>
+                                                        </td>                                
+                                                        {% endif %}
+                                                    </tr>
+                                                    {% endfor %}
+                                                    
+                                                </tbody>
+                                            </table>                                        
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+    </div>
+    <!-- Content wrapper -->
+    </div>
+    <!-- / Layout page -->
+    </div>
+
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- <div class="buy-now">
+            <a
+                href="{% url 'home' %}#cta-premium"
+                target="_blank"
+                class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+        </div> -->
+
+    <!-- Core JS -->
+    <script>
+        const submitBtn = document.getElementById('add_order');
+        const loadingDiv = document.getElementById('loading-bh');
+        const bhBody = document.getElementById('main');
+        const form = document.getElementById('my-form');
+
+
+        submitBtn.addEventListener('click', () => {
+            if (form.checkValidity()) {
+                loadingDiv.style.display = 'block';
+                bhBody.classList.add('blur');
+            } else {
+                form.reportValidity();
+            }
+        });    
+    </script>
+
+    <script>
+        
+        function complete_task(id) {
+            console.log(id)
+            // Redirect the user to the desired link with the provided ID
+            window.location.href = '/complete_task/' + id; // Replace with your desired link            
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <!-- build:js assets-dash/vendor/js/core.js -->
+    <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
+    <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+    <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+    <script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/static/assets-dash/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="/static/assets-dash/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>

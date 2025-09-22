@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
+    data-assets-dash-path="/static/assets-dash/" data-template="vertical-menu-template-free">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,
+            minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Baker's Hub - Freemium</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/static/assets-cta/images/favicon.png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.g/static.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/fonts/boxicons.css" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/static/assets-dash/vendor/css/theme-default.css"
+        class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/static/assets-dash/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="/static/assets-dash/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="/static/assets-dash/js/config.js"></script>
+    <style>
+        :root {
+            --bg-grad: linear-gradient(-145deg, rgb(147, 138, 222) 0%, rgb(159, 246, 227) 100%);
+            --dark-color: rgb(81, 50, 176);
+            --hover-color: rgba(147, 138, 222, 0.358);
+        }
+        .mobile-nav {
+            background: #F1F1F1;
+            position: fixed;
+            bottom: 0;
+            height: 55px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 9999;
+        }
+
+        .bloc-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .bloc-icon img {
+            width: 30px;
+        }
+
+        .up-pro:hover {
+            box-shadow: 5px 5px 10px black;
+        }
+
+        .bg_bh {
+            /* background: linear-gradient(-145deg, rgb(147, 138, 222) 0%, rgb(159, 220, 246) 100%); */
+            /* background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%); */
+            /* background-color: #a3a2a268; */
+            background: var(--bg-grad);
+        }
+
+        .btn_bh {
+            color: #fff !important;
+            background-color: var(--dark-color) !important;
+        }
+
+        .btn_bh:hover {
+            transform: scale(1.1);
+        }
+
+        .ele_bg_bh {
+            background-color: var(--dark-color) !important;
+        }
+
+        .bor_col_bh {
+            border: 1px solid var(--dark-color) !important;
+        }
+
+        .tex_col_bh {
+            color: var(--dark-color) !important;
+        }
+
+        /* Dashbaord */
+        .list-group-item.active {
+            background-color: var(--dark-color) !important;
+            border-color: var(--dark-color) !important;
+            color: #fff !important;
+        }
+
+        .list-group-item {
+            border-color: var(--dark-color) !important;
+            color: #000 !important;
+        }
+
+        .item-hover:hover {
+            background-color: var(--dark-color) !important;
+            color: #fff !important;
+        }
+
+        .list-group-item-action:hover {
+            background-color: var(--hover-color) !important;
+            color: #fff !important;
+        }
+
+        /* Settings */
+        .form-check-input:checked {
+            background-color: var(--dark-color) !important;
+            border: var(--hover-color) !important;
+            box-shadow: 0 0 0 1px var(--hover-color) !important;
+        }
+
+        .form-check-input:focus {
+            border: var(--hover-color);
+            box-shadow: 0 0 0 1px var(--hover-color) !important;
+        }
+
+        .form-check-input:hover {
+            border: var(--hover-color) !important;
+            box-shadow: 0 0 0 3px var(--hover-color) !important;
+        }
+
+        .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
+            color: var(--dark-color) !important;
+            background-color: var(--hover-color) !important;
+        }
+
+        .bg-menu-theme .menu-inner>.menu-item.active:before {
+            background: var(--dark-color) !important;
+        }
+
+        @media screen and (min-width: 1200px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+    </style>
+    
+</head>
+
+<body style="background-color: #696cff;">
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row">
+                <div class="col-6">
+                    <h2 style="color: #fff;"><b>Baker's Hub Freemium</b></h2>
+                </div>
+               
+                <div class="col-12">
+                    <div class="card mt-4" style="box-shadow: 5px 5px 10px black;">
+                        <div class="card-body">
+                            <div class="">
+                                {% if error == 1 %}                            
+                                <div class="alert alert-danger" role="alert"><b>Freemium was not added!</b></div>
+                                {% endif %}
+                                {% if error == 2 %}                            
+                                <div class="alert alert-success" role="alert"><b>Freemium added!</b></div>
+                                {% endif %}
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input
+                                        type="email"
+                                        class="form-control"
+                                        id="email"
+                                        name="email"
+                                        placeholder="Enter Email"
+                                        aria-describedby="Email"
+                                        required
+                                        />
+                                        <div id="Email" class="form-text">
+                                        Please be careful.
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="duration" class="form-label">Duration (Days)</label>
+                                        <input
+                                        type="text"
+                                        class="form-control"
+                                        id="duration"
+                                        name="duration"
+                                        placeholder="30 / 60 / 90"
+                                        aria-describedby="duration"
+                                        required
+                                        />
+                                        <div id="duration" class="form-text">
+                                        How many days for freemium.
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <!-- <small class="text-success fw-semibold">
+                                <i class="bx bx-up-arrow-alt"></i> +{{profit_perct}}%
+                            </small> -->
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+</div>
+<!-- / Layout page -->
+</div>
+
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- build:js assets-dash/vendor/js/core.js -->
+<script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
+<script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
+<script src="/static/assets-dash/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/static/assets-dash/vendor/js/menu.js"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+<script src="/static/assets-dash/vendor/libs/apex-charts/apexcharts.js"></script>
+<!-- Main JS -->
+<script src="/static/assets-dash/js/main.js"></script>
+
+<!-- Page JS -->
+<script src="/static/assets-dash/js/dashboards-analytics.js"></script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>
+</body>

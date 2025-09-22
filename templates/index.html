@@ -2,556 +2,629 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <title>Baker's Hub - Expense Tracking, Order Management, and Analysis App for Home Baking Business</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="bakers hub, Baker's Hub, home baking, business app, expense tracking, order management, analysis, bookkeeping" name="keywords">
+    <meta content="Track your expenses, manage orders, and analyze your home baking business with Baker's Hub - a user-friendly app. Take your business to new heights with our easy-to-use features. Get started today!" name="description">
+    <meta name="author" content="Divyam Shah">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1,
-      shrink-to-fit=no">
-  <!--<meta name="description" content="Optimize your home baking business with our user-friendly app. From recording expenses to managing orders and generating invoices, we make it easy for you. Get started today and take your business to new heights!">-->
-  <meta name="description" content="Track your expenses, manage orders, and analyze your home baking business with Baker's Hub - a user-friendly app. Take your business to new heights with our easy-to-use features. Get started today!">
-  <meta name="author" content="Divyam Shah">
-  <meta name="keywords" content="bakers hub, Baker's Hub, home baking, business app, expense tracking, order management, analysis">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <meta property="og:site_name" content="Baker's Hub" /> <!-- website name -->
+	<meta property="og:site" content="https://www.bakershub.in/" /> <!-- website link -->
+	<meta property="og:title" content="Baker's Hub - Bookkeeping App for Home Bakers"/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="Track your expenses, manage orders, and analyze your home baking business with Baker's Hub - a user-friendly app. Take your business to new heights with our easy-to-use features. Get started today!" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="/static/cta-assets/img/square_logo.jpg" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="https://www.bakershub.in/" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
 
-  <title>Baker's Hub - Expense Tracking, Order Management, and Analysis App for Home Baking Business</title>
-  <link rel="icon" href="/static/assets-cta/images/favicon.png">
-  <!-- Bootstrap core CSS -->
-  <link href="/static/assets-cta/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Favicon -->
+    <link href="/static/cta-assets/img/favicon.ico" rel="icon">
 
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="/static/assets-cta/css/fontawesome.css">
-  <link rel="stylesheet" href="/static/assets-cta/css/templatemo-eduwell-style.css">
-  <link rel="stylesheet" href="/static/assets-cta/css/owl.css">
-  <link rel="stylesheet" href="/static/assets-cta/css/lightbox.css">
-  <link rel="stylesheet" href="/static/assets-dash/vendor/fonts/boxicons.css" />
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Libraries Stylesheet -->
+    <link href="/static/cta-assets/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/cta-assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-  <!--
--->
-<style>
-  .btn_bh{
-                color: #fff !important;
-                background-color: rgb(176, 50, 98) !important;
-                cursor: default !important;
-            }
-  .tex_col_bh{
-                color: rgb(176, 50, 98) !important;
-            }
-</style>
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/cta-assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/static/cta-assets/css/style.css" rel="stylesheet">
 </head>
 
-<!-- <body style="background-color: rgba(238, 170, 233, 0.421);"> -->
-
-<body>
-  <!-- ***** Header Area Start ***** -->
-  {% include "cta-header.html" %}
-
-  <!-- ***** Header Area End ***** -->
-
-  <!-- ***** Main Banner Area Start ***** -->
-  <section class="main-banner rounded-5" id="top"
-    style="background: linear-gradient(rgba(219, 138, 222, 0.473) 0%, rgba(246, 191, 159, 0.489))">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 align-self-center">
-          <div class="header-text">
-            <h6>Welcome to <b>Baker's Hub</b></h6>
-            <h5>Track your <em>Finance!</em></h5>
-            <p class="pb-4" style="position: relative; z-index: 2;"><b>Optimize your home baking business with our
-              user-friendly app. From recording expenses
-              to managing orders and generating invoices,
-              we make it easy for you. Get started today
-              and take your business to new heights!</b></p>
-
-            <div class="main-button-gradient">
-              <div class="scroll-to-section"><a href="#app">Get The App!</a></div>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+    <div class="bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow" style="width: 3rem; height: 3rem; color: var(--primary);" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
-          </div>
         </div>
-        <div class="col-lg-6">
-          <div class="right-image">
-            <img src="/static/assets-cta/images/person-studying-online.png" alt="Baker's Hub - Home Baking Business App">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ***** Main Banner Area End ***** -->
+        <!-- Spinner End -->
 
-  <div class="services" id="services"
-    style="background: linear-gradient(to bottom, rgba(246, 191, 159, 0.489), #fff); padding-top: 140px;">
-    <br>
-    <div class="container">
-      <div class="row align-items-end text-center">
-        <div class="col-lg-12">
-          <div class="section-heading">
-            <h6>Our Services</h6>
-            <h4>Services for Your <em>Home Baking Business</em></h4>
-          </div>
-        </div>
-        <div class="col-lg-3 col-6 text-center text-wrap">
-          <img src="/static/assets-cta/images/service-icon-02.png" style="max-width: 100px;" alt="Expense Tracking">
-          <h4 class="py-3"><b>Expense Tracking</b></h4>
-        </div>
-        <div class="col-lg-3 col-6 text-center text-wrap">
-          <img src="/static/assets-cta/images/service-icon-03.png" style="max-width: 100px;" alt="Record Keeping">
-          <h4 class="py-3"><b>Record Keeping</b></h4>
-        </div>
-        <div class="col-lg-3 col-6 text-center text-wrap">
-          <img src="/static/assets-cta/images/service-icon-04.png" style="max-width: 100px;" alt="Cloud Based Technology">
-          <h4 class="py-3"><b>Cloud Based Technology</b></h4>
-        </div>
-        <div class="col-lg-3 col-6 text-center text-wrap">
-          <img src="/static/assets-cta/images/service-icon-01.png" style="max-width: 100px;" alt="In-Depth Analysis">
-          <h4 class="py-3"><b>In-Depth Analysis</b></h4>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <section class="our-features" id="features">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-          <div class="section-heading">
-            <h6>OUR FEATURES</h6>
-            <h4>What You Can <em>Do</em></h4>
-            <p>You just think about Baker's Hub whenever you purchase something or
-              whenever you get an order!
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <div class="naccs">
-            <div class="tabs">
-              <div class="row">
-                <div class="col-lg-3">
-                  <div class="menu">
-                    <div class="active gradient-border" onclick="scrollToTarget();"><span>Order Tracker</span></div></a>
-                    <div class="gradient-border" onclick="scrollToTarget();"><span>Cost Tracker</span></div>
-                    <div class="gradient-border" onclick="scrollToTarget();"><span>Analysis</span></div>
-                  </div>
+        <!-- Navbar & Hero Start -->
+        <div class="position-relative p-0" id="home">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="m-0">Baker's Hub</h1>
+                    <!-- <img src="/static/cta-assets/img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0" style="margin-right: 0 !important;">
+                        <a href="#home" class="nav-item nav-link active">Home</a>
+                        <a href="#about" class="nav-item nav-link">About</a>
+                        <a href="#feature" class="nav-item nav-link">Features</a>
+                        <a href="#pricing" class="nav-item nav-link">Pricing</a>
+                        <a href="#download" class="nav-item nav-link">App</a>
+                        <!-- <a href="#contact" class="nav-item nav-link">Contact</a> -->
+                    </div>
+                    <!-- <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Start Free Trial</a> -->
                 </div>
-                <div class="col-lg-9" id="premium_features">
-                  <ul class="nacc">
-                    <li class="active" style="box-shadow: 5px 5px 10px black; background: linear-gradient(-145deg, rgba(219, 138, 222, 0.568) 0%, rgba(246,191,159,0.568) 100%)">
-                      <div>
-                        <div class="left-image" style="text-align: center;">
-                          <img src="/static/assets-cta/images/inc.png" style="width:
-                              380px;" alt="Order Tracker">
-                        </div>
-                        <div class="right-content">
-                          <h4>Order Tracker</h4>
-                          <p>
-                            Our order tracker feature simplifies the process of
-                            adding orders for you. With our
-                            user-friendly interface, you can easily add and
-                            manage your orders all in one place. Say goodbye
-                            to the hassle of keeping track of orders on paper
-                            or in multiple systems - our feature saves you time
-                            and helps you stay organized. Plus, our reporting
-                            feature allows you to view all of your orders in
-                            one place, giving you a clear picture of your
-                            business's sales and revenue. By using Baker's Hub,
-                            you can streamline your order management
-                            process and make critical decisions about your
-                            business's growth.
-                          </p>
-                          <span>Simple</span>
-                          <span>Efficient</span>
-                          <span class="last-span">User Friendly</span>
-                          <div class="text-button">
-                            <a href="#register-section">Register</a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li style="box-shadow: 5px 5px 10px black; background: linear-gradient(-145deg, rgba(219, 138, 222, 0.568) 0%, rgba(246,191,159,0.568) 100%)">
-                      <div>
-                        <div class="left-image" style="text-align: center;">
-                          <img src="/static/assets-cta/images/exp.png" style="width:
-                              400px;" alt="Cost Tracker">
-                        </div>
-                        <div class="right-content">
-                          <h4>Cost Tracker</h4>
-                          <p>Our Cost Tracker feature makes it easy for you
-                            to keep track of your expenses. With our
-                            simple and intuitive interface, you can quickly
-                            enter your expenses and keep them organized in one
-                            place. Say goodbye to the hassle of messy
-                            spreadsheets and digging through receipts - our
-                            feature saves you time and hassle. Plus, our expense
-                            reporting feature allows you to view all of your
-                            expenses at one place, giving you a clear picture of
-                            your business's financial health. By tracking your
-                            expenses with Baker's Hub, you can stay in control
-                            of your budget and make informed decisions about
-                            your business's finances.</p>
-                          <span>Simple</span>
-                          <span>Efficient</span>
-                          <span class="last-span">User Friendly</span>
-                          <div class="text-button">
-                            <a href="#register-section">Register</a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li style="box-shadow: 5px 5px 10px black; background: linear-gradient(-145deg, rgba(219, 138, 222, 0.568) 0%, rgba(246,191,159,0.568) 100%)">
-                      <div>
-                        <div class="left-image" style="text-align: center;">
-                          <img src="/static/assets-cta/images/report.png" style="width: 350px;" alt="Analysis">
-                        </div>
-                        <div class="right-content">
-                          <h4>Analysis</h4>
-                          <p>Our analytical feature makes it easy for
-                            you to get a comprehensive view of your
-                            business's performance. With our reporting tool,
-                            you can view all of your income, expenses, and
-                            orders in one place, giving you a clear picture of
-                            your business's financial health. Our reporting
-                            tool also allows you to filter data by date range,
-                            order type, and more, so you can get the insights
-                            you need to make informed decisions about your
-                            business. Whether you need to track your monthly
-                            revenue, compare sales by product, or analyze your
-                            expenses, our report generator feature can help
-                            you stay on top of your business's performance.
-                            With our user-friendly interface, generating
-                            reports has never been easier.</p>
-                          <span>Simple</span>
-                          <span>Efficient</span>
-                          <span class="last-span">User Friendly</span>
-                          <div class="text-button">
-                            <a href="#register-section">Register</a>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+            </nav>
 
-                  </ul>
+            <div class="bg-primary hero-header mb-0" style="padding-bottom: 0 !important;">
+                <div class="container">
+                    <div class="row gap-5 gap-lg-0">
+                        <div class="col-lg-6 text-center text-lg-start pt-lg-5">
+                            <h1 class="text-white mb-4 animated slideInDown pt-lg-5">The Revolutionary App That Helps To Control Your Baking Business</h1>
+                            <p class="text-white pb-3 animated slideInDown">Optimize your home baking business with our
+                                user-friendly app. Get started today
+                                and take your business to new heights!</p>
+                                <div class="row g-4">
+                                    <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                                        <a href="https://apps.apple.com/in/app/bakers-hub/id6450502150" class="d-flex bg-primary-gradient rounded py-3 px-4" style="border: 2px solid black;">
+                                            <i class="fab fa-apple fa-3x text-white flex-shrink-0"></i>
+                                            <div class="ms-3">
+                                                <p class="text-white mb-0">Available On</p>
+                                                <h5 class="text-white mb-0">App Store</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
+                                        <a href="https://play.google.com/store/apps/details?id=app.bakershub.android" class="d-flex bg-secondary-gradient rounded py-3 px-4" style="border: 2px solid black;">
+                                            <i class="fab fa-android fa-3x text-white flex-shrink-0"></i>
+                                            <div class="ms-3">
+                                                <p class="text-white mb-0">Available On</p>
+                                                <h5 class="text-white mb-0">Play Store</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            <!-- <a href="#about" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill me-3 animated slideInLeft">&nbsp;&nbsp;&nbsp; iOS &nbsp;&nbsp;&nbsp;</a>
+                            <a href="#download" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Android</a> -->
+                        </div>
+                        <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end wow fadeInUp mt-0" data-wow-delay="0.3s">
+                            <img class="img-fluid" src="/static/cta-assets/img/mockup.png" alt="alternative">
+                                <!-- end of img-wrapper -->
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+            <svg class="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310"><defs><style>.cls-1{fill:var(--primary);}</style></defs><title>header-frame</title><path class="cls-1" d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z"/></svg>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="simple-cta" id="cta-premium">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5">
-          <div class="left-image" style="text-align: center;">
-            <img src="/static/assets-cta/images/20-premium.png" style="width: 500px;" alt="53% Discount">
-          </div>
-        </div>
-        <div class="col-lg-7 align-self-center">
-          <h6>Get the discount right now!</h6>
-          <h4>Flat 53% OFF For Premium Version</h4>
-          <h6 class="pt-4 pb-5">Don't miss out on our exclusive offer! Register yourself today
-            and become eligible for a 53% discount on our premium
-            version of the app.
-            Don't wait - sign up today and get ready to take your home bakery
-            business to the next level!</h6>
-            <div class="white-button">
-              <a href="#register-section">Register Now</a>
-            </div>
-
-        </div>
+        <!-- Navbar & Hero End -->
 
 
-      </div>
-    </div>
-    </div>
-  </section>
-
-  <section class="plans" id="plans" style="margin: 10px 0; padding-top: 20px; padding-bottom: 20px;">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="section-heading">
-            <h6>Pricing</h6>
-            <h4>Monthly <em>Plans</em></h4>
-          </div>
-        </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px black; background: linear-gradient(-145deg, rgba(219, 138, 222, 0.568) 0%, rgba(246,191,159,0.568) 100%)">
-              <div class="card-header py-3">
-                <b><h3 class="my-0" style="color: #000; font-weight: 600;">1 Month plan</h3></b>
-              </div>
-              <hr class="hr p-0 m-0 pb-1" style="color: rgb(176, 50, 98) !important;">
-              <div class="card-body">
-                <h1 class="card-title pricing-card-title"><strike style="font-size: 25px;">₹539</strike> ₹249<small class="text-body-secondary fw-light">/mo</small></h1>
-                <ul class="list-styled mt-3 mb-4">
-                  <li>Validity <b>1 Month</b></li>
-                  <li>Expense Tracker</li>
-                  <li>Sales Tracker</li>
-                  <li>Analytics</li>
-                  <li>Bill Generator<small> <u>(Coming soon)</u></small></li>
-                </ul>
-                <div type="button" class="w-100 btn btn-lg btn_bh"><b class="float-start">Total <strike>₹539</strike> ₹249</b><i class="bx bx-right-arrow-circle bx-sm rounded-circle float-end tex_col_bh" style="background-color: #fff;"></i></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px black; background: linear-gradient(-145deg, rgba(219,138,222,0.568) 0%, rgba(246,191,159,0.568) 100%)">
-              <div class="card-header py-3">
-                <b><h3 class="my-0" style="color: #000; font-weight: 600;">3 Months plan</h3></b>
-              </div>
-              <hr class="hr p-0 m-0 pb-1 tex_col_bh">
-              <div class="card-body">
-                <h1 class="card-title pricing-card-title"><strike style="font-size: 25px;">₹420</strike> ₹223<small class="text-body-secondary fw-light">/mo</small></h1>
-                <ul class="list-styled mt-3 mb-4">
-                    <li>Validity <b>3 Months</b></li>
-                    <li>Expense Tracker</li>
-                    <li>Sales Tracker</li>
-                    <li>Analytics</li>
-                    <li>Bill Generator<small> <u>(Coming soon)</u></small></li>
-                </ul>
-                <div type="button" class="w-100 btn btn-lg btn_bh"><b class="float-start">Total <strike>₹1260</strike> ₹669</b><i class="bx bx-right-arrow-circle bx-sm rounded-circle float-end tex_col_bh" style="background-color: #fff;"></i></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="card mb-4 rounded-3" style="box-shadow: 5px 5px 10px black; background: linear-gradient(-145deg, rgba(219,138,222,0.568) 0%, rgba(246,191,159,0.568) 100%)">
-              <div class="card-header py-3 text-bg-primary">
-                <b><h3 class="my-0" style="color: #000; font-weight: 600;">6 Months plan</h3></b>
-              </div>
-              <hr class="hr p-0 m-0 pb-1 tex_col_bh">
-              <div class="card-body">
-                <h1 class="card-title pricing-card-title"><strike style="font-size: 25px;">₹383</strike> ₹203<small class="text-body-secondary fw-light">/mo</small></h1>
-                <ul class="list-styled mt-3 mb-4">
-                    <li>Validity <b>6 Months</b></li>
-                    <li>Expense Tracker</li>
-                    <li>Sales Tracker</li>
-                    <li>Analytics</li>
-                    <li>Bill Generator<small> <u>(Coming soon)</u></small></li>
-                </ul>
-                <div type="button" class="w-100 btn btn-lg btn_bh"><b class="float-start">Total <strike>₹2298</strike> ₹1218</b><i class="bx bx-right-arrow-circle bx-sm rounded-circle float-end tex_col_bh" style="background-color: #fff;"></i></div>
-              </div>
-            </div>
-          </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="app">
-      <div class="row text-center">
-        <div class="col-lg-12">
-          <div class="section-heading">
-            <h6>Mobile App</h6>
-            <h4>Choose your <em>Platform</em></h4>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-6 pt-5 mb-5">
-          <a href="https://play.google.com/store/apps/details?id=app.bakershub.android" target="_blank">
-          <img src="/static/assets-cta/images/google_logo.png" alt="Play Store Logo" style="width: 300px;">
-          <h6 style="color: #000;"><b>Google Play Store</b></h6>
-          </a>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-6 pt-5 mb-5">
-          <a>
-          <img src="/static/assets-cta/images/apple_logo.png" alt="App Store Logo" style="width: 300px;"         data-bs-toggle="modal"
-          data-bs-target="#modalCenter">
-          <h6 style="color: #000;"><b>App Store</b></h6>
-          </a>
-        </div>
-        <!-- Modal -->
-      <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalCenterTitle">Launching Soon!!</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-                  <label for="nameWithTitle" class="form-label float-start">Our iOS app is almost here, <br>but in the meantime, you can still enjoy our services through our convenient web app!
-                    <br><span style="color: #000;">
-                      <b><u>Note: Make sure to bookmark / create shortcut of the web app.</u></b>
-                    </span>
-                    </label>
-            </div>
-            <div class="modal-footer">
-              <a href="{% url 'app' %}"><button type="button" class="btn btn-primary">Access Web App</button></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-  </section>
-
-<section class="register" id="register-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-7">
-          <div id="map">
-
-            <!-- You just need to go to Google Maps for your own map point, and copy the embed code from Share -> Embed a map section-->
-            <img src="/static/assets-cta/images/people-working-together-online.png" style="border:0; border-radius: 15px; position: relative;
-                z-index: 2;" alt="Register"/>
-          </div>
-      </div>
-      <div class="col-lg-5">
-          <form id="register" method="post">
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="section-heading">
-                  <h6>Register</h6>
-                  <h4>See you <em>Inside</em></h4>
-                  <p></p>
+        <!-- About Start -->
+        <div class="container-xxl py-5" id="about">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <h5 class="text-primary-gradient fw-medium">About App</h5>
+                        <h1 class="mb-4">#1 App For Your Baking Business</h1>
+                        <p class="mb-4">Optimize your home baking business with our
+                            user-friendly app. From recording expenses
+                            to managing orders and generating invoices,
+                            we make it easy for you. Get started today
+                            and take your business to new heights!</p>
+                        <!-- <div class="row g-4 mb-4">
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                                <div class="d-flex">
+                                    <i class="fa fa-cogs fa-2x text-primary-gradient flex-shrink-0 mt-1"></i>
+                                    <div class="ms-3">
+                                        <h2 class="mb-0" data-toggle="counter-up">1234</h2>
+                                        <p class="text-primary-gradient mb-0">Active Install</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
+                                <div class="d-flex">
+                                    <i class="fa fa-comments fa-2x text-secondary-gradient flex-shrink-0 mt-1"></i>
+                                    <div class="ms-3">
+                                        <h2 class="mb-0" data-toggle="counter-up">1234</h2>
+                                        <p class="text-secondary-gradient mb-0">Clients Reviews</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <a href="#feature" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Features</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="/static/cta-assets/img/about.png">
+                    </div>
                 </div>
-              </div>
-              <div class="col-lg-12">
-                {% if error == 1 %}
-                <script>
-                  // Use JavaScript to scroll to the element on page load
-                  window.onload = function () {
-                    document.getElementById('register').scrollIntoView();
-                  }
-                </script>
-                <div class="mb-5 py-2 px-2 text-danger rounded m-2"
-                  style="background-color: rgba(255, 113, 113, 0.508);"><b>
-                    E-mail Id is already registered!
-                    </a></b>
-                </div>
-                {% endif %}
-                <fieldset>
-                  <input type="name" name="name" pattern="[A-Za-z ]+"
-                    title="Please don't enter numbers & symbols in the name field." id="name" placeholder="Full Name"
-                    autocomplete="off" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <input type="email" name="email" id="email" placeholder="Your Email" autocomplete="off" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                  <input type="Password" name="password" id="name" placeholder="Password" autocomplete="off" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-8">
-                <p class="mb-3">
-                  <span>Already have an account?</span>
-                  <a href="{% url 'sign_in' %}">
-                    <b><span style="color: #dc8cdb;">Sign in instead</span></b>
-                  </a>
-                </p>
-              </div>
-              <div class="col-lg-4">
-                <fieldset>
-                  <button type="submit" id="form-submit" class="main-gradient-button">Register</button>
-                </fieldset>
-              </div>
             </div>
-          </form>
-      </div>
-      <div class="col-lg-12">
-          <ul class="social-icons">
-            <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-          </ul>
-      </div>
-      <div class="col-lg-12">
-        <footer class="content-footer footer bg-footer-theme text-center">
-          <div class="my-3" style="color: #000;"><b>
-              © <script>document.write(new Date().getFullYear());</script> All rights reserverd to</b> <a href="{% url 'home' %}" style="color: rgb(176, 50, 98);"><b><u>Baker's Hub</u></b><br>
-              <span style="color: #000;">
-              <a href="{% url 'privacy_policy' %}" style="color: #000;"><b><u>Privacy Policy</u></b></a> |
-              <a href="{% url 'terms_conds' %}" style="color: #000;"><b><u>Terms and Conditions</u></b></a> |
-              <a href="mailto:support@bakershub.in" title="support@bakershub.in" style="color: #000;"><b><u>Contact Us</u></b></a>
-              </span>
-          </div>
-        </footer>
-      </div>
+        </div>
+        <!-- About End -->
 
+                <!-- Download Start -->
+        <div class="container-xxl py-5" id="download">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="/static/cta-assets/img/download.png">
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <h5 class="text-primary-gradient fw-medium">Download</h5>
+                        <h1 class="mb-4">Download The Latest Version Of Our App</h1>
+                        <p class="mb-4">Simply download and install the Bakers Hub app from your preferred app store. It's available for both iOS and Android devices, ensuring compatibility with your smartphone or tablet.</p>
+                        <div class="row g-4">
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                                <a href="https://apps.apple.com/in/app/bakers-hub/id6450502150" class="d-flex bg-primary-gradient rounded py-3 px-4">
+                                    <i class="fab fa-apple fa-3x text-white flex-shrink-0"></i>
+                                    <div class="ms-3">
+                                        <p class="text-white mb-0">Available On</p>
+                                        <h5 class="text-white mb-0">App Store</h5>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
+                                <a href="https://play.google.com/store/apps/details?id=app.bakershub.android" class="d-flex bg-secondary-gradient rounded py-3 px-4">
+                                    <i class="fab fa-android fa-3x text-white flex-shrink-0"></i>
+                                    <div class="ms-3">
+                                        <p class="text-white mb-0">Available On</p>
+                                        <h5 class="text-white mb-0">Play Store</h5>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Download End -->
+
+
+
+        <!-- Features Start -->
+        <div class="container-xxl py-5" id="feature">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">App Features</h5>
+                    <h1 class="mb-5">Awesome Features</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="bi-cash-stack text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Order Manager</h5>
+                            <p class="m-0">Effortlessly organize and track your orders with our intuitive Order Manager - streamlining your workflow.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="bi-credit-card text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Expense Tracker</h5>
+                            <p class="m-0">Take control of your finances and monitor your expenses with our powerful Expense Tracker - providing valuable insights</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="bi-pencil-square text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Editable Data</h5>
+                            <p class="m-0">Customize and manage your data easily with our Editable Data feature - ensuring you have the flexibility to update your information</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="bi-list-check text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Shopping List</h5>
+                            <p class="m-0">Never miss an ingredient again with our convenient Shopping List feature - helping you stay organized</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="bi-tag text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Price Calculator</h5>
+                            <p class="m-0">Accurately calculate your product prices with our Price Calculator - ensuring you set competitive prices</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="bi-cloud-arrow-up text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Cloud Storage</h5>
+                            <p class="m-0">Safely store and access your important data from anywhere with our secure Cloud Storage - keeping your business information protected</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Features End -->
+
+
+        <!-- Screenshot Start -->
+        <div class="container-xxl py-5">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                        <h5 class="text-primary-gradient fw-medium">In App Expierence</h5>
+                        <h1 class="mb-4">User Friendly interface And Very Easy To Use</h1>
+                        <p class="mb-4">Experience the ultimate user-friendly interface with Bakers Hub. Our intuitive design and seamless navigation make managing your baking business a breeze. Check out these screenshots of our app to see just how easy it is to track orders, manage expenses, and analyze your business performance.</p>
+                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Intuitive Design</p>
+                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Enhanced Security</p>
+                        <p class="mb-4"><i class="fa fa-check text-primary-gradient me-3"></i>Real-time Updates</p>
+                        <!-- <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a> -->
+                    </div>
+                    <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="owl-carousel screenshot-carousel">
+                            <img class="img-fluid" src="/static/cta-assets/img/screenshot-1.png" alt="">
+                            <img class="img-fluid" src="/static/cta-assets/img/screenshot-2.png" alt="">
+                            <img class="img-fluid" src="/static/cta-assets/img/screenshot-3.png" alt="">
+                            <img class="img-fluid" src="/static/cta-assets/img/screenshot-4.png" alt="">
+                            <img class="img-fluid" src="/static/cta-assets/img/screenshot-5.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Screenshot End -->
+
+
+        <!-- Process Start -->
+        <div class="container-xxl py-5">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">How It Works</h5>
+                    <h1 class="mb-5">3 Easy Steps</h1>
+                </div>
+                <div class="row gy-5 gx-4 justify-content-center">
+                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                                <i class="fa fa-cog fa-3x text-white"></i>
+                            </div>
+                            <h5 class="mt-4 mb-3">Install the App</h5>
+                            <p class="mb-0">Simply download and install the Bakers Hub app from your preferred app store. It's available for both iOS and Android devices.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                                <i class="fa fa-address-card fa-3x text-white"></i>
+                            </div>
+                            <h5 class="mt-4 mb-3">Setup Your Profile</h5>
+                            <p class="mb-0">Create your profile within the app by providing relevant information about you to personalize your experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                                <i class="fa fa-check fa-3x text-white"></i>
+                            </div>
+                            <h5 class="mt-4 mb-3">Enjoy The Features</h5>
+                            <p class="mb-0">Once your profile is set up, you're ready to dive into the world of Bakers Hub. Explore the range of powerful features.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Process Start -->
+
+
+        <!-- Pricing Start -->
+        <div class="container-xxl py-5" id="pricing">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">Pricing Plan</h5>
+                    <h1 class="mb-5">Choose Your Plan</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded">
+                            <div class="border-bottom p-4 mb-4">
+                                <h4 class="text-primary-gradient mb-1">1 Month Plan</h4>
+                                <span>Valid for 30 days</span>
+                            </div>
+                            <div class="p-4 pt-0">
+                                <h1 class="mb-3">
+                                    <small class="align-top" style="font-size: 22px; line-height: 45px;">₹</small>249<small
+                                        class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
+                                </h1>
+                                <div class="d-flex justify-content-between mb-3"><span>Expense Tracker</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Sales Tracker</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Shopping List</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Analytics</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Price Calculator<small> <u>(Coming soon)</u></small></span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-2"><span>Bill Generator<small> <u>(Coming soon)</u></small></span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <a href="#download" class="btn btn-primary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded">
+                            <div class="border-bottom p-4 mb-4">
+                                <h4 class="text-primary-gradient mb-1">3 Months Plan</h4>
+                                <span>Valid for 90 days</span>
+                            </div>
+                            <div class="p-4 pt-0">
+                                <h1 class="mb-3">
+                                    <small class="align-top" style="font-size: 22px; line-height: 45px;">₹</small>223<small
+                                        class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
+                                </h1>
+                                <div class="d-flex justify-content-between mb-3"><span>Expense Tracker</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Sales Tracker</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Shopping List</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Analytics</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Price Calculator<small> <u>(Coming soon)</u></small></span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-2"><span>Bill Generator<small> <u>(Coming soon)</u></small></span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <a href="#download" class="btn btn-primary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded">
+                            <div class="border-bottom p-4 mb-4">
+                                <h4 class="text-primary-gradient mb-1">6 Months Plan</h4>
+                                <span>Valid for 180 days</span>
+                            </div>
+                            <div class="p-4 pt-0">
+                                <h1 class="mb-3">
+                                    <small class="align-top" style="font-size: 22px; line-height: 45px;">₹</small>203<small
+                                        class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>
+                                </h1>
+                                <div class="d-flex justify-content-between mb-3"><span>Expense Tracker</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Sales Tracker</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Shopping List</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Analytics</span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-3"><span>Price Calculator<small> <u>(Coming soon)</u></small></span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <div class="d-flex justify-content-between mb-2"><span>Bill Generator<small> <u>(Coming soon)</u></small></span><i class="fa fa-check text-primary-gradient pt-1"></i></div>
+                                <a href="#download" class="btn btn-primary-gradient rounded-pill py-2 px-4 mt-4">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pricing End -->
+
+
+        <!-- Testimonial Start -->
+        <!-- <div class="container-xxl py-5" id="review">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">Testimonial</h5>
+                    <h1 class="mb-5">What Say Our Clients!</h1>
+                </div>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="/static/cta-assets/img/testimonial-1.jpg" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Client Name</h5>
+                                <p class="mb-1">Profession</p>
+                                <div>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="/static/cta-assets/img/testimonial-2.jpg" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Client Name</h5>
+                                <p class="mb-1">Profession</p>
+                                <div>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="/static/cta-assets/img/testimonial-3.jpg" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Client Name</h5>
+                                <p class="mb-1">Profession</p>
+                                <div>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="/static/cta-assets/img/testimonial-4.jpg" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Client Name</h5>
+                                <p class="mb-1">Profession</p>
+                                <div>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                    <small class="fa fa-star text-warning"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        <!-- Testimonial End -->
+
+
+        <!-- Contact Start -->
+         <!-- <div class="container-xxl py-5" id="contact">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">Contact Us</h5>
+                    <h1 class="mb-5">Get In Touch!</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-9">
+                        <div class="wow fadeInUp" data-wow-delay="0.3s">
+                            <p class="text-center mb-4">Have a question or need assistance? Reach out to us and we'll be happy to help.</a>.</p>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                                            <label for="name">Your Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                                            <label for="email">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                                            <label for="subject">Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" name="message" placeholder="Leave a message here" id="message" style="height: 150px" required></textarea>
+                                            <label for="message">Message</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button class="btn btn-primary-gradient rounded-pill py-3 px-5" type="submit">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Contact End -->
+
+
+        <!-- Footer Start -->
+        <div class="bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s">
+            <div class="container px-lg-5">
+                <div class="row gap-5 gap-lg-0">
+                    <div class="col-md-6 col-lg-3">
+                        <h4 class="text-white mb-4">Address</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Ahmedabad, Gujarat, India</p>
+                        <!-- <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p> -->
+                        <p><i class="fa fa-envelope me-3"></i>support@bakershub.in</p>
+                        <div class="d-flex pt-2">
+                            <!-- <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a> -->
+                            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/baker.s_hub._/"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/company/bakers-hub/"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <h4 class="text-white mb-4">Quick Link</h4>
+                        <!-- <a class="btn btn-link" href="">About Us</a> -->
+                        <a class="btn btn-link" href="#contact">Contact Us</a>
+                        <a class="btn btn-link" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                        <a class="btn btn-link" href="{% url 'terms_conds' %}">Terms & Condition</a>
+                        <!-- <a class="btn btn-link" href="">Career</a> -->
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <h4 class="text-white mb-4">Popular Link</h4>
+                        <a class="btn btn-link" href="https://apps.apple.com/in/app/bakers-hub/id6450502150">iOS App</a>
+                        <a class="btn btn-link" href="https://play.google.com/store/apps/details?id=app.bakershub.android">Android App</a>
+                        <a class="btn btn-link" href="{% url 'app' %}">Web App</a>
+                        <!-- <a class="btn btn-link" href="">Terms & Condition</a>
+                        <a class="btn btn-link" href="">Career</a> -->
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <h4 class="text-white mb-4">Newsletter</h4>
+                        <p>Stay in the loop with our newsletter! Sign up today for the latest baking tips, exclusive offers, and updates from Bakers Hub.</p>
+                        <div class="position-relative w-100 mt-3">
+                            <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="Your Email" style="height: 48px;">
+                            <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary-gradient fs-4"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container px-lg-5">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="">Baker's Hub</a>, All Right Reserved.
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="{% url 'home' %}">Home</a>
+                                <a href="#download">App</a>
+                                <a href="#contact">Help</a>
+                                <!-- <a href="">FQAs</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up text-white"></i></a>
     </div>
-  </div>
-</section
--->
 
-  <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  <script src="/static/assets-cta/vendor/jquery/jquery.min.js"></script>
-  <script src="/static/assets-cta/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/static/assets-cta/js/isotope.min.js"></script>
-  <script src="/static/assets-cta/js/owl-carousel.js"></script>
-  <script src="/static/assets-cta/js/lightbox.js"></script>
-  <script src="/static/assets-cta/js/tabs.js"></script>
-  <script src="/static/assets-cta/js/video.js"></script>
-  <script src="/static/assets-cta/js/slick-slider.js"></script>
-  <script src="/static/assets-cta/js/custom.js"></script>
-  <script src="/static/assets-dash/vendor/libs/jquery/jquery.js"></script>
-  <script src="/static/assets-dash/vendor/libs/popper/popper.js"></script>
-  <script src="/static/assets-dash/vendor/js/bootstrap.js"></script>
-  <script>
-    // get the target element by ID
-    function scrollToTarget() {
-    const targetElement = document.getElementById('premium_features');
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/cta-assets/lib/wow/wow.min.js"></script>
+    <script src="/static/cta-assets/lib/easing/easing.min.js"></script>
+    <script src="/static/cta-assets/lib/waypoints/waypoints.min.js"></script>
+    <script src="/static/cta-assets/lib/counterup/counterup.min.js"></script>
+    <script src="/static/cta-assets/lib/owlcarousel/owl.carousel.min.js"></script>
 
-    // scroll to the target element and land slightly above it
-    targetElement.scrollIntoView({
-      block:"start",
-      behavior: 'smooth',
-    });
-    }
-  </script>
-  <script>
-    //according to loftblog tut
-    $('.nav li:first').addClass('active');
-
-    var showSection = function showSection(section, isAnimate) {
-      var
-        direction = section.replace(/#/, ''),
-        reqSection = $('.section').filter('[data-section="' + direction + '"]'),
-        reqSectionPos = reqSection.offset().top - 0;
-
-      if (isAnimate) {
-        $('body, html').animate({
-          scrollTop: reqSectionPos
-        },
-          800);
-      } else {
-        $('body, html').scrollTop(reqSectionPos);
-      }
-
-    };
-
-    var checkSection = function checkSection() {
-      $('.section').each(function () {
-        var
-          $this = $(this),
-          topEdge = $this.offset().top - 80,
-          bottomEdge = topEdge + $this.height(),
-          wScroll = $(window).scrollTop();
-        if (topEdge < wScroll && bottomEdge > wScroll) {
-          var
-            currentId = $this.data('section'),
-            reqLink = $('a').filter('[href*=\\#' + currentId + ']');
-          reqLink.closest('li').addClass('active').
-            siblings().removeClass('active');
-        }
-      });
-    };
-    $('.main-menu, .responsive-menu, .scroll-to-section').on('click', 'a', function (e) {
-      e.preventDefault();
-      showSection($(this).attr('href'), true);
-    });
-
-    $(window).scroll(function () {
-      checkSection();
-    });
-  </script>
+    <!-- Template Javascript -->
+    <script src="/static/cta-assets/js/main.js"></script>
 </body>
 
 </html>

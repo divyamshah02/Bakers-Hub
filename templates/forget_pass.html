@@ -7,7 +7,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Sign-in</title>
+  <title>Forget password</title>
 
   <meta name="description" content="" />
 
@@ -63,29 +63,27 @@
       position: absolute;
       z-index: 999;
       top: 50%;
-      left: 50%;
+      left: 45%;
       color: rgb(176, 50, 98);
       display: none;
     }
   </style>
 </head>
 
-<body style="background: linear-gradient(-145deg, rgba(219,138,222,1) 0%, rgba(246,191,159,1) 100%);">
+<body style="background: linear-gradient(-145deg, rgb(194, 96, 133) 0%, rgba(246,191,159,1) 100%);">
   <!-- Content -->
 
   <div class="container-xxl" id="bh-body">
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner py-4">
+        <div class="row">
+          <div class="col-12 p-5 text-center">
+            <img src="/static/assets-cta/images/logo.png" alt="Baker Hub" style="width: 250px; position: relative; z-index: 10;"/>
+          </div>
+        </div>
         <!-- Forgot Password -->
         <div class="card" style="background-color: transparent; border: 2px solid black;">
           <div class="card-body">
-            <div class="app-brand justify-content-center">
-              <a href="{% url 'home' %}" class="app-brand-link gap-2">
-                <img src="/static/assets-cta/images/logo.png" alt="Baker Hub"
-                  style="width: 200px; padding: 15px 0px;" />
-
-              </a>
-            </div>
             <h4 class="mb-2" style="color: black;">Forgot Password? 🔒</h4>
             <p class="mb-4" style="color: black;">Enter your registered email and we'll send you <b>OTP</b> to reset
               your password</p>
