@@ -1,0 +1,1277 @@
+{
+    "stats": {
+        "total_users": 126,
+        "total_users_with_0_sales": 74,
+        "total_users_with_0_expenses": 95
+    },
+    "Ignore Users": [
+        "3477882782",
+        "9217577061",
+        "Divyam",
+        "8077336961",
+        "9076941873",
+        "3301609695"
+    ],
+    "data": [
+        {
+            "user_id": "3477882782",
+            "join_date": "09/04/23",
+            "total_sales": 92,
+            "total_sales_amount": 220540,
+            "total_expenses": 93,
+            "total_exp_amount": 139386,
+            "bill_uploaded": 11,
+            "net_profit": 81154
+        },
+        {
+            "user_id": "4537074825",
+            "join_date": "19/07/2023",
+            "total_sales": 68,
+            "total_sales_amount": 38668,
+            "total_expenses": 40,
+            "total_exp_amount": 23301,
+            "bill_uploaded": 2,
+            "net_profit": 15367
+        },
+        {
+            "user_id": "9217577061",
+            "join_date": "06/01/2024",
+            "total_sales": 40,
+            "total_sales_amount": 76913,
+            "total_expenses": 29,
+            "total_exp_amount": 30709,
+            "bill_uploaded": 0,
+            "net_profit": 46204
+        },
+        {
+            "user_id": "9749649977",
+            "join_date": "30/09/2023",
+            "total_sales": 38,
+            "total_sales_amount": 47275,
+            "total_expenses": 2,
+            "total_exp_amount": 372,
+            "bill_uploaded": 0,
+            "net_profit": 46903
+        },
+        {
+            "user_id": "9198012712",
+            "join_date": "04/02/2024",
+            "total_sales": 34,
+            "total_sales_amount": 37250,
+            "total_expenses": 14,
+            "total_exp_amount": 8219,
+            "bill_uploaded": 2,
+            "net_profit": 29031
+        },
+        {
+            "user_id": "Divyam",
+            "join_date": "08/04/23",
+            "total_sales": 22,
+            "total_sales_amount": 77700,
+            "total_expenses": 15,
+            "total_exp_amount": 8450,
+            "bill_uploaded": 1,
+            "net_profit": 69250
+        },
+        {
+            "user_id": "5649604149",
+            "join_date": "08/12/2023",
+            "total_sales": 17,
+            "total_sales_amount": 17000,
+            "total_expenses": 7,
+            "total_exp_amount": 5700,
+            "bill_uploaded": 0,
+            "net_profit": 11300
+        },
+        {
+            "user_id": "8077336961",
+            "join_date": "08/06/2023",
+            "total_sales": 16,
+            "total_sales_amount": 55704,
+            "total_expenses": 17,
+            "total_exp_amount": 48233,
+            "bill_uploaded": 1,
+            "net_profit": 7471
+        },
+        {
+            "user_id": "3574606524",
+            "join_date": "12/10/2023",
+            "total_sales": 14,
+            "total_sales_amount": 10050,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 10050
+        },
+        {
+            "user_id": "6417173803",
+            "join_date": "25/07/2023",
+            "total_sales": 11,
+            "total_sales_amount": 4615,
+            "total_expenses": 4,
+            "total_exp_amount": 126,
+            "bill_uploaded": 0,
+            "net_profit": 4489
+        },
+        {
+            "user_id": "2664089357",
+            "join_date": "17/07/2023",
+            "total_sales": 10,
+            "total_sales_amount": 13810,
+            "total_expenses": 3,
+            "total_exp_amount": 2598,
+            "bill_uploaded": 1,
+            "net_profit": 11212
+        },
+        {
+            "user_id": "3832382306",
+            "join_date": "30/01/2024",
+            "total_sales": 10,
+            "total_sales_amount": 8800,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 8800
+        },
+        {
+            "user_id": "2420859175",
+            "join_date": "04/10/2023",
+            "total_sales": 6,
+            "total_sales_amount": 198,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 198
+        },
+        {
+            "user_id": "9657200666",
+            "join_date": "15/07/2023",
+            "total_sales": 5,
+            "total_sales_amount": 2700,
+            "total_expenses": 3,
+            "total_exp_amount": 985,
+            "bill_uploaded": 0,
+            "net_profit": 1715
+        },
+        {
+            "user_id": "2328688417",
+            "join_date": "17/07/2023",
+            "total_sales": 4,
+            "total_sales_amount": 8575,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 8575
+        },
+        {
+            "user_id": "5185888333",
+            "join_date": "22/07/2023",
+            "total_sales": 4,
+            "total_sales_amount": 1950,
+            "total_expenses": 1,
+            "total_exp_amount": 500,
+            "bill_uploaded": 0,
+            "net_profit": 1450
+        },
+        {
+            "user_id": "3004454618",
+            "join_date": "25/02/2024",
+            "total_sales": 4,
+            "total_sales_amount": 3900,
+            "total_expenses": 5,
+            "total_exp_amount": 3100,
+            "bill_uploaded": 0,
+            "net_profit": 800
+        },
+        {
+            "user_id": "6952094448",
+            "join_date": "15/07/2023",
+            "total_sales": 3,
+            "total_sales_amount": 4150,
+            "total_expenses": 5,
+            "total_exp_amount": 1848,
+            "bill_uploaded": 0,
+            "net_profit": 2302
+        },
+        {
+            "user_id": "6338731540",
+            "join_date": "19/07/2023",
+            "total_sales": 3,
+            "total_sales_amount": 3950,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 3950
+        },
+        {
+            "user_id": "2764638331",
+            "join_date": "29/07/2023",
+            "total_sales": 3,
+            "total_sales_amount": 3600,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 3600
+        },
+        {
+            "user_id": "7521633818",
+            "join_date": "01/10/2023",
+            "total_sales": 3,
+            "total_sales_amount": 3600,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 3600
+        },
+        {
+            "user_id": "8570944282",
+            "join_date": "01/12/2023",
+            "total_sales": 2,
+            "total_sales_amount": 1600,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 1600
+        },
+        {
+            "user_id": "1854519734",
+            "join_date": "08/03/2024",
+            "total_sales": 2,
+            "total_sales_amount": 8,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 8
+        },
+        {
+            "user_id": "9316032030",
+            "join_date": "09/03/2024",
+            "total_sales": 2,
+            "total_sales_amount": 880,
+            "total_expenses": 1,
+            "total_exp_amount": 10000,
+            "bill_uploaded": 0,
+            "net_profit": -9120
+        },
+        {
+            "user_id": "2096181711",
+            "join_date": "13/06/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1000,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 1000
+        },
+        {
+            "user_id": "4738019363",
+            "join_date": "13/06/2023",
+            "total_sales": 1,
+            "total_sales_amount": 100000000000000,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 100000000000000
+        },
+        {
+            "user_id": "6720214086",
+            "join_date": "17/06/2023",
+            "total_sales": 1,
+            "total_sales_amount": 10000,
+            "total_expenses": 1,
+            "total_exp_amount": 100000,
+            "bill_uploaded": 0,
+            "net_profit": -90000
+        },
+        {
+            "user_id": "6372602533",
+            "join_date": "20/06/2023",
+            "total_sales": 1,
+            "total_sales_amount": 750,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 750
+        },
+        {
+            "user_id": "9407690256",
+            "join_date": "04/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 500,
+            "total_expenses": 1,
+            "total_exp_amount": 250,
+            "bill_uploaded": 1,
+            "net_profit": 250
+        },
+        {
+            "user_id": "6276128744",
+            "join_date": "09/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1208,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 1208
+        },
+        {
+            "user_id": "3066623302",
+            "join_date": "09/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 350,
+            "total_expenses": 10,
+            "total_exp_amount": 837,
+            "bill_uploaded": 0,
+            "net_profit": -487
+        },
+        {
+            "user_id": "3112728029",
+            "join_date": "11/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1550,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 1550
+        },
+        {
+            "user_id": "8837384598",
+            "join_date": "15/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 500,
+            "total_expenses": 4,
+            "total_exp_amount": 601,
+            "bill_uploaded": 0,
+            "net_profit": -101
+        },
+        {
+            "user_id": "2349240630",
+            "join_date": "15/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 900,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 900
+        },
+        {
+            "user_id": "1342472507",
+            "join_date": "18/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 350,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 350
+        },
+        {
+            "user_id": "8117214099",
+            "join_date": "23/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 2000,
+            "total_expenses": 1,
+            "total_exp_amount": 100,
+            "bill_uploaded": 0,
+            "net_profit": 1900
+        },
+        {
+            "user_id": "3322519106",
+            "join_date": "24/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1200,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 1200
+        },
+        {
+            "user_id": "8077716029",
+            "join_date": "25/07/2023",
+            "total_sales": 1,
+            "total_sales_amount": 3300,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 3300
+        },
+        {
+            "user_id": "7647283052",
+            "join_date": "08/08/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1500,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 1500
+        },
+        {
+            "user_id": "7197330305",
+            "join_date": "09/08/2023",
+            "total_sales": 1,
+            "total_sales_amount": 10,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 10
+        },
+        {
+            "user_id": "6120679759",
+            "join_date": "11/08/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1800,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 1800
+        },
+        {
+            "user_id": "5186493503",
+            "join_date": "13/08/2023",
+            "total_sales": 1,
+            "total_sales_amount": 700,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 700
+        },
+        {
+            "user_id": "7505794962",
+            "join_date": "19/08/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1000,
+            "total_expenses": 1,
+            "total_exp_amount": 500,
+            "bill_uploaded": 0,
+            "net_profit": 500
+        },
+        {
+            "user_id": "7794785809",
+            "join_date": "16/09/2023",
+            "total_sales": 1,
+            "total_sales_amount": 170,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 170
+        },
+        {
+            "user_id": "4283136897",
+            "join_date": "16/10/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1450,
+            "total_expenses": 4,
+            "total_exp_amount": 2700,
+            "bill_uploaded": 0,
+            "net_profit": -1250
+        },
+        {
+            "user_id": "6455796899",
+            "join_date": "30/11/2023",
+            "total_sales": 1,
+            "total_sales_amount": 1800,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 1800
+        },
+        {
+            "user_id": "6959618893",
+            "join_date": "02/12/2023",
+            "total_sales": 1,
+            "total_sales_amount": 550,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 550
+        },
+        {
+            "user_id": "2253318505",
+            "join_date": "19/12/2023",
+            "total_sales": 1,
+            "total_sales_amount": 500,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 500
+        },
+        {
+            "user_id": "9103185887",
+            "join_date": "04/02/2024",
+            "total_sales": 1,
+            "total_sales_amount": 380,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 380
+        },
+        {
+            "user_id": "4099346404",
+            "join_date": "11/02/2024",
+            "total_sales": 1,
+            "total_sales_amount": 0,
+            "total_expenses": 1,
+            "total_exp_amount": 170,
+            "bill_uploaded": 0,
+            "net_profit": -170
+        },
+        {
+            "user_id": "7696959125",
+            "join_date": "28/02/2024",
+            "total_sales": 1,
+            "total_sales_amount": 180,
+            "total_expenses": 1,
+            "total_exp_amount": 100,
+            "bill_uploaded": 0,
+            "net_profit": 80
+        },
+        {
+            "user_id": "4265505109",
+            "join_date": "26/03/2024",
+            "total_sales": 1,
+            "total_sales_amount": 85,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 85
+        },
+        {
+            "user_id": "4945222629",
+            "join_date": "25/05/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "5409909674",
+            "join_date": "13/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "2051617556",
+            "join_date": "13/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4981986426",
+            "join_date": "13/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "5427690533",
+            "join_date": "13/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 1,
+            "total_exp_amount": 100,
+            "bill_uploaded": 1,
+            "net_profit": -100
+        },
+        {
+            "user_id": "1295051786",
+            "join_date": "13/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9537544196",
+            "join_date": "13/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4620240955",
+            "join_date": "13/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "3037159148",
+            "join_date": "14/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "1638377646",
+            "join_date": "15/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9076941873",
+            "join_date": "15/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "8778674970",
+            "join_date": "15/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9693820100",
+            "join_date": "17/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "5207748512",
+            "join_date": "21/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4807316870",
+            "join_date": "28/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "3003535386",
+            "join_date": "28/06/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "6627535533",
+            "join_date": "01/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "5029091475",
+            "join_date": "03/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "8126744692",
+            "join_date": "06/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "2655131782",
+            "join_date": "10/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "5662812578",
+            "join_date": "13/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "7342847384",
+            "join_date": "16/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 1,
+            "total_exp_amount": 3562,
+            "bill_uploaded": 0,
+            "net_profit": -3562
+        },
+        {
+            "user_id": "3592181262",
+            "join_date": "17/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "2729456899",
+            "join_date": "18/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "8992247529",
+            "join_date": "18/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "1429739320",
+            "join_date": "18/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 2,
+            "total_exp_amount": 240,
+            "bill_uploaded": 0,
+            "net_profit": -240
+        },
+        {
+            "user_id": "4231494318",
+            "join_date": "19/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "3300772563",
+            "join_date": "19/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "7052326557",
+            "join_date": "19/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "6837432925",
+            "join_date": "22/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4010835700",
+            "join_date": "22/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9877858829",
+            "join_date": "23/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "5774905485",
+            "join_date": "23/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "1369796693",
+            "join_date": "24/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9244180333",
+            "join_date": "24/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4781702891",
+            "join_date": "24/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9516894699",
+            "join_date": "24/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 7,
+            "total_exp_amount": 9550,
+            "bill_uploaded": 0,
+            "net_profit": -9550
+        },
+        {
+            "user_id": "5969443643",
+            "join_date": "24/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 1,
+            "total_exp_amount": 950,
+            "bill_uploaded": 1,
+            "net_profit": -950
+        },
+        {
+            "user_id": "2551675951",
+            "join_date": "25/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "1932940522",
+            "join_date": "25/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "2016075235",
+            "join_date": "29/07/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 1,
+            "total_exp_amount": 200,
+            "bill_uploaded": 0,
+            "net_profit": -200
+        },
+        {
+            "user_id": "7444217556",
+            "join_date": "02/08/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "5060733624",
+            "join_date": "09/08/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4324716831",
+            "join_date": "13/08/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "2190017398",
+            "join_date": "21/08/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9750629379",
+            "join_date": "24/08/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4163527283",
+            "join_date": "01/09/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "1376705446",
+            "join_date": "03/09/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "6228477380",
+            "join_date": "08/09/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "6601026080",
+            "join_date": "17/09/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4300740288",
+            "join_date": "05/10/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "1666383451",
+            "join_date": "18/10/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "7045038228",
+            "join_date": "20/10/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4654391524",
+            "join_date": "31/10/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "8192897649",
+            "join_date": "29/11/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "3599804788",
+            "join_date": "30/11/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9200731451",
+            "join_date": "30/11/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "1880393985",
+            "join_date": "03/12/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "7553394155",
+            "join_date": "03/12/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "3378948583",
+            "join_date": "06/12/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "7776027751",
+            "join_date": "07/12/2023",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9334133033",
+            "join_date": "06/01/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "2819786770",
+            "join_date": "24/01/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "1820569720",
+            "join_date": "30/01/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "9802607001",
+            "join_date": "13/02/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "5974991318",
+            "join_date": "15/02/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "8559503000",
+            "join_date": "15/02/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "3252732629",
+            "join_date": "17/02/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "3909954970",
+            "join_date": "28/02/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 2,
+            "total_exp_amount": 1200,
+            "bill_uploaded": 0,
+            "net_profit": -1200
+        },
+        {
+            "user_id": "4097755669",
+            "join_date": "16/03/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "4017593286",
+            "join_date": "23/03/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "2804780712",
+            "join_date": "27/03/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "2251173977",
+            "join_date": "28/03/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        },
+        {
+            "user_id": "3301609695",
+            "join_date": "25/11/2024",
+            "total_sales": 0,
+            "total_sales_amount": 0,
+            "total_expenses": 0,
+            "total_exp_amount": 0,
+            "bill_uploaded": 0,
+            "net_profit": 0
+        }
+    ]
+}

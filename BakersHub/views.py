@@ -2417,3 +2417,60 @@ def extra_code():
         #     user_obj_pro.save()
 
     pass
+
+def get_reports(request):
+    all_users = UserProfile.objects.all()
+    data = []
+
+    total_users = all_users.count()
+    total_users_with_0_sales = 0
+    total_users_with_0_expenses = 0
+
+    for user in all_users:
+        temp_user_data = {
+            "user_id": user.user_id,
+            "name": f"{user.first_name} {user.last_name}",
+            "email": user.email,
+            "join_date": user.join_date,
+        }
+
+        # Sales
+        user_sale_data = Sale.objects.filter(user_id=user.user_id)
+        total_sales_count = user_sale_data.count()
+        total_sales_amount = sum(int(sale.price or 0) for sale in user_sale_data)
+
+        temp_user_data["total_sales"] = total_sales_count
+        temp_user_data["total_sales_amount"] = total_sales_amount
+
+        if total_sales_count == 0:
+            total_users_with_0_sales += 1
+
+        # Expenses
+        user_exp_data = Expense.objects.filter(user_id=user.user_id)
+        total_exp_count = user_exp_data.count()
+        total_exp_amount = sum(int(exp.expense_amount or 0) for exp in user_exp_data)
+        bill_uploaded = sum(1 for exp in user_exp_data if exp.bill)
+
+        temp_user_data["total_expenses"] = total_exp_count
+        temp_user_data["total_exp_amount"] = total_exp_amount
+        temp_user_data["bill_uploaded"] = bill_uploaded
+
+        if total_exp_count == 0:
+            total_users_with_0_expenses += 1
+
+        # Profit/loss
+        temp_user_data["net_profit"] = total_sales_amount - total_exp_amount
+
+        data.append(temp_user_data)
+
+    # Sort by sales amount (highest first)
+    data = sorted(data, key=lambda x: x["total_sales"], reverse=True)
+
+    return JsonResponse({
+        "stats": {
+            "total_users": total_users,
+            "total_users_with_0_sales": total_users_with_0_sales,
+            "total_users_with_0_expenses": total_users_with_0_expenses,
+        },
+        "data": data
+    })

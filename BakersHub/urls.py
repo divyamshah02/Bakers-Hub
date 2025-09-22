@@ -34,6 +34,7 @@ urlpatterns = [
     
     # path('<path>/',views.maintenance,name='maintenance'),
     # --- Admin --- #
+    path('get_reports/', views.get_reports, name='get_reports'),
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
     path('report/',views.report,name='report'),
